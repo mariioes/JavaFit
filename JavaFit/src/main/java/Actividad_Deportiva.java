@@ -63,7 +63,5 @@ public class Actividad_Deportiva {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
-    }
-    
-    
+    } 
 }

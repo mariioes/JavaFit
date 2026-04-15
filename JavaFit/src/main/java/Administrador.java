@@ -7,6 +7,10 @@ public class Administrador {
         this.correo = correo;
         this.clave = clave;
     }
+    
+    public void crear_actividad(Actividad_Deportiva actividad) {
+        
+    }
 
     public String getCorreo() {
         return correo;
@@ -23,6 +27,4 @@ public class Administrador {
     public void setClave(String clave) {
         this.clave = clave;
     }
-    
-    
-    }
+}
