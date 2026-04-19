@@ -23,5 +23,10 @@ public class Gestor {
     public static ArrayList<Socio> getSocios() {
         return socios;
     }
+
+    public static ArrayList<Reserva> getReservas() {
+        return reservas;
+    }
+    
 }
-}
+

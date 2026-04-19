@@ -1,5 +1,7 @@
-import java.util.ArrayList;
+import Interfaz.Inicio;
 
 public class main {
-    private ArrayList<Actividad_Deportiva> actividades = new ArrayList<>();
+    public static void main (String[]args) {
+        Inicio inicio = new Inicio();
+    }
     }

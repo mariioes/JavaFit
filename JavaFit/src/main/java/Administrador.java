@@ -9,15 +9,19 @@ public class Administrador {
     }
     
     public void crea_actividad(Actividad_Deportiva actividad) {
-        GestorActividades.agregar(actividad);
+        Gestor.agregar(actividad);
     }
     
     public void elimina_actividad(Actividad_Deportiva actividad) {
-        GestorActividades.eliminar(actividad);
+        Gestor.eliminar(actividad);
     }
     
     public static void set_actividades(ArrayList<Actividad_Deportiva> actividades) {
-        GestorActividades.setActividades(actividades);
+        Gestor.setActividades(actividades);
+    }
+    
+    public static ArrayList<Reserva> get_reservas() {
+        return Gestor.getReservas();
     }
 
     public String getCorreo() {
