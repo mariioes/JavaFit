@@ -24,12 +24,7 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
         this.socioActual = socio;
         initComponents();
         
-        jComboBox1.removeAllItems();
         
-        for (Logica.Tipo_Actividad tipo : Logica.Tipo_Actividad.values()) {
-            // El .name() lo convierte en texto para que el desplegable no se queje
-            jComboBox1.addItem(tipo.name()); 
-        }
         this.setSize(710, 415);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -56,9 +51,9 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
         botonBuscar = new javax.swing.JButton();
         buscaTipoActividad = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        buscarDiaSemana = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        buscarMonitor = new javax.swing.JComboBox<>();
         botonVolver = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
@@ -71,14 +66,15 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
 
         jLabel1.setText("Tipo de Actividad");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo" }));
+        buscarDiaSemana.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo" }));
 
         jLabel2.setText("Día de la semana");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Monitor 1", "Monitor 2", "Monitor 3", "Monitor 4" }));
-        jComboBox2.addActionListener(this::jComboBox2ActionPerformed);
+        buscarMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Monitor 1", "Monitor 2", "Monitor 3", "Monitor 4" }));
+        buscarMonitor.addActionListener(this::buscarMonitorActionPerformed);
 
         botonVolver.setText("Volver atrás");
+        botonVolver.addActionListener(this::botonVolverActionPerformed);
 
         jLabel3.setText("Monitor");
 
@@ -94,7 +90,7 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buscarDiaSemana, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(152, 152, 152))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -102,7 +98,7 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(313, 313, 313)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(buscarMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(26, 26, 26)
                             .addComponent(botonVolver))))
@@ -122,11 +118,11 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buscaTipoActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buscarDiaSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buscarMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
                 .addComponent(botonBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
@@ -141,9 +137,16 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buscaTipoActividadActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void buscarMonitorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarMonitorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_buscarMonitorActionPerformed
+
+    private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
+        this.dispose(); // Cierra esta ventana
+        if (ventanaMenu != null) {
+            ventanaMenu.setVisible(true); // Muestra el menú anterior
+        }
+    }//GEN-LAST:event_botonVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,8 +157,8 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonVolver;
     private javax.swing.JComboBox<String> buscaTipoActividad;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> buscarDiaSemana;
+    private javax.swing.JComboBox<String> buscarMonitor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

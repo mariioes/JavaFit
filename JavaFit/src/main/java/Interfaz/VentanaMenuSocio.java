@@ -126,7 +126,10 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
     }//GEN-LAST:event_botonDatosActionPerformed
 
     private void botonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarSesionActionPerformed
-        // TODO add your handling code here:
+        this.dispose(); // Cerramos el menú actual
+        //Creamos y mostramos la ventana principal de inicio
+        VentanaPrincipal inicio = new VentanaPrincipal();
+        inicio.setVisible(true);
     }//GEN-LAST:event_botonCerrarSesionActionPerformed
 
     /**
