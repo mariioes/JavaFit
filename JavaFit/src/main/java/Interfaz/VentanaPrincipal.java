@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaz;
-
 /**
  *
  * @author gdsergio1307
@@ -16,8 +15,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
+        Logica.Gestor.cargarSocios();
         // 1. Creamos el panel con la ruta de tu imagen en resources
          PanelFondo contenedorFondo = new PanelFondo("/imagenes/imagen_inicio.jpg");
+
     
         // 2. Le ponemos el mismo layout para que el Design funcione bien
         contenedorFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -27,6 +28,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
         // 4. Inicializamos los componentes (botones, etc.)
         initComponents();
+        // Chivato para confirmar que funcionó
+        System.out.println("Carga inicial finalizada. Socios en memoria: " + Logica.Gestor.getSocios().size());
     
         // 5. Centramos y damos tamaño
         this.setSize(710, 415);
@@ -48,6 +51,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonRegistrarse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaFit - Menú de Inicio");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(204, 255, 255));
@@ -62,14 +66,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         botonRegistrarse.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonRegistrarse.setLabel("Registrarse");
+        botonRegistrarse.addActionListener(this::botonRegistrarseActionPerformed);
         getContentPane().add(botonRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 190, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarSesionActionPerformed
-        // TODO add your handling code here:
+        VentanaLogin ventanaDatos = new VentanaLogin(this);
+        this.setVisible(false);
+        ventanaDatos.setVisible(true);
     }//GEN-LAST:event_botonIniciarSesionActionPerformed
+
+    private void botonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarseActionPerformed
+        VentanaRegistro ventanaDatos = new VentanaRegistro(this);
+        this.setVisible(false);
+        ventanaDatos.setVisible(true);
+    }//GEN-LAST:event_botonRegistrarseActionPerformed
 
     /**
      * @param args the command line arguments

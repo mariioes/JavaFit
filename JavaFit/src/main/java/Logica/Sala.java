@@ -1,3 +1,5 @@
+package Logica;
+
 
 public class Sala {
     private String nombre;

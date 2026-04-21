@@ -1,3 +1,8 @@
+package Logica;
+
+import Logica.Reserva;
+import Logica.Actividad_Deportiva;
+import Logica.Gestor;
 import java.util.ArrayList;
 public class Administrador {
     private String correo;

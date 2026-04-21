@@ -1,13 +1,16 @@
+package Logica;
+import java.io.Serializable;
 
-public class Socio {
-    
+public class Socio extends Usuario implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String nombre;
     private String telefono;
     private String direccion;
-    private Long tarjeta_credito;
+    private String tarjeta_credito;
     private boolean es_vip;
 
-    public Socio(String nombre, String telefono, String direccion, Long tarjeta_credito, boolean es_vip, String correo, String clave) {
+    public Socio(String nombre, String telefono, String direccion, String tarjeta_credito, boolean es_vip, String correo, String contraseña) {
+        super(correo, contraseña);
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
@@ -27,11 +30,11 @@ public class Socio {
         return direccion;
     }
 
-    public Long getTarjeta_credito() {
+    public String getTarjeta() {
         return tarjeta_credito;
     }
 
-    public boolean isEs_vip() {
+    public boolean esVip() {
         return es_vip;
     }
 
@@ -47,11 +50,12 @@ public class Socio {
         this.direccion = direccion;
     }
 
-    public void setTarjeta_credito(Long tarjeta_credito) {
+    public void setTarjeta(String tarjeta_credito) {
         this.tarjeta_credito = tarjeta_credito;
     }
 
-    public void setEs_vip(boolean es_vip) {
+    public void setEsVip(boolean es_vip) {
         this.es_vip = es_vip;
     }
+    
 }

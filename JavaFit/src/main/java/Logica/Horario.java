@@ -1,3 +1,5 @@
+package Logica;
+
 
 public class Horario {
     private String dia;

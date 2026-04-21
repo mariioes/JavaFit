@@ -1,3 +1,7 @@
+package Logica;
+
+import Logica.Actividad_Deportiva;
+import Logica.Socio;
 import java.time.LocalDate;
 
 public class Reserva {

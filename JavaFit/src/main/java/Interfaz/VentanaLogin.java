@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Interfaz;
 
 /**
@@ -11,26 +7,39 @@ package Interfaz;
 public class VentanaLogin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaLogin.class.getName());
-
+    private javax.swing.JFrame ventanaPrincipal;
     /**
      * Creates new form VentanaLogin
+     * @param principal
      */
-    public VentanaLogin() {
+public VentanaLogin(javax.swing.JFrame principal) {
+        this.ventanaPrincipal = principal;
         initComponents();
+        
         try {
-            // Creamos una máscara estricta de 9 números (cada '#' es un número obligatorio)
             javax.swing.text.MaskFormatter mascaraTelefono = new javax.swing.text.MaskFormatter("#########");
-            
-            // Opcional: Pone un guion bajo para que el usuario vea cuántos números le faltan
             mascaraTelefono.setPlaceholderCharacter('_'); 
-            
-            // Le aplicamos la nueva máscara a tu campo de texto, machacando la de NetBeans
             jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraTelefono));
-            
         } catch (java.text.ParseException ex) {
-            // Si la máscara estuviera mal escrita, nos avisaría por aquí
-            logger.log(java.util.logging.Level.SEVERE, "Error en la máscara del teléfono", ex);
+            logger.log(java.util.logging.Level.SEVERE, "Error en la máscara", ex);
         }
+        
+        this.setSize(710,415);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        // Configuramos para que al darle a la 'X' o al botón Volver pase esto:
+        this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                if (ventanaPrincipal != null) {
+                    ventanaPrincipal.setVisible(true);
+                }
+            }
+        });
+        
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -46,24 +55,45 @@ public class VentanaLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        botonConfirmarInicio = new javax.swing.JButton();
+        botonVolverLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaFit - Ventana de Inicio de Sesión");
+        setBackground(new java.awt.Color(255, 255, 102));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#########"))));
+        jFormattedTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
         jFormattedTextField1.addActionListener(this::jFormattedTextField1ActionPerformed);
-        getContentPane().add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 160, 20));
+        getContentPane().add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 210, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel1.setText("Teléfono");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, 20));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, 20));
 
         jPasswordField1.setText("jPasswordField1");
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 168, 160, -1));
+        jPasswordField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPasswordField1.setFocusTraversalPolicyProvider(true);
+        jPasswordField1.addActionListener(this::jPasswordField1ActionPerformed);
+        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 210, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel2.setText("Contraseña");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
+
+        jCheckBox1.setText("jCheckBox1");
+        jCheckBox1.addActionListener(this::jCheckBox1ActionPerformed);
+        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, -1, -1));
+
+        botonConfirmarInicio.setLabel("Iniciar Sesión");
+        botonConfirmarInicio.addActionListener(this::botonConfirmarInicioActionPerformed);
+        getContentPane().add(botonConfirmarInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, -1, -1));
+
+        botonVolverLogin.setLabel("Volver atrás");
+        botonVolverLogin.addActionListener(this::botonVolverLoginActionPerformed);
+        getContentPane().add(botonVolverLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -72,32 +102,83 @@ public class VentanaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextField1ActionPerformed
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void botonConfirmarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarInicioActionPerformed
+        String tel = jFormattedTextField1.getText().replace("_", "").trim();
+        String pass = new String(jPasswordField1.getPassword());
+
+        if (tel.length() != 9) {
+            javax.swing.JOptionPane.showMessageDialog(this, "El teléfono debe tener exactamente 9 dígitos.");
+            return;
+        }
+
+        if (pass.length() < 6) { // Antes tenías 4, lo subimos a 6 para que coincida con el registro
+            javax.swing.JOptionPane.showMessageDialog(this, "La contraseña es demasiado corta.");
+            return;
+        }
+
+        // --- LA MAGIA DEL LOGIN ---
+        boolean accesoConcedido = false;
+        String nombreSocio = "";
+
+        // Recorremos la lista de socios que tiene el Gestor
+        System.out.println("Intentando login con:");
+        System.out.println("Tel introducido: '" + tel + "' (Longitud: " + tel.length() + ")");
+        System.out.println("Pass introducida: '" + pass + "'");
+        System.out.println("Socios en memoria: " + Logica.Gestor.getSocios().size());
+        Logica.Socio socioActual = null;
+        for (Logica.Socio s : Logica.Gestor.getSocios()) {
+            // Comparamos el teléfono y la contraseña
+            if (s.getTelefono().equals(tel) && s.getContraseña().equals(pass)) {
+                accesoConcedido = true;
+                nombreSocio = s.getNombre();
+                socioActual = s;
+                break; // Si lo encontramos, dejamos de buscar
+            }
+        }
+
+        // Resultado de la búsqueda
+// Dentro del if (accesoConcedido) de VentanaLogin:
+        if (accesoConcedido && socioActual!=null) {
+            VentanaMenuSocio menu = new VentanaMenuSocio(socioActual); 
+            menu.setVisible(true);
+            this.setVisible(false);
+}
+            
+         else {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Teléfono o contraseña incorrectos.", 
+                "Error de Acceso", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+        
+        // Aquí en el futuro crearás la Ventana del Menú Principal
+        // VentanaMenu menu = new VentanaMenu();
+        // menu.setVisible(true);
+        // this.ventanaPrincipal = null; 
+        // this.dispose();
+    }//GEN-LAST:event_botonConfirmarInicioActionPerformed
+
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void botonVolverLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverLoginActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_botonVolverLoginActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VentanaLogin().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonConfirmarInicio;
+    private javax.swing.JButton botonVolverLogin;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -1,3 +1,10 @@
+package Logica;
+
+
+import Logica.Horario;
+import Logica.Sala;
+import Logica.Actividad_Deportiva;
+
 
 public class Actividad_Especial extends Actividad_Deportiva {
     private double precio;

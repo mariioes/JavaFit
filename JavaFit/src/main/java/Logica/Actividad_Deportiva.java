@@ -1,3 +1,5 @@
+package Logica;
+
 
 public class Actividad_Deportiva {
     private String titulo;
