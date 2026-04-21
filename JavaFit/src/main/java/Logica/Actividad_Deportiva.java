@@ -1,18 +1,17 @@
 package Logica;
 
-
 public class Actividad_Deportiva {
     private String titulo;
-    private String tipo;
+    private Tipo_Actividad tipo_Actividad;
     private Sala sala;
     private Horario horario;
     private String monitor_asignado;
     private String imagen;
     int aforo_actual;
 
-    public Actividad_Deportiva(String titulo, String tipo, Sala sala, Horario horario, String monitor_asignado, int aforo_actual) {
+    public Actividad_Deportiva(String titulo, Tipo_Actividad tipo_Actividad, Sala sala, Horario horario, String monitor_asignado, int aforo_actual) {
         this.titulo = titulo;
-        this.tipo = tipo;
+        this.tipo_Actividad = tipo_Actividad;
         this.sala = sala;
         this.horario = horario;
         this.monitor_asignado = monitor_asignado;
@@ -23,8 +22,8 @@ public class Actividad_Deportiva {
         return titulo;
     }
 
-    public String getTipo() {
-        return tipo;
+    public Tipo_Actividad getTipo_Actividad() {
+        return tipo_Actividad;
     }
 
     public Sala getSala() {
@@ -47,8 +46,8 @@ public class Actividad_Deportiva {
         this.titulo = titulo;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTipo_Actividad(Tipo_Actividad tipo_Actividad) {
+        this.tipo_Actividad = tipo_Actividad;
     }
 
     public void setSala(Sala sala) {
