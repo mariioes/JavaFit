@@ -71,6 +71,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(botonRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 190, 40));
 
         botonIniciarAdmin.setText("Iniciar sesión como Administrador");
+        botonIniciarAdmin.addActionListener(this::botonIniciarAdminActionPerformed);
         getContentPane().add(botonIniciarAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
 
         pack();
@@ -87,6 +88,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
         ventanaDatos.setVisible(true);
     }//GEN-LAST:event_botonRegistrarseActionPerformed
+
+    private void botonIniciarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarAdminActionPerformed
+        // Creamos la instancia de la ventana de login de admin
+        VentanaLoginAdmin loginAdmin = new VentanaLoginAdmin(this);
+        // La hacemos visible
+        loginAdmin.setVisible(true);
+        // Ocultamos la principal
+        this.setVisible(false);
+    }//GEN-LAST:event_botonIniciarAdminActionPerformed
 
     /**
      * @param args the command line arguments

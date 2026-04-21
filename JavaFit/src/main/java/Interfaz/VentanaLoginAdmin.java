@@ -11,14 +11,20 @@ package Interfaz;
 public class VentanaLoginAdmin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaLoginAdmin.class.getName());
-
+    
+    // Variable para guardar la ventana anterior
+    private javax.swing.JFrame ventanaPadre;
     /**
      * Creates new form VentanaLoginAdmin
      */
-    public VentanaLoginAdmin() {
+    // Recibe la ventana padre como parámetro
+    
+    public VentanaLoginAdmin(javax.swing.JFrame padre) {
+        this.ventanaPadre = padre; //Guardamos la referencia
         initComponents();
+        this.setLocationRelativeTo(null); // Centra la ventana en la pantalla
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,6 +39,7 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
         registrarContraseñaAdmin = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
         botonVolver = new javax.swing.JButton();
+        botonIniciarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,6 +51,9 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
 
         botonVolver.setText("Volver atrás");
         botonVolver.addActionListener(this::botonVolverActionPerformed);
+
+        botonIniciarSesion.setText("Iniciar Sesión");
+        botonIniciarSesion.addActionListener(this::botonIniciarSesionActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,7 +71,10 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
                                 .addComponent(registrarContraseñaAdmin))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(botonVolver)))
+                        .addComponent(botonVolver))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(303, 303, 303)
+                        .addComponent(botonIniciarSesion)))
                 .addContainerGap(275, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -77,7 +90,9 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(1, 1, 1)
                 .addComponent(registrarContraseñaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(botonIniciarSesion)
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         pack();
@@ -88,35 +103,23 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_registrarCorreoAdminActionPerformed
 
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
-        // TODO add your handling code here:
+        this.dispose(); // Cierra la ventana de login
+        if (ventanaPadre != null) {
+            ventanaPadre.setVisible(true); // Muestra la VentanaPrincipal
+        }
     }//GEN-LAST:event_botonVolverActionPerformed
+
+    private void botonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarSesionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonIniciarSesionActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VentanaLoginAdmin().setVisible(true));
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonIniciarSesion;
     private javax.swing.JButton botonVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
