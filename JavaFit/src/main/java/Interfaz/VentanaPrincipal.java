@@ -49,6 +49,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         botonIniciarSesion = new javax.swing.JButton();
         botonRegistrarse = new javax.swing.JButton();
+        botonIniciarAdmin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaFit - Menú de Inicio");
@@ -68,6 +69,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonRegistrarse.setLabel("Registrarse");
         botonRegistrarse.addActionListener(this::botonRegistrarseActionPerformed);
         getContentPane().add(botonRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 190, 40));
+
+        botonIniciarAdmin.setText("Iniciar sesión como Administrador");
+        getContentPane().add(botonIniciarAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -110,6 +114,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonIniciarAdmin;
     private javax.swing.JButton botonIniciarSesion;
     private javax.swing.JButton botonRegistrarse;
     private javax.swing.JLabel jLabel1;

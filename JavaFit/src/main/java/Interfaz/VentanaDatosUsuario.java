@@ -32,7 +32,7 @@ public class VentanaDatosUsuario extends javax.swing.JFrame {
         try {
             javax.swing.text.MaskFormatter mf = new javax.swing.text.MaskFormatter("#########");
             mf.setPlaceholderCharacter('_');
-            registroNombre.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mf));
+            registroTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mf));
         } catch (java.text.ParseException ex) {
             System.err.println("Error en máscara: " + ex.getMessage());
         }
@@ -72,13 +72,14 @@ public class VentanaDatosUsuario extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Nombre Completo");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, -1, -1));
 
+        registroNombre.setFormatterFactory(null);
         registroNombre.addActionListener(this::registroNombreActionPerformed);
         getContentPane().add(registroNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 250, 40));
 
         jLabel2.setText("Teléfono");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
 
         registroDireccion.addActionListener(this::registroDireccionActionPerformed);
         getContentPane().add(registroDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 250, 40));
@@ -140,8 +141,8 @@ public class VentanaDatosUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_botonVolverLoginActionPerformed
 
     private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosActionPerformed
-        String nombre = registroTelefono.getText().trim();
-        String telefono = registroNombre.getText().replace("_", "").trim();
+        String nombre = registroNombre.getText().trim();
+        String telefono = registroTelefono.getText().replace("_", "").trim();
         String direccion = registroDireccion.getText().trim();
         String correo = registroCorreo.getText().trim();
         String contraseña = new String(registroContraseña.getPassword());
