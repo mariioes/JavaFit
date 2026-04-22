@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaz;
+
+import java.awt.Color;
+
 /**
  *
  * @author gdsergio1307
@@ -17,7 +20,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         Logica.Gestor.cargarSocios();
         // 1. Creamos el panel con la ruta de tu imagen en resources
-         PanelFondo contenedorFondo = new PanelFondo("/imagenes/imagen_inicio.jpg");
+        PanelFondo contenedorFondo = new PanelFondo("/imagenes/imagen_inicio.jpg");
 
     
         // 2. Le ponemos el mismo layout para que el Design funcione bien
@@ -34,6 +37,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // 5. Centramos y damos tamaño
         this.setSize(710, 415);
         this.setLocationRelativeTo(null); 
+        
+        botonIniciarSesion.setBackground(new java.awt.Color(52, 152, 219)); // Un azul bonito
+        botonIniciarSesion.setForeground(java.awt.Color.WHITE);
+        botonIniciarSesion.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        
+        botonRegistrarse.setBackground(Color.orange);
+        botonRegistrarse.setForeground(java.awt.Color.WHITE);
+        botonRegistrarse.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
         
     }
 
@@ -63,12 +74,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonIniciarSesion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonIniciarSesion.setLabel("Iniciar Sesión");
         botonIniciarSesion.addActionListener(this::botonIniciarSesionActionPerformed);
-        getContentPane().add(botonIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 190, 40));
+        getContentPane().add(botonIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 190, 40));
 
         botonRegistrarse.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonRegistrarse.setLabel("Registrarse");
         botonRegistrarse.addActionListener(this::botonRegistrarseActionPerformed);
-        getContentPane().add(botonRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 190, 40));
+        getContentPane().add(botonRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 190, 40));
 
         botonIniciarAdmin.setText("Iniciar sesión como Administrador");
         botonIniciarAdmin.addActionListener(this::botonIniciarAdminActionPerformed);

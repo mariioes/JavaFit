@@ -1,5 +1,7 @@
 package Interfaz;
 
+import java.awt.Color;
+
 
 /**
  *
@@ -17,10 +19,12 @@ public VentanaLogin(javax.swing.JFrame principal) {
         this.ventanaPrincipal = principal;
         initComponents();
         
+        this.getContentPane().setBackground(java.awt.Color.LIGHT_GRAY);
+
         try {
             javax.swing.text.MaskFormatter mascaraTelefono = new javax.swing.text.MaskFormatter("#########");
             mascaraTelefono.setPlaceholderCharacter('_'); 
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraTelefono));
+            iniciaTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraTelefono));
         } catch (java.text.ParseException ex) {
             logger.log(java.util.logging.Level.SEVERE, "Error en la máscara", ex);
         }
@@ -52,9 +56,9 @@ public VentanaLogin(javax.swing.JFrame principal) {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        iniciaTelefono = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        iniciaContraseña = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         botonConfirmarInicio = new javax.swing.JButton();
@@ -65,20 +69,20 @@ public VentanaLogin(javax.swing.JFrame principal) {
         setBackground(new java.awt.Color(255, 255, 102));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jFormattedTextField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
-        jFormattedTextField1.addActionListener(this::jFormattedTextField1ActionPerformed);
-        getContentPane().add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 210, 30));
+        iniciaTelefono.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        iniciaTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        iniciaTelefono.addActionListener(this::iniciaTelefonoActionPerformed);
+        getContentPane().add(iniciaTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 210, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel1.setText("Teléfono");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, 20));
 
-        jPasswordField1.setText("jPasswordField1");
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPasswordField1.setFocusTraversalPolicyProvider(true);
-        jPasswordField1.addActionListener(this::jPasswordField1ActionPerformed);
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 210, 30));
+        iniciaContraseña.setText("jPasswordField1");
+        iniciaContraseña.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        iniciaContraseña.setFocusTraversalPolicyProvider(true);
+        iniciaContraseña.addActionListener(this::iniciaContraseñaActionPerformed);
+        getContentPane().add(iniciaContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 210, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel2.setText("Contraseña");
@@ -99,17 +103,17 @@ public VentanaLogin(javax.swing.JFrame principal) {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
+    private void iniciaTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciaTelefonoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
+    }//GEN-LAST:event_iniciaTelefonoActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void botonConfirmarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarInicioActionPerformed
-        String tel = jFormattedTextField1.getText().replace("_", "").trim();
-        String pass = new String(jPasswordField1.getPassword());
+        String tel = iniciaTelefono.getText().replace("_", "").trim();
+        String pass = new String(iniciaContraseña.getPassword());
 
         if (tel.length() != 9) {
             javax.swing.JOptionPane.showMessageDialog(this, "El teléfono debe tener exactamente 9 dígitos.");
@@ -163,9 +167,9 @@ public VentanaLogin(javax.swing.JFrame principal) {
         // this.dispose();
     }//GEN-LAST:event_botonConfirmarInicioActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void iniciaContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciaContraseñaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_iniciaContraseñaActionPerformed
 
     private void botonVolverLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverLoginActionPerformed
         this.dispose();
@@ -179,10 +183,10 @@ public VentanaLogin(javax.swing.JFrame principal) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonConfirmarInicio;
     private javax.swing.JButton botonVolverLogin;
+    private javax.swing.JPasswordField iniciaContraseña;
+    private javax.swing.JFormattedTextField iniciaTelefono;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
     // End of variables declaration//GEN-END:variables
 }
