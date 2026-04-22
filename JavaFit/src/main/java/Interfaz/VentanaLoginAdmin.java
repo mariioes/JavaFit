@@ -4,6 +4,9 @@
  */
 package Interfaz;
 
+import Logica.Administrador;
+import Logica.Usuario;
+import Logica.Gestor;
 /**
  *
  * @author mario
@@ -14,11 +17,7 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
     
     // Variable para guardar la ventana anterior
     private javax.swing.JFrame ventanaPadre;
-    /**
-     * Creates new form VentanaLoginAdmin
-     */
-    // Recibe la ventana padre como parámetro
-    
+
     public VentanaLoginAdmin(javax.swing.JFrame padre) {
         this.ventanaPadre = padre; //Guardamos la referencia
         initComponents();
@@ -36,10 +35,10 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
 
         registrarCorreoAdmin = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
-        registrarContraseñaAdmin = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
         botonVolver = new javax.swing.JButton();
         botonIniciarSesion = new javax.swing.JButton();
+        registrarContraseñaAdmin = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,6 +54,8 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
         botonIniciarSesion.setText("Iniciar Sesión");
         botonIniciarSesion.addActionListener(this::botonIniciarSesionActionPerformed);
 
+        registrarContraseñaAdmin.setText("jPasswordField1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -63,12 +64,11 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(266, 266, 266)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(registrarCorreoAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(registrarContraseñaAdmin))))
+                            .addComponent(registrarCorreoAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(registrarContraseñaAdmin)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(botonVolver))
@@ -88,9 +88,9 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
                 .addComponent(registrarCorreoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(registrarContraseñaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(13, 13, 13)
                 .addComponent(botonIniciarSesion)
                 .addContainerGap(175, Short.MAX_VALUE))
         );
@@ -110,20 +110,58 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_botonVolverActionPerformed
 
     private void botonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarSesionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonIniciarSesionActionPerformed
+        String correo = registrarCorreoAdmin.getText().trim();
+        String contraseña = new String(registrarContraseñaAdmin.getPassword());
+        
+        if(!correo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "El formato de correo es incorrecto.");
+            return;
+        }
+        
+        if(contraseña.length() < 5) {
+            javax.swing.JOptionPane.showMessageDialog(this, "La contraseña es demasiado corta.");
+            return;
+        }
+        
+        // --- LA MAGIA DEL LOGIN ---
+        boolean accesoConcedido = false;
+        Logica.Administrador adminActual = null;
 
-    /**
-     * @param args the command line arguments
-     */
-   
+        System.out.println("Intentando login con:");
+        System.out.println("Correo introducido: " + correo);
+        System.out.println("Contraseña introducida: '" + contraseña + "'");
+        System.out.println("Admins en memoria: " + Logica.Gestor.getAdmins().size());
+        
+        // 1. EL BUCLE SOLO BUSCA
+        for (Logica.Administrador admin : Logica.Gestor.getAdmins()) {
+            if (admin.getCorreo().equals(correo) && admin.getContraseña().equals(contraseña)) {
+                accesoConcedido = true;
+                adminActual = admin;
+                break; // Rompemos el bucle al encontrarlo
+            }
+        } // <-- ESTA ES LA LLAVE MÁGICA QUE CIERRA EL FOR
+            
+        // 2. LA DECISIÓN ESTÁ FUERA DEL BUCLE
+        if (accesoConcedido && adminActual != null) {
+            VentanaMenuAdmin menu = new VentanaMenuAdmin(adminActual); 
+            menu.setVisible(true);
+            this.dispose(); // Cerramos el login
+        } else {
+            // Si no se concedió el acceso, mostramos el error
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Correo o contraseña incorrectos.", 
+                "Error de Acceso", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_botonIniciarSesionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonIniciarSesion;
     private javax.swing.JButton botonVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JFormattedTextField registrarContraseñaAdmin;
+    private javax.swing.JPasswordField registrarContraseñaAdmin;
     private javax.swing.JFormattedTextField registrarCorreoAdmin;
     // End of variables declaration//GEN-END:variables
+
 }

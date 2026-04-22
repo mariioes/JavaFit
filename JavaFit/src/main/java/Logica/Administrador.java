@@ -4,13 +4,11 @@ import Logica.Reserva;
 import Logica.Actividad_Deportiva;
 import Logica.Gestor;
 import java.util.ArrayList;
-public class Administrador {
-    private String correo;
-    private String clave;
+import java.io.Serializable;
 
-    public Administrador(String correo, String clave) {
-        this.correo = correo;
-        this.clave = clave;
+public class Administrador extends Usuario implements Serializable {
+    public Administrador(String correo, String contraseña) {
+        super(correo, contraseña);
     }
     
     public void crea_actividad(Actividad_Deportiva actividad) {
@@ -27,21 +25,5 @@ public class Administrador {
     
     public static ArrayList<Reserva> get_reservas() {
         return Gestor.getReservas();
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public String getClave() {
-        return clave;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public void setClave(String clave) {
-        this.clave = clave;
     }
 }
