@@ -74,12 +74,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonIniciarSesion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonIniciarSesion.setLabel("Iniciar Sesión");
         botonIniciarSesion.addActionListener(this::botonIniciarSesionActionPerformed);
-        getContentPane().add(botonIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 190, 40));
+        getContentPane().add(botonIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 190, 40));
 
         botonRegistrarse.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonRegistrarse.setLabel("Registrarse");
         botonRegistrarse.addActionListener(this::botonRegistrarseActionPerformed);
-        getContentPane().add(botonRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 190, 40));
+        getContentPane().add(botonRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 190, 40));
 
         botonIniciarAdmin.setText("Iniciar sesión como Administrador");
         botonIniciarAdmin.addActionListener(this::botonIniciarAdminActionPerformed);
