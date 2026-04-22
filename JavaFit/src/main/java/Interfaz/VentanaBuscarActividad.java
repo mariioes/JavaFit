@@ -159,7 +159,7 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
     java.util.ArrayList<Logica.Actividad_Deportiva> resultados = Logica.Gestor.filtrarActividades(tipo, dia, monitor);
 
     // 3. Crear la ventana de resultados
-    VentanaResultadosActividades vResultados = new VentanaResultadosActividades();
+    VentanaResultadosActividades vResultados = new VentanaResultadosActividades(socioActual);
     
     // Centramos la ventana en la pantalla
     vResultados.setLocationRelativeTo(null);

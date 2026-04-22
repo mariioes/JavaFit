@@ -93,6 +93,30 @@ public class Gestor {
             e.printStackTrace();
         }
     }
+    
+    // Prueba inicial:
+    public static void cargarDatosPrueba() {
+    // 1. Creamos algunas Salas
+    Sala sala1 = new Sala("Sala Zen", 20);
+    Sala sala2 = new Sala("Sala Fitness", 30);
+    
+    // 2. Creamos algunos Horarios
+    Horario h1 = new Horario("Lunes", "09:00", "10:30");
+    Horario h2 = new Horario("Jueves", "18:00", "19:30");
+    Horario h3 = new Horario("Martes", "11:00", "12:00");
+    
+    // 3. Creamos tipos de actividad
+    Tipo_Actividad yoga = Tipo_Actividad.YOGA; // O como lo tengas definido
+    Tipo_Actividad cardio = Tipo_Actividad.CARDIO;
+
+    // 4. Añadimos Actividades Deportivas normales
+    actividades.add(new Actividad_Deportiva("Yoga Matinal", yoga, sala1, h1, "Monitor 1", 0));
+    actividades.add(new Actividad_Deportiva("Yoga Tarde", yoga, sala1, h2, "Monitor 2", 0));
+    actividades.add(new Actividad_Deportiva("Zumba", cardio, sala2, h3, "Monitor 3", 0));
+
+    // 5. Añadimos una Actividad Especial
+    actividades.add(new Actividad_Especial(15.0, "Sesión intensiva", "Masterclass Yoga", yoga, sala2, h2, "Monitor 4", 0));
+}
 
     public static void agregarSocio(Socio nuevo) {
         socios.add(nuevo);

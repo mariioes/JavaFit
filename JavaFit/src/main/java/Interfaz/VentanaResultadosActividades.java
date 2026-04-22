@@ -6,8 +6,11 @@
 package Interfaz;
 
 import Logica.Actividad_Deportiva;
+import Logica.Actividad_Especial;
+import Logica.Sala;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import Logica.Socio;
 
 /**
  *
@@ -15,13 +18,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VentanaResultadosActividades extends javax.swing.JFrame {
     
+    private Socio socioLogueado;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaResultadosActividades.class.getName());
 
     /**
      * Creates new form VentanaResultadosActividades
      */
-    public VentanaResultadosActividades() {
+    public VentanaResultadosActividades(Socio socio) {
         initComponents();
+        this.socioLogueado = socio; // Guardamos el socio que nos pasan
+        this.setLocationRelativeTo(null); // Centra la ventana
+        this.setResizable(false);        // Bloquea el tamaño
+        this.setTitle("Resultados de Búsqueda");
     }
 
     /**
@@ -35,40 +43,63 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaResultados = new javax.swing.JTable();
+        botonVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         TablaResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Actividad", "Tipo", "Sala (Aforo)", "Día", "Horario ", "Monitor", "Precio"
             }
         ));
         jScrollPane1.setViewportView(TablaResultados);
+
+        botonVolver.setText("Volver atrás");
+        botonVolver.addActionListener(this::botonVolverActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(161, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(132, 132, 132))
+                .addContainerGap(112, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 140, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addComponent(botonVolver)
+                .addGap(29, 29, 29))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
+                                                 
+    // 1. Cerramos esta ventana de resultados
+    this.dispose(); 
+    
+    // 2. Abrimos una nueva ventana de búsqueda para que el usuario pueda filtrar otra vez
+    // Nota: Como tu VentanaBuscarActividad pide un Socio y el Menú en el constructor, 
+    // lo más fácil ahora es crear una nueva.
+    // Si tienes guardado al socio actual, pásalo aquí:
+    new VentanaBuscarActividad(new VentanaPrincipal(), socioLogueado).setVisible(true);
+
+    }//GEN-LAST:event_botonVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,41 +110,40 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
     modelo.setRowCount(0); // Limpiamos la tabla por si acaso
     
     for (Actividad_Deportiva act : lista) {
+        // Extraemos la info de la Sala (Nombre + Aforo)
+        String salaInfo = act.getSala().getNombre() + " (Máx: " + act.getSala().getAforo_maximo() + ")";
+        
+        // Extraemos el Horario (Inicio y Fin)
+        String horarioInfo = act.getHorario().getHora_inicio() + " - " + act.getHorario().getHora_final();
+        
+        // Comprobamos si es Actividad Especial para el precio
+        String precioStr = "-"; 
+        if (act instanceof Actividad_Especial) {
+            // Hacemos "cast" a Actividad_Especial para acceder a su precio
+            Actividad_Especial especial = (Actividad_Especial) act;
+            precioStr = especial.getPrecio() + "€";
+        }
+
+        // 4. Creamos la fila con los datos formateados
         Object[] fila = {
             act.getTitulo(),
-            act.getTipo_Actividad(),
-            act.getHorario().getDia(), // O el método que tengas en Horario
+            act.getTipo_Actividad().toString(),
+            salaInfo,
+            act.getHorario().getDia(),
+            horarioInfo,
             act.getMonitor_asignado(),
-            act.getSala()
+            precioStr
         };
+        
+        // 5. Agregamos la fila al modelo de la tabla
         modelo.addRow(fila);
     }
     
     }
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VentanaResultadosActividades().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaResultados;
+    private javax.swing.JButton botonVolver;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
