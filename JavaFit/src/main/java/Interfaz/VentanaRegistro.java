@@ -14,6 +14,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
         this.ventanaPrincipal = principal;
         initComponents();
         
+        this.getContentPane().setBackground(java.awt.Color.cyan);
         this.setSize(710,415);
         this.setResizable(false);
         this.setLocationRelativeTo(null);

@@ -23,10 +23,23 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="587" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="botonConsultaReservas" max="32767" attributes="0"/>
+                          <Component id="botonGestionarActividades" pref="263" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                      <Component id="botonConsultaSocios" min="-2" pref="252" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="63" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -35,7 +48,14 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="373" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="botonConsultaSocios" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
+                  <Component id="botonGestionarActividades" alignment="3" min="-2" pref="93" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <Component id="botonConsultaReservas" min="-2" pref="93" max="-2" attributes="0"/>
+              <EmptySpace pref="93" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,6 +68,24 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="botonGestionarActividades">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Gestionar Actividades"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonGestionarActividadesActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="botonConsultaSocios">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Consulta de socios"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="botonConsultaReservas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Consulta de Reservas"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

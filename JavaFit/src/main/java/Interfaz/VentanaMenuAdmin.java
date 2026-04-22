@@ -35,27 +35,52 @@ public class VentanaMenuAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        botonGestionarActividades = new javax.swing.JButton();
+        botonConsultaSocios = new javax.swing.JButton();
+        botonConsultaReservas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("Cerrar Sesión");
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
+        botonGestionarActividades.setText("Gestionar Actividades");
+        botonGestionarActividades.addActionListener(this::botonGestionarActividadesActionPerformed);
+
+        botonConsultaSocios.setText("Consulta de socios");
+
+        botonConsultaReservas.setText("Consulta de Reservas");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jButton1)
-                .addContainerGap(587, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(botonConsultaReservas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botonGestionarActividades, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE))
+                        .addGap(60, 60, 60)
+                        .addComponent(botonConsultaSocios, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jButton1)
-                .addContainerGap(373, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonConsultaSocios, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonGestionarActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(botonConsultaReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         pack();
@@ -68,11 +93,18 @@ public class VentanaMenuAdmin extends javax.swing.JFrame {
         inicio.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void botonGestionarActividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGestionarActividadesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonGestionarActividadesActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonConsultaReservas;
+    private javax.swing.JButton botonConsultaSocios;
+    private javax.swing.JButton botonGestionarActividades;
     private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaz;
+
+import java.awt.Color;
+
 /**
  *
  * @author gdsergio1307
@@ -17,7 +20,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         Logica.Gestor.cargarSocios();
         // 1. Creamos el panel con la ruta de tu imagen en resources
-         PanelFondo contenedorFondo = new PanelFondo("/imagenes/imagen_inicio.jpg");
+        PanelFondo contenedorFondo = new PanelFondo("/imagenes/imagen_inicio.jpg");
 
     
         // 2. Le ponemos el mismo layout para que el Design funcione bien
@@ -34,6 +37,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // 5. Centramos y damos tamaño
         this.setSize(710, 415);
         this.setLocationRelativeTo(null); 
+        
+        botonIniciarSesion.setBackground(new java.awt.Color(52, 152, 219)); // Un azul bonito
+        botonIniciarSesion.setForeground(java.awt.Color.WHITE);
+        botonIniciarSesion.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        
+        botonRegistrarse.setBackground(Color.orange);
+        botonRegistrarse.setForeground(java.awt.Color.WHITE);
+        botonRegistrarse.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
         
     }
 
