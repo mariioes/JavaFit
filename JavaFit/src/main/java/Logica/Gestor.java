@@ -17,6 +17,30 @@ public class Gestor {
         }
     }
     
+public static ArrayList<Actividad_Deportiva> filtrarActividades(String tipoBusqueda, String diaBusqueda, String monitorBusqueda) {
+    ArrayList<Actividad_Deportiva> filtradas = new ArrayList<>();
+    
+    for (Actividad_Deportiva act : actividades) {
+        
+        // Filtro 1: Tipo (Yoga, Musculación...)
+        boolean coincideTipo = tipoBusqueda.equals("Cualquiera") || 
+                               act.getTipo_Actividad().toString().equalsIgnoreCase(tipoBusqueda);
+        
+        // Filtro 2: DÍA (Si busca "Cualquiera", entran todos los días de la semana)
+        boolean coincideDia = diaBusqueda.equals("Cualquiera") || 
+                              act.getHorario().getDia().equalsIgnoreCase(diaBusqueda);
+        
+        // Filtro 3: MONITOR
+        boolean coincideMonitor = monitorBusqueda.equals("Cualquiera") || 
+                                  act.getMonitor_asignado().equalsIgnoreCase(monitorBusqueda);
+        
+        // Solo si la actividad supera los 3 filtros se añade a la lista de resultados
+        if (coincideTipo && coincideDia && coincideMonitor) {
+            filtradas.add(act);
+        }
+    }
+    return filtradas;
+}
 public static void cargarSocios() {
     File f = new File(FICHERO_SOCIOS);
     

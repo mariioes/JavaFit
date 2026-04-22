@@ -1,10 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Interfaz;
+
 import Logica.Socio;
 import Logica.Actividad_Deportiva;
+import java.util.ArrayList;
+
 /**
  *
  * @author gdsergio1307
@@ -60,6 +59,7 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         botonBuscar.setText("Buscar");
+        botonBuscar.addActionListener(this::botonBuscarActionPerformed);
 
         buscaTipoActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Yoga", "Musculación", "Natación", "Cardio" }));
         buscaTipoActividad.addActionListener(this::buscaTipoActividadActionPerformed);
@@ -147,6 +147,35 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
             ventanaMenu.setVisible(true); // Muestra el menú anterior
         }
     }//GEN-LAST:event_botonVolverActionPerformed
+
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+                                             
+    // 1. Obtener filtros
+    String tipo = buscaTipoActividad.getSelectedItem().toString();
+    String dia = buscarDiaSemana.getSelectedItem().toString();
+    String monitor = buscarMonitor.getSelectedItem().toString();
+
+    // 2. Obtener lista filtrada del Gestor
+    java.util.ArrayList<Logica.Actividad_Deportiva> resultados = Logica.Gestor.filtrarActividades(tipo, dia, monitor);
+
+    // 3. Crear la ventana de resultados
+    VentanaResultadosActividades vResultados = new VentanaResultadosActividades();
+    
+    // Centramos la ventana en la pantalla
+    vResultados.setLocationRelativeTo(null);
+    
+    // Hacer que no se pueda maximizar ni cambiar el tamaño manualmente
+    vResultados.setResizable(false);
+    
+    // 4. ¡IMPORTANTE! Llamar al método que acabas de arreglar para pasarle los datos
+    vResultados.cargarDatosEnTabla(resultados);
+    
+    // 5. Mostrar la ventana
+    vResultados.setVisible(true);
+    
+    // Hacer que desaparezca la ventana de búsqueda
+    this.setVisible(false); // Cerramos la de búsqueda       
+    }//GEN-LAST:event_botonBuscarActionPerformed
 
     /**
      * @param args the command line arguments
