@@ -8,9 +8,10 @@ package Interfaz;
 import Logica.Actividad_Deportiva;
 import Logica.Actividad_Especial;
 import Logica.Sala;
+import Logica.Socio;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import Logica.Socio;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,6 +20,7 @@ import Logica.Socio;
 public class VentanaResultadosActividades extends javax.swing.JFrame {
     
     private Socio socioLogueado;
+    private ArrayList<Actividad_Deportiva> listaActividadesActual;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaResultadosActividades.class.getName());
 
     /**
@@ -30,6 +32,51 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         this.setLocationRelativeTo(null); // Centra la ventana
         this.setResizable(false);        // Bloquea el tamaño
         this.setTitle("Resultados de Búsqueda");
+        
+        // AÑADIMOS EL EVENTO DE CLIC A LA TABLA
+        TablaResultados.addMouseListener(new java.awt.event.MouseAdapter() {
+        @Override
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            int fila = TablaResultados.getSelectedRow();
+            if (fila != -1 && listaActividadesActual != null) {
+                // Obtenemos la actividad de la lista usando el índice de la fila
+                Actividad_Deportiva seleccionada = listaActividadesActual.get(fila);
+                actualizarPanelDetalles(seleccionada);
+            }
+        }
+    });
+    }
+    
+    private void actualizarPanelDetalles(Actividad_Deportiva act) {
+        // Actualizar la descripción
+        if (act instanceof Actividad_Especial) {
+            // Si es especial, mostramos su descripción propia
+            Actividad_Especial especial = (Actividad_Especial) act;
+            // Si es especial, usamos su descripción guardada
+            txtDescripcion.setText(especial.getDescripcion());
+        } else {
+        // Si es normal, ponemos un texto informativo
+        txtDescripcion.setText("Actividad: " + act.getTitulo() + "\nSala: " + act.getSala().getNombre());
+    }
+        // 2. Actualizar Imagen
+        if (act.getImagen() != null && !act.getImagen().isEmpty()) {
+            try {
+                java.net.URL imgURL = getClass().getResource(act.getImagen());
+                if (imgURL != null) {
+                    lblFoto.setIcon(new ImageIcon(imgURL));
+                    lblFoto.setText(""); 
+                } else {
+                    lblFoto.setIcon(null);
+                    lblFoto.setText("Imagen no encontrada");
+                }
+            } catch (Exception e) {
+                lblFoto.setIcon(null);
+                lblFoto.setText("Error cargando imagen");
+            }
+        } else {
+            lblFoto.setIcon(null);
+            lblFoto.setText("Sin imagen");
+        }
     }
 
     /**
@@ -44,6 +91,10 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaResultados = new javax.swing.JTable();
         botonVolver = new javax.swing.JButton();
+        panelDetalles = new javax.swing.JPanel();
+        lblFoto = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtDescripcion = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,26 +114,59 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         botonVolver.setText("Volver atrás");
         botonVolver.addActionListener(this::botonVolverActionPerformed);
 
+        javax.swing.GroupLayout panelDetallesLayout = new javax.swing.GroupLayout(panelDetalles);
+        panelDetalles.setLayout(panelDetallesLayout);
+        panelDetallesLayout.setHorizontalGroup(
+            panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDetallesLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(lblFoto)
+                .addContainerGap(196, Short.MAX_VALUE))
+        );
+        panelDetallesLayout.setVerticalGroup(
+            panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDetallesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblFoto)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        txtDescripcion.setEditable(false);
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setLineWrap(true);
+        txtDescripcion.setRows(5);
+        jScrollPane2.setViewportView(txtDescripcion);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97))
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addComponent(botonVolver)
-                .addGap(29, 29, 29))
+                .addGap(39, 39, 39))
         );
 
         pack();
@@ -106,6 +190,7 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
      */
     
     public void cargarDatosEnTabla(ArrayList<Actividad_Deportiva> lista) {
+        this.listaActividadesActual = lista;
     DefaultTableModel modelo = (DefaultTableModel) TablaResultados.getModel();
     modelo.setRowCount(0); // Limpiamos la tabla por si acaso
     
@@ -145,5 +230,9 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
     private javax.swing.JTable TablaResultados;
     private javax.swing.JButton botonVolver;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblFoto;
+    private javax.swing.JPanel panelDetalles;
+    private javax.swing.JTextArea txtDescripcion;
     // End of variables declaration//GEN-END:variables
 }

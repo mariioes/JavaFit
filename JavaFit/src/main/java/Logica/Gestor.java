@@ -1,6 +1,7 @@
 package Logica;
 
 import java.util.ArrayList;
+import Logica.Actividad_Deportiva;
 import java.io.*;
 
 public class Gestor {
@@ -95,7 +96,7 @@ public class Gestor {
     }
     
     // Prueba inicial:
-    public static void cargarDatosPrueba() {
+   public static void cargarDatosPrueba() {
     // 1. Creamos algunas Salas
     Sala sala1 = new Sala("Sala Zen", 20);
     Sala sala2 = new Sala("Sala Fitness", 30);
@@ -106,16 +107,30 @@ public class Gestor {
     Horario h3 = new Horario("Martes", "11:00", "12:00");
     
     // 3. Creamos tipos de actividad
-    Tipo_Actividad yoga = Tipo_Actividad.YOGA; // O como lo tengas definido
+    Tipo_Actividad yoga = Tipo_Actividad.YOGA; 
     Tipo_Actividad cardio = Tipo_Actividad.CARDIO;
 
     // 4. Añadimos Actividades Deportivas normales
-    actividades.add(new Actividad_Deportiva("Yoga Matinal", yoga, sala1, h1, "Monitor 1", 0));
-    actividades.add(new Actividad_Deportiva("Yoga Tarde", yoga, sala1, h2, "Monitor 2", 0));
-    actividades.add(new Actividad_Deportiva("Zumba", cardio, sala2, h3, "Monitor 3", 0));
+    // Creamos la primera actividad de yoga
+    Actividad_Deportiva act1 = new Actividad_Deportiva("Yoga Matinal", yoga, sala1, h1, "Monitor 1", 0);
+    act1.setImagen("/Imagenes_Actividades/foto_yoga_1.jpg"); // Se lo ponemos a act1
+    actividades.add(act1);
+    
+    // Creamos la segunda actividad de yoga
+    Actividad_Deportiva act2 = new Actividad_Deportiva("Yoga Tarde", yoga, sala1, h2, "Monitor 2", 0);
+    act2.setImagen("/Imagenes_Actividades/foto_yoga_2.jpg"); // Otra foto diferente
+    actividades.add(act2);
+
+    // Creamos zumba
+    Actividad_Deportiva act3 = new Actividad_Deportiva("Zumba", cardio, sala2, h3, "Monitor 3", 0);
+    // act3.setImagen("/Imagenes_Actividades/zumba.jpg"); // Opcional si tienes la foto
+    actividades.add(act3);
 
     // 5. Añadimos una Actividad Especial
-    actividades.add(new Actividad_Especial(15.0, "Sesión intensiva", "Masterclass Yoga", yoga, sala2, h2, "Monitor 4", 0));
+    // Nota: Asegúrate de que el constructor de Actividad_Especial coincide con este orden
+    Actividad_Especial especial1 = new Actividad_Especial(15.0, "Sesión intensiva de fin de semana", "Masterclass Yoga", yoga, sala2, h2, "Monitor 4", 0);
+    especial1.setImagen("/Imagenes_Actividades/foto_yoga_1.jpg");
+    actividades.add(especial1);
 }
 
     public static void agregarSocio(Socio nuevo) {
