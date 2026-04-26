@@ -19,25 +19,19 @@ public class Gestor {
 
     // --- 3. INICIALIZACIÓN GLOBAL ---
     // ¡IMPORTANTE! Llama a este método al arrancar tu aplicación (en tu Main o Menú de Inicio)
-    public static void inicializarTodo() {
-        System.out.println("=== Iniciando JavaFit Base de Datos ===");
+   public static void inicializarTodo() {
         cargarAdmins();
-        crearAdminJefe(); // Aseguramos que haya al menos un admin
+        crearAdminJefe();
         cargarSocios();
-        
-        // Intentamos cargar actividades. Si no hay archivo, cargamos las de prueba.
-        File f = new File(FICHERO_ACTIVIDADES);
-        if (f.exists()) {
-            cargarActividades();
-        } else {
-            System.out.println("No se encontró archivo de actividades. Cargando datos de prueba...");
-            cargarDatosPrueba();
-            guardarActividades();
-        }
-        
+    
+        // FORZAMOS LOS DATOS DE PRUEBA PARA LIMPIAR ERRORES
+        actividades.clear(); // Vaciamos por si acaso
+        cargarDatosPrueba(); 
+        guardarActividades(); // Esto creará el archivo .dat con las RUTAS NUEVAS
+    
         cargarReservas();
-        System.out.println("=== Datos cargados correctamente ===");
-    }
+        System.out.println("DEBUG: Actividades cargadas en memoria: " + actividades.size());
+}
 
     // --- 4. MÉTODOS DE GUARDADO (Persistencia) ---
     public static void guardarSocios() {
@@ -109,18 +103,17 @@ public class Gestor {
         Tipo_Actividad cardio = Tipo_Actividad.CARDIO;
 
         Actividad_Deportiva act1 = new Actividad_Deportiva("Yoga Matinal", yoga, sala1, h1, "Monitor 1", 0);
-        act1.setImagen("/Imagenes_Actividades/foto_yoga_1.jpg");
+        act1.setImagen("/Imagenes/foto_yoga_1.jpg");
         actividades.add(act1);
         
         Actividad_Deportiva act2 = new Actividad_Deportiva("Yoga Tarde", yoga, sala1, h2, "Monitor 2", 0);
-        act2.setImagen("/Imagenes_Actividades/foto_yoga_2.jpg");
+        act2.setImagen("/Imagenes/foto_yoga_2.jpg");
         actividades.add(act2);
 
         Actividad_Deportiva act3 = new Actividad_Deportiva("Zumba", cardio, sala2, h3, "Monitor 3", 0);
         actividades.add(act3);
 
         Actividad_Especial especial1 = new Actividad_Especial(15.0, "Sesión intensiva de fin de semana", "Masterclass Yoga", yoga, sala2, h2, "Monitor 4", 0);
-        especial1.setImagen("/Imagenes_Actividades/foto_yoga_1.jpg");
         actividades.add(especial1);
     }
 

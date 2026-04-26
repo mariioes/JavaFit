@@ -3,16 +3,10 @@ import Logica.Gestor;
 
 public class Main {
     public static void main(String args[]) {
-        // 1. CARGAR DATOS ANTES DE LANZAR LA INTERFAZ
-        // Cargamos lo que haya en disco
-        Logica.Gestor.cargarSocios();
-        Logica.Gestor.cargarAdmins();
-        Logica.Gestor.crearAdminJefe();
+        // 1. LLAMADA ÚNICA: Esto gestiona socios, admins y actividades sin duplicar
+        Logica.Gestor.inicializarTodo();
         
-        // Cargamos las actividades de prueba que escribimos antes
-        Logica.Gestor.cargarDatosPrueba();
-        
-        // 2. CONFIGURACIÓN DEL ESTILO VISUAL (Look and Feel)
+        // 2. CONFIGURACIÓN DEL ESTILO VISUAL
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -25,11 +19,8 @@ public class Main {
         }
         
         // 3. LANZAR LA VENTANA PRINCIPAL
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new VentanaPrincipal().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new VentanaPrincipal().setVisible(true);
         });
     }
 }
