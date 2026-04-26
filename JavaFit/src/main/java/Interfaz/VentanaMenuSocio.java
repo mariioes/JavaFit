@@ -108,7 +108,13 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
     }//GEN-LAST:event_botonReservarActividadActionPerformed
 
     private void botonMisReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMisReservasActionPerformed
-        // TODO add your handling code here:
+        if (this.socioActual != null) {
+            VentanaMisReservas vmr = new VentanaMisReservas(this, this.socioActual);
+            vmr.setVisible(true);
+            this.setVisible(false);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: No hay un socio logueado.");
+        }
     }//GEN-LAST:event_botonMisReservasActionPerformed
 
     private void botonDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDatosActionPerformed

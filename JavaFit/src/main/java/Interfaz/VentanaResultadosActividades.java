@@ -9,19 +9,16 @@ import Logica.Actividad_Deportiva;
 import Logica.Actividad_Especial;
 import Logica.Sala;
 import Logica.Socio;
+import Logica.Gestor;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author mario
- */
 public class VentanaResultadosActividades extends javax.swing.JFrame {
     
     private Socio socioLogueado;
     private ArrayList<Actividad_Deportiva> listaActividadesActual;
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaResultadosActividades.class.getName());
 
     /**
      * Creates new form VentanaResultadosActividades
@@ -31,7 +28,7 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         this.socioLogueado = socio; // Guardamos el socio que nos pasan
         this.setLocationRelativeTo(null); // Centra la ventana
         this.setResizable(false);        // Bloquea el tamaño
-        this.setTitle("Resultados de Búsqueda");
+        this.setTitle("JAVAFIT - Resultados de Búsqueda");
         
         // AÑADIMOS EL EVENTO DE CLIC A LA TABLA
         TablaResultados.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,6 +85,7 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollBar1 = new javax.swing.JScrollBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaResultados = new javax.swing.JTable();
         botonVolver = new javax.swing.JButton();
@@ -95,6 +93,8 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         lblFoto = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
+        jScrollBar2 = new javax.swing.JScrollBar();
+        botonReservarActividad = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,7 +121,7 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
             .addGroup(panelDetallesLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(lblFoto)
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelDetallesLayout.setVerticalGroup(
             panelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,6 +137,9 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         txtDescripcion.setRows(5);
         jScrollPane2.setViewportView(txtDescripcion);
 
+        botonReservarActividad.setText("Reservar Actividad");
+        botonReservarActividad.addActionListener(this::botonReservarActividadActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,14 +148,21 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                            .addComponent(panelDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(421, 421, 421)
+                .addComponent(botonReservarActividad)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,26 +174,46 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panelDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(botonReservarActividad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(botonVolver)
-                .addGap(39, 39, 39))
+                .addGap(16, 16, 16)
+                .addComponent(jScrollBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
-                                                 
-    // 1. Cerramos esta ventana de resultados
-    this.dispose(); 
-    
-    // 2. Abrimos una nueva ventana de búsqueda para que el usuario pueda filtrar otra vez
-    // Nota: Como tu VentanaBuscarActividad pide un Socio y el Menú en el constructor, 
-    // lo más fácil ahora es crear una nueva.
-    // Si tienes guardado al socio actual, pásalo aquí:
-    new VentanaBuscarActividad(new VentanaPrincipal(), socioLogueado).setVisible(true);
-
+        this.dispose();
+        new VentanaBuscarActividad(new VentanaPrincipal(), socioLogueado).setVisible(true);
     }//GEN-LAST:event_botonVolverActionPerformed
+
+    private void botonReservarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservarActividadActionPerformed
+        int fila = TablaResultados.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona una actividad de la tabla.");
+            return;
+        }
+
+        Actividad_Deportiva seleccionada = listaActividadesActual.get(fila);
+        
+        // Llamada al método de reserva que añadimos al Gestor
+        String resultado = Gestor.realizarReserva(socioLogueado, seleccionada);
+
+        switch (resultado) {
+            case "EXITO":
+                JOptionPane.showMessageDialog(this, "¡Reserva confirmada!");
+                break;
+            case "DUPLICADO":
+                JOptionPane.showMessageDialog(this, "Ya tienes una reserva para esta actividad.", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+            case "LLENO":
+                JOptionPane.showMessageDialog(this, "Lo sentimos, no quedan plazas libres.", "Aforo completo", JOptionPane.WARNING_MESSAGE);
+                break;
+        }
+    }//GEN-LAST:event_botonReservarActividadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,44 +221,33 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
     
     public void cargarDatosEnTabla(ArrayList<Actividad_Deportiva> lista) {
         this.listaActividadesActual = lista;
-    DefaultTableModel modelo = (DefaultTableModel) TablaResultados.getModel();
-    modelo.setRowCount(0); // Limpiamos la tabla por si acaso
-    
-    for (Actividad_Deportiva act : lista) {
-        // Extraemos la info de la Sala (Nombre + Aforo)
-        String salaInfo = act.getSala().getNombre() + " (Máx: " + act.getSala().getAforo_maximo() + ")";
+        DefaultTableModel modelo = (DefaultTableModel) TablaResultados.getModel();
+        modelo.setRowCount(0); 
         
-        // Extraemos el Horario (Inicio y Fin)
-        String horarioInfo = act.getHorario().getHora_inicio() + " - " + act.getHorario().getHora_final();
-        
-        // Comprobamos si es Actividad Especial para el precio
-        String precioStr = "-"; 
-        if (act instanceof Actividad_Especial) {
-            // Hacemos "cast" a Actividad_Especial para acceder a su precio
-            Actividad_Especial especial = (Actividad_Especial) act;
-            precioStr = especial.getPrecio() + "€";
-        }
+        for (Actividad_Deportiva act : lista) {
+            String salaInfo = act.getSala().getNombre() + " (" + act.getSala().getAforo_maximo() + ")";
+            String horarioInfo = act.getHorario().getHora_inicio() + " - " + act.getHorario().getHora_final();
+            String precioStr = (act instanceof Actividad_Especial) ? ((Actividad_Especial) act).getPrecio() + "€" : "Incluido";
 
-        // 4. Creamos la fila con los datos formateados
-        Object[] fila = {
-            act.getTitulo(),
-            act.getTipo_Actividad().toString(),
-            salaInfo,
-            act.getHorario().getDia(),
-            horarioInfo,
-            act.getMonitor_asignado(),
-            precioStr
-        };
-        
-        // 5. Agregamos la fila al modelo de la tabla
-        modelo.addRow(fila);
-    }
-    
+            Object[] fila = {
+                act.getTitulo(),
+                act.getTipo_Actividad().toString(),
+                salaInfo,
+                act.getHorario().getDia(),
+                horarioInfo,
+                act.getMonitor_asignado(),
+                precioStr
+            };
+            modelo.addRow(fila);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaResultados;
+    private javax.swing.JButton botonReservarActividad;
     private javax.swing.JButton botonVolver;
+    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JScrollBar jScrollBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblFoto;

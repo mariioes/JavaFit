@@ -11,7 +11,7 @@ public class Reserva {
     private double precio_total;
     private double precio_pagado;
 
-    public Reserva(Socio socio, Actividad_Deportiva actividad, LocalDate fecha, double precio_total) {
+    public Reserva(Socio socio, Actividad_Deportiva actividad) {
         this.socio = socio;
         this.actividad = actividad;
         this.fecha = fecha;
