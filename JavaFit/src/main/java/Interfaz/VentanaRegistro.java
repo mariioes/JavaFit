@@ -60,6 +60,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
         registroContraseña = new javax.swing.JPasswordField();
         registroNombre = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -107,7 +108,10 @@ public class VentanaRegistro extends javax.swing.JFrame {
         getContentPane().add(registroNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 250, 40));
 
         jLabel5.setText("Correo");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, -1, -1));
+
+        jLabel6.setText("Contraseña");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -132,7 +136,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
         String nombre = registroNombre.getText().trim();
         String telefono = registroTelefono.getText().replace("_", "").trim();
         String direccion = registroDireccion.getText().trim();
-        String correo = registroCorreo.getText().trim();
+        String correo = registroCorreo.getValue() != null ? registroCorreo.getValue().toString().trim() : registroCorreo.getText().trim();
         String contraseña = new String(registroContraseña.getPassword());
         String tarjeta = registroTarjeta.getText().replace("_", "").replace(" ", "").trim();
         boolean esVip = registroSocioVip.isSelected();
@@ -171,6 +175,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
         
 
             Socio nuevoSocio = new Socio(nombre, telefono, direccion, tarjeta, esVip, correo, contraseña);
+            System.out.println("GUARDANDO SOCIO -> Correo: " + nuevoSocio.getCorreo() + " | Pass: " + nuevoSocio.getContraseña());
             Logica.Gestor.agregarSocio(nuevoSocio);
             System.out.println("Objeto Socio creado: " + nuevoSocio.getNombre());
             javax.swing.JOptionPane.showMessageDialog(this, "Usuario " + nuevoSocio.getNombre() + " vinculado correctamente.");
@@ -204,6 +209,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPasswordField registroContraseña;
     private javax.swing.JFormattedTextField registroCorreo;
     private javax.swing.JFormattedTextField registroDireccion;

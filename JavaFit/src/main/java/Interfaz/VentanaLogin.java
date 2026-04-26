@@ -20,14 +20,6 @@ public VentanaLogin(javax.swing.JFrame principal) {
         initComponents();
         
         this.getContentPane().setBackground(java.awt.Color.LIGHT_GRAY);
-
-        try {
-            javax.swing.text.MaskFormatter mascaraTelefono = new javax.swing.text.MaskFormatter("#########");
-            mascaraTelefono.setPlaceholderCharacter('_'); 
-            iniciaTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraTelefono));
-        } catch (java.text.ParseException ex) {
-            logger.log(java.util.logging.Level.SEVERE, "Error en la máscara", ex);
-        }
         
         this.setSize(710,415);
         this.setResizable(false);
@@ -56,27 +48,22 @@ public VentanaLogin(javax.swing.JFrame principal) {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        iniciaTelefono = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         iniciaContraseña = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         botonConfirmarInicio = new javax.swing.JButton();
         botonVolverLogin = new javax.swing.JButton();
+        iniciaCorreo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaFit - Ventana de Inicio de Sesión");
         setBackground(new java.awt.Color(255, 255, 102));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        iniciaTelefono.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        iniciaTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
-        iniciaTelefono.addActionListener(this::iniciaTelefonoActionPerformed);
-        getContentPane().add(iniciaTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 210, 30));
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jLabel1.setText("Teléfono");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, 20));
+        jLabel1.setText("Correo electrónico");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 90, 20));
 
         iniciaContraseña.setText("jPasswordField1");
         iniciaContraseña.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -86,7 +73,7 @@ public VentanaLogin(javax.swing.JFrame principal) {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel2.setText("Contraseña");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
 
         jCheckBox1.setText("jCheckBox1");
         jCheckBox1.addActionListener(this::jCheckBox1ActionPerformed);
@@ -99,73 +86,14 @@ public VentanaLogin(javax.swing.JFrame principal) {
         botonVolverLogin.setLabel("Volver atrás");
         botonVolverLogin.addActionListener(this::botonVolverLoginActionPerformed);
         getContentPane().add(botonVolverLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        getContentPane().add(iniciaCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 210, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void iniciaTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciaTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_iniciaTelefonoActionPerformed
-
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
-
-    private void botonConfirmarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarInicioActionPerformed
-        String tel = iniciaTelefono.getText().replace("_", "").trim();
-        String pass = new String(iniciaContraseña.getPassword());
-
-        if (tel.length() != 9) {
-            javax.swing.JOptionPane.showMessageDialog(this, "El teléfono debe tener exactamente 9 dígitos.");
-            return;
-        }
-
-        if (pass.length() < 6) { // Antes tenías 4, lo subimos a 6 para que coincida con el registro
-            javax.swing.JOptionPane.showMessageDialog(this, "La contraseña es demasiado corta.");
-            return;
-        }
-
-        // --- LA MAGIA DEL LOGIN ---
-        boolean accesoConcedido = false;
-        String nombreSocio = "";
-
-        // Recorremos la lista de socios que tiene el Gestor
-        System.out.println("Intentando login con:");
-        System.out.println("Tel introducido: '" + tel + "' (Longitud: " + tel.length() + ")");
-        System.out.println("Pass introducida: '" + pass + "'");
-        System.out.println("Socios en memoria: " + Logica.Gestor.getSocios().size());
-        Logica.Socio socioActual = null;
-        for (Logica.Socio s : Logica.Gestor.getSocios()) {
-            // Comparamos el teléfono y la contraseña
-            if (s.getTelefono().equals(tel) && s.getContraseña().equals(pass)) {
-                accesoConcedido = true;
-                nombreSocio = s.getNombre();
-                socioActual = s;
-                break; // Si lo encontramos, dejamos de buscar
-            }
-        }
-
-        // Resultado de la búsqueda
-// Dentro del if (accesoConcedido) de VentanaLogin:
-        if (accesoConcedido && socioActual!=null) {
-            VentanaMenuSocio menu = new VentanaMenuSocio(socioActual); 
-            menu.setVisible(true);
-            this.setVisible(false);
-}
-            
-         else {
-            javax.swing.JOptionPane.showMessageDialog(this, 
-                "Teléfono o contraseña incorrectos.", 
-                "Error de Acceso", 
-                javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
-        
-        // Aquí en el futuro crearás la Ventana del Menú Principal
-        // VentanaMenu menu = new VentanaMenu();
-        // menu.setVisible(true);
-        // this.ventanaPrincipal = null; 
-        // this.dispose();
-    }//GEN-LAST:event_botonConfirmarInicioActionPerformed
 
     private void iniciaContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciaContraseñaActionPerformed
         // TODO add your handling code here:
@@ -174,6 +102,53 @@ public VentanaLogin(javax.swing.JFrame principal) {
     private void botonVolverLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverLoginActionPerformed
         this.dispose();
     }//GEN-LAST:event_botonVolverLoginActionPerformed
+
+    private void botonConfirmarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarInicioActionPerformed
+
+        // Usamos trim() para quitar espacios accidentales
+        String emailIntroducido = iniciaCorreo.getText().trim();
+        String pass = new String(iniciaContraseña.getPassword()).trim();
+
+        System.out.println("DEBUG: Intentando entrar con [" + emailIntroducido + "]");
+
+        boolean accesoConcedido = false;
+        Logica.Socio socioActual = null;
+
+        // IMPORTANTE: Asegúrate de que Gestor.getSocios() no esté vacío
+        for (Logica.Socio s : Logica.Gestor.getSocios()) {
+            // Usamos equalsIgnoreCase y trim para máxima compatibilidad
+            if (s.getCorreo().trim().equalsIgnoreCase(emailIntroducido) &&
+                s.getContraseña().trim().equals(pass)) {
+
+                accesoConcedido = true;
+                socioActual = s;
+                break;
+            }
+        }
+
+        if (accesoConcedido && socioActual != null) {
+    // 1. Quitamos los listeners para que al cerrar esta no se abra la anterior
+    for (java.awt.event.WindowListener wl : this.getWindowListeners()) {
+        this.removeWindowListener(wl);
+    }
+
+    // 2. Crear y mostrar el menú del socio
+    VentanaMenuSocio menuSocio = new VentanaMenuSocio(socioActual);
+    menuSocio.setVisible(true);
+    
+    // 3. Si la ventana principal existe, la destruimos para que no quede en la barra de tareas
+    if (ventanaPrincipal != null) {
+        ventanaPrincipal.dispose();
+    }
+    
+    // 4. Cerramos el Login
+    this.dispose(); 
+    } else {
+    // Solo si falla mostramos el error
+    javax.swing.JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.");
+}
+
+    }//GEN-LAST:event_botonConfirmarInicioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,7 +159,7 @@ public VentanaLogin(javax.swing.JFrame principal) {
     private javax.swing.JButton botonConfirmarInicio;
     private javax.swing.JButton botonVolverLogin;
     private javax.swing.JPasswordField iniciaContraseña;
-    private javax.swing.JFormattedTextField iniciaTelefono;
+    private javax.swing.JTextField iniciaCorreo;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

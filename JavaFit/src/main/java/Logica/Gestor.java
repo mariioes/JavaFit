@@ -172,19 +172,12 @@ public class Gestor {
         return admins;
     }
     
-    public static void crearAdminJefe() {
-        // Solo lo creamos si la lista está vacía
-        if (admins.isEmpty()) {
-            System.out.println("No hay administradores. Creando Admin Jefe por defecto...");
-            
-            // Creamos el objeto (usa el correo y clave que prefieras)
-            Administrador jefe = new Administrador("admin@javafit.com", "admin");
-            
-            // Lo añadimos a la lista
-            admins.add(jefe);
-            
-            // Guardamos la lista en el archivo inmediatamente
-            guardarAdmins(); 
+   public static void crearAdminJefe() {
+    if (admins.isEmpty()) {
+        // Asegúrate de que el primer parámetro sea el CORREO
+        Administrador jefe = new Administrador("admin@javafit.com", "admin1234");
+        admins.add(jefe);
+        guardarAdmins(); 
         }
     }
 }
