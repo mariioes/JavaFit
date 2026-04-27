@@ -10,8 +10,8 @@ public class Actividad_Especial extends Actividad_Deportiva {
     private double precio;
     private String descripcion;
 
-    public Actividad_Especial(double precio, String descripcion, String titulo, Tipo_Actividad tipo, Sala sala, Horario horario, String monitor_asignado, int aforo_actual) {
-        super(titulo, tipo, sala, horario, monitor_asignado, aforo_actual);
+    public Actividad_Especial(double precio, String descripcion, String titulo, Tipo_Actividad tipo, Sala sala, Horario horario, String monitor_asignado, int aforo_actual, String ruta) {
+        super(titulo, tipo, sala, horario, monitor_asignado, aforo_actual, ruta);
         this.precio = precio;
         this.descripcion = descripcion;
         this.aforo_actual = 0;

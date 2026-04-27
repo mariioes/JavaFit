@@ -102,18 +102,16 @@ public class Gestor {
         Tipo_Actividad yoga = Tipo_Actividad.YOGA; 
         Tipo_Actividad cardio = Tipo_Actividad.CARDIO;
 
-        Actividad_Deportiva act1 = new Actividad_Deportiva("Yoga Matinal", yoga, sala1, h1, "Monitor 1", 0);
-        act1.setImagen("/Imagenes/foto_yoga_1.jpg");
+        Actividad_Deportiva act1 = new Actividad_Deportiva("Yoga Matinal", yoga, sala1, h1, "Monitor 1", 0, "/imagenes/foto_yoga_1.jpg");
         actividades.add(act1);
         
-        Actividad_Deportiva act2 = new Actividad_Deportiva("Yoga Tarde", yoga, sala1, h2, "Monitor 2", 0);
-        act2.setImagen("/Imagenes/foto_yoga_2.jpg");
+        Actividad_Deportiva act2 = new Actividad_Deportiva("Yoga Tarde", yoga, sala1, h2, "Monitor 2", 0, "/imagenes/foto_yoga_2.jpg");
         actividades.add(act2);
 
-        Actividad_Deportiva act3 = new Actividad_Deportiva("Zumba", cardio, sala2, h3, "Monitor 3", 0);
+        Actividad_Deportiva act3 = new Actividad_Deportiva("Zumba", cardio, sala2, h3, "Monitor 3", 0, "/imagenes/foto_zumba_1.jpg");
         actividades.add(act3);
 
-        Actividad_Especial especial1 = new Actividad_Especial(15.0, "Sesión intensiva de fin de semana", "Masterclass Yoga", yoga, sala2, h2, "Monitor 4", 0);
+        Actividad_Especial especial1 = new Actividad_Especial(15.0, "Sesión intensiva de fin de semana", "Masterclass Yoga", yoga, sala2, h2, "Monitor 4", 0, "/imagenes/foto_yoga_especial_1");
         actividades.add(especial1);
     }
 

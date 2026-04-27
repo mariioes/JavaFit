@@ -45,51 +45,35 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
     }
     
     private void actualizarPanelDetalles(Actividad_Deportiva act) {
-        // Actualizar la descripción
+    // 1. Descripción
         if (act instanceof Actividad_Especial) {
-            // Si es especial, mostramos su descripción propia
             Actividad_Especial especial = (Actividad_Especial) act;
-            // Si es especial, usamos su descripción guardada
             txtDescripcion.setText(especial.getDescripcion());
         } else {
-        // Mejoramos el texto para actividades normales si no tienen descripción propia
             String texto = "Actividad: " + act.getTitulo() + "\n"
-                     + "Monitor: " + act.getMonitor_asignado() + "\n"
-                     + "Sala: " + act.getSala().getNombre() + "\n"
-                     + "Aforo: " + act.getSala().getAforo_maximo() + " personas.";
-            txtDescripcion.setText(texto);
-    }
-        // 2. Actualizar Imagen
-        if (act.getImagen() != null && !act.getImagen().isEmpty()) {
-            System.out.println("DEBUG - Buscando en: " + act.getImagen());
-            try {
-                // Intenta cargar la imagen usando el ClassLoader del sistema
-                java.net.URL imgURL = Actividad_Deportiva.class.getResource(act.getImagen());
-                if (imgURL != null) {
-                    ImageIcon iconOriginal = new ImageIcon(imgURL);
-                    // --- LÓGICA DE ESCALADO ---
-                // Obtenemos las dimensiones del label
-                int anchoLabel = lblFoto2.getWidth() > 0 ? lblFoto2.getWidth() : 280; 
-                int altoLabel = lblFoto2.getHeight() > 0 ? lblFoto2.getHeight() : 145;
-
-                java.awt.Image imgEscalada = iconOriginal.getImage().getScaledInstance(
-                    anchoLabel, altoLabel, java.awt.Image.SCALE_SMOOTH);
-                
-                lblFoto2.setIcon(new ImageIcon(imgEscalada));
-                lblFoto2.setText("");
-                } else {
-                    lblFoto2.setIcon(null);
-                    lblFoto2.setText("Imagen no encontrada");
-                }
-            } catch (Exception e) {
-                lblFoto2.setIcon(null);
-                lblFoto2.setText("Error cargando imagen");
-            }
-        } else {
-            lblFoto2.setIcon(null);
-            lblFoto2.setText("Sin imagen");
+                + "Monitor: " + act.getMonitor_asignado() + "\n"
+                + "Sala: " + act.getSala().getNombre() + "\n"
+                + "Aforo: " + act.getSala().getAforo_maximo() + " personas.";
+                txtDescripcion.setText(texto);
         }
+
+    // 2. Imagen
+    ImageIcon icono = act.getImagen();
+    if (icono != null && icono.getImage() != null) {
+        // Usamos tamaño fijo en lugar de getWidth()/getHeight()
+        int ancho = 280;
+        int alto = 130;
+
+        java.awt.Image imgEscalada = icono.getImage()
+                .getScaledInstance(ancho, alto, java.awt.Image.SCALE_SMOOTH);
+
+        lblFoto2.setIcon(new ImageIcon(imgEscalada));
+        lblFoto2.setText("");
+    } else {
+        lblFoto2.setIcon(null);
+        lblFoto2.setText("Sin imagen");
     }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.

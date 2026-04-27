@@ -1,21 +1,29 @@
 package Logica;
-
+import javax.swing.ImageIcon;
 public class Actividad_Deportiva {
     private String titulo;
     private Tipo_Actividad tipo_Actividad;
     private Sala sala;
     private Horario horario;
     private String monitor_asignado;
-    private String imagen;
+    private ImageIcon imagen;
     int aforo_actual;
-
-    public Actividad_Deportiva(String titulo, Tipo_Actividad tipo_Actividad, Sala sala, Horario horario, String monitor_asignado, int aforo_actual) {
+    
+    
+    public Actividad_Deportiva(String titulo, Tipo_Actividad tipo_Actividad, Sala sala, Horario horario, String monitor_asignado, int aforo_actual, String ruta) {
         this.titulo = titulo;
         this.tipo_Actividad = tipo_Actividad;
         this.sala = sala;
         this.horario = horario;
         this.monitor_asignado = monitor_asignado;
         this.aforo_actual = 0;
+        java.net.URL url = getClass().getResource(ruta);
+        if (url != null) {
+            this.imagen = new ImageIcon(url);
+        } else {
+            System.out.println("DEBUG - Imagen no encontrada: " + ruta);
+            this.imagen = null;
+    }
     }
 
     public String getTitulo() {
@@ -38,7 +46,7 @@ public class Actividad_Deportiva {
         return monitor_asignado;
     }
 
-    public String getImagen() {
+    public ImageIcon getImagen() {
         return imagen;
     }
 
@@ -62,7 +70,7 @@ public class Actividad_Deportiva {
         this.monitor_asignado = monitor_asignado;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
+    public void setImagen(String ruta) {
+        this.imagen = new ImageIcon(ruta);
     } 
 }
