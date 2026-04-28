@@ -23,14 +23,17 @@ public class Gestor {
         cargarAdmins();
         crearAdminJefe();
         cargarSocios();
-    
-        // FORZAMOS LOS DATOS DE PRUEBA PARA LIMPIAR ERRORES
-        actividades.clear(); // Vaciamos por si acaso
-        cargarDatosPrueba(); 
-        guardarActividades(); // Esto creará el archivo .dat con las RUTAS NUEVAS
-    
+        
+        File f = new File(FICHERO_ACTIVIDADES);
+        if (!f.exists() || actividades.isEmpty()) {
+            cargarDatosPrueba();
+            guardarActividades();
+        } else {
+            cargarActividades();
+        }
         cargarReservas();
         System.out.println("DEBUG: Actividades cargadas en memoria: " + actividades.size());
+        System.out.println("DEBUG - Reservas cargadas: " + reservas.size());
 }
 
     // --- 4. MÉTODOS DE GUARDADO (Persistencia) ---
@@ -156,6 +159,22 @@ public class Gestor {
         }
         return filtradas;
     }
+    
+    public static boolean eliminarReserva(Socio socio, Actividad_Deportiva actividad) {
+        Reserva aEliminar = null;
+        for (Reserva r : reservas) {
+            if (r.getSocio().getCorreo().equalsIgnoreCase(socio.getCorreo()) && r.getActividad().getTitulo().equals(actividad.getTitulo())) {
+                aEliminar = r;
+                break;
+            }
+        }
+        if (aEliminar != null) {
+            reservas.remove(aEliminar);
+            guardarReservas();
+            return true;
+        }
+        return false;
+}
     
     public static ArrayList<Reserva> obtenerReservasPorSocio(Socio socio) {
         ArrayList<Reserva> filtradas = new ArrayList<>();

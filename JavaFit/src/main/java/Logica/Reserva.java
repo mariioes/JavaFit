@@ -3,8 +3,9 @@ package Logica;
 import Logica.Actividad_Deportiva;
 import Logica.Socio;
 import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Reserva {
+public class Reserva implements Serializable {
     private Socio socio;
     private Actividad_Deportiva actividad;
     private LocalDate fecha; // Ya veremos como hacerla

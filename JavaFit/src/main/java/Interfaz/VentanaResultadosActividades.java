@@ -19,12 +19,13 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
     
     private Socio socioLogueado;
     private ArrayList<Actividad_Deportiva> listaActividadesActual;
-
+    private javax.swing.JFrame ventanaAnterior;
     /**
      * Creates new form VentanaResultadosActividades
      */
-    public VentanaResultadosActividades(Socio socio) {
+    public VentanaResultadosActividades(javax.swing.JFrame ventanaAnterior, Socio socio) {
         initComponents();
+        this.ventanaAnterior = ventanaAnterior;
         this.socioLogueado = socio; // Guardamos el socio que nos pasan
         this.setLocationRelativeTo(null); // Centra la ventana
         this.setResizable(false);        // Bloquea el tamaño
@@ -182,7 +183,9 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
 
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
         this.dispose();
-        new VentanaBuscarActividad(new VentanaPrincipal(), socioLogueado).setVisible(true);
+        if (ventanaAnterior!=null) {
+            ventanaAnterior.setVisible(true);
+        }
     }//GEN-LAST:event_botonVolverActionPerformed
 
     private void botonReservarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservarActividadActionPerformed

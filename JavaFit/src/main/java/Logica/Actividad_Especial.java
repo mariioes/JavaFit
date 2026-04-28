@@ -4,9 +4,10 @@ package Logica;
 import Logica.Horario;
 import Logica.Sala;
 import Logica.Actividad_Deportiva;
+import java.io.Serializable;
 
 
-public class Actividad_Especial extends Actividad_Deportiva {
+public class Actividad_Especial extends Actividad_Deportiva implements Serializable {
     private double precio;
     private String descripcion;
 

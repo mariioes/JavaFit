@@ -48,6 +48,7 @@ public class VentanaMenuAdmin extends javax.swing.JFrame {
         botonGestionarActividades.addActionListener(this::botonGestionarActividadesActionPerformed);
 
         botonConsultaSocios.setText("Consulta de socios");
+        botonConsultaSocios.addActionListener(this::botonConsultaSociosActionPerformed);
 
         botonConsultaReservas.setText("Consulta de Reservas");
 
@@ -96,6 +97,16 @@ public class VentanaMenuAdmin extends javax.swing.JFrame {
     private void botonGestionarActividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGestionarActividadesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonGestionarActividadesActionPerformed
+
+    private void botonConsultaSociosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultaSociosActionPerformed
+        if (this.adminActual != null) {
+            VentanaConsultarSocios vcs = new VentanaConsultarSocios(this, this.adminActual);
+            vcs.setVisible(true);
+            this.setVisible(false);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: No hay un admin logueado.");
+        }
+    }//GEN-LAST:event_botonConsultaSociosActionPerformed
 
     /**
      * @param args the command line arguments

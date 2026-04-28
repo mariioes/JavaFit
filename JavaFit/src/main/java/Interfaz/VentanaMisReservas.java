@@ -7,6 +7,8 @@ import Logica.Gestor;
 import Logica.Reserva;
 import Logica.Socio;
 import java.util.ArrayList;
+import Logica.Actividad_Deportiva;
+import Logica.Actividad_Especial;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 /**
@@ -51,6 +53,7 @@ public class VentanaMisReservas extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaMisReservas = new javax.swing.JTable();
+        botonCancelarReserva = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +70,9 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaMisReservas);
 
+        botonCancelarReserva.setText("Cancelar Reserva");
+        botonCancelarReserva.addActionListener(this::botonCancelarReservaActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,17 +81,48 @@ public class VentanaMisReservas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(165, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonCancelarReserva)
+                .addGap(285, 285, 285))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(botonCancelarReserva)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonCancelarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarReservaActionPerformed
+        int fila = tablaMisReservas.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Selecciona una reserva para eliminar.");
+            return;
+        }
+
+        int confirmar = JOptionPane.showConfirmDialog(this,
+                "¿Seguro que quieres cancelar esta reserva?",
+                "Confirmar cancelación",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirmar == JOptionPane.YES_OPTION) {
+            Actividad_Deportiva actividad = misReservasActuales.get(fila).getActividad();
+            boolean eliminado = Gestor.eliminarReserva(socioLogueado, actividad);
+
+            if (eliminado) {
+                JOptionPane.showMessageDialog(this, "Reserva cancelada correctamente.");
+                actualizarTabla(); // Refresca la tabla
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo cancelar la reserva.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_botonCancelarReservaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,6 +149,7 @@ public class VentanaMisReservas extends javax.swing.JFrame {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonCancelarReserva;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaMisReservas;
     // End of variables declaration//GEN-END:variables

@@ -15,11 +15,11 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
     /**
      * Creates new form VentanaReservarActividad
      */
-    private javax.swing.JFrame ventanaMenu;
+    private javax.swing.JFrame ventanaAnterior;
     private Socio socioActual;
 
     public VentanaBuscarActividad(javax.swing.JFrame menu, Socio socio) {
-        this.ventanaMenu = menu;
+        this.ventanaAnterior = menu;
         this.socioActual = socio;
         initComponents();
         
@@ -31,8 +31,8 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent e) {
-                if (ventanaMenu != null) {
-                    ventanaMenu.setVisible(true);
+                if (ventanaAnterior != null) {
+                    ventanaAnterior.setVisible(true);
                 }
             }
         });
@@ -140,8 +140,8 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
 
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
         this.dispose(); // Cierra esta ventana
-        if (ventanaMenu != null) {
-            ventanaMenu.setVisible(true); // Muestra el menú anterior
+        if (ventanaAnterior != null) {
+            ventanaAnterior.setVisible(true); // Muestra el menú anterior
         }
     }//GEN-LAST:event_botonVolverActionPerformed
 
@@ -156,7 +156,7 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
     java.util.ArrayList<Logica.Actividad_Deportiva> resultados = Logica.Gestor.filtrarActividades(tipo, dia, monitor);
 
     // 3. Crear la ventana de resultados
-    VentanaResultadosActividades vResultados = new VentanaResultadosActividades(socioActual);
+    VentanaResultadosActividades vResultados = new VentanaResultadosActividades(ventanaAnterior, socioActual);
     
     // Centramos la ventana en la pantalla
     vResultados.setLocationRelativeTo(null);
