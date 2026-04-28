@@ -95,7 +95,13 @@ public class VentanaMenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void botonGestionarActividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGestionarActividadesActionPerformed
-        // TODO add your handling code here:
+        if (this.adminActual != null) {
+            VentanaConsultarActividad vca = new VentanaConsultarActividad(this, this.adminActual);
+            vca.setVisible(true);
+            this.setVisible(false);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: No hay un admin logueado.");
+        }
     }//GEN-LAST:event_botonGestionarActividadesActionPerformed
 
     private void botonConsultaSociosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultaSociosActionPerformed
