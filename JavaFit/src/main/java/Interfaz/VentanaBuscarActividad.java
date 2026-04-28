@@ -56,7 +56,7 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
         botonVolver = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         botonBuscar.setText("Buscar");
         botonBuscar.addActionListener(this::botonBuscarActionPerformed);
@@ -156,7 +156,7 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
     java.util.ArrayList<Logica.Actividad_Deportiva> resultados = Logica.Gestor.filtrarActividades(tipo, dia, monitor);
 
     // 3. Crear la ventana de resultados
-    VentanaResultadosActividades vResultados = new VentanaResultadosActividades(socioActual);
+    VentanaResultadosActividades vResultados = new VentanaResultadosActividades(ventanaMenu, socioActual);
     
     // Centramos la ventana en la pantalla
     vResultados.setLocationRelativeTo(null);

@@ -23,8 +23,10 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
     /**
      * Creates new form VentanaResultadosActividades
      */
-    public VentanaResultadosActividades(Socio socio) {
+    private javax.swing.JFrame ventanaMenu;
+    public VentanaResultadosActividades(javax.swing.JFrame menu, Socio socio) {
         initComponents();
+        this.ventanaMenu = menu;
         this.socioLogueado = socio; // Guardamos el socio que nos pasan
         this.setLocationRelativeTo(null); // Centra la ventana
         this.setResizable(false);        // Bloquea el tamaño
@@ -96,7 +98,7 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         jScrollBar2 = new javax.swing.JScrollBar();
         botonReservarActividad = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         TablaResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -182,7 +184,9 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
 
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
         this.dispose();
-        new VentanaBuscarActividad(new VentanaPrincipal(), socioLogueado).setVisible(true);
+        if (ventanaMenu != null) {
+            ventanaMenu.setVisible(true);
+        }
     }//GEN-LAST:event_botonVolverActionPerformed
 
     private void botonReservarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservarActividadActionPerformed
