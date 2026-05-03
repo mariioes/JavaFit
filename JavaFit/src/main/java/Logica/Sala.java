@@ -1,7 +1,8 @@
 package Logica;
+import java.io.Serializable;
 
 
-public class Sala {
+public class Sala implements Serializable {
     private String nombre;
     private int aforo_maximo;
 

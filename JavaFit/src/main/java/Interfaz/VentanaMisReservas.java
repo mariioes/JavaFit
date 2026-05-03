@@ -7,6 +7,8 @@ import Logica.Gestor;
 import Logica.Reserva;
 import Logica.Socio;
 import java.util.ArrayList;
+import Logica.Actividad_Deportiva;
+import Logica.Actividad_Especial;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 /**
@@ -90,6 +92,10 @@ public class VentanaMisReservas extends javax.swing.JFrame {
                         .addGap(211, 211, 211)
                         .addComponent(botonCancelar)))
                 .addContainerGap(165, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonCancelarReserva)
+                .addGap(285, 285, 285))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -19,7 +19,7 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
     
     private Socio socioLogueado;
     private ArrayList<Actividad_Deportiva> listaActividadesActual;
-
+    private javax.swing.JFrame ventanaAnterior;
     /**
      * Creates new form VentanaResultadosActividades
      */

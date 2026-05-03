@@ -1,7 +1,7 @@
 package Logica;
+import java.io.Serializable;
 
-
-public class Horario {
+public class Horario implements Serializable {
     private String dia;
     private String hora_inicio;
     private String hora_final;

@@ -1,6 +1,7 @@
 package Logica;
 import javax.swing.ImageIcon;
-public class Actividad_Deportiva {
+import java.io.Serializable;
+public class Actividad_Deportiva implements Serializable {
     private String titulo;
     private Tipo_Actividad tipo_Actividad;
     private Sala sala;
