@@ -54,7 +54,7 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaMisReservas = new javax.swing.JTable();
         botonVolver = new javax.swing.JButton();
-        botonCancelar = new javax.swing.JButton();
+        botonCancelarReserva = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,7 +74,7 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         botonVolver.setText("Volver atrás");
         botonVolver.addActionListener(this::botonVolverActionPerformed);
 
-        botonCancelar.setText("Cancelar reserva");
+        botonCancelarReserva.setText("Cancelar reserva");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,12 +90,8 @@ public class VentanaMisReservas extends javax.swing.JFrame {
                         .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(211, 211, 211)
-                        .addComponent(botonCancelar)))
-                .addContainerGap(165, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonCancelarReserva)
-                .addGap(285, 285, 285))
+                        .addComponent(botonCancelarReserva)))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,7 +99,7 @@ public class VentanaMisReservas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(botonCancelar)
+                .addComponent(botonCancelarReserva)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(botonVolver)
                 .addGap(48, 48, 48))
@@ -141,7 +137,7 @@ public class VentanaMisReservas extends javax.swing.JFrame {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonCancelar;
+    private javax.swing.JButton botonCancelarReserva;
     private javax.swing.JButton botonVolver;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaMisReservas;
