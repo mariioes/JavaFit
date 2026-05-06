@@ -14,7 +14,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
         this.ventanaPrincipal = principal;
         initComponents();
         
-        this.getContentPane().setBackground(java.awt.Color.cyan);
+        this.getContentPane().setBackground(java.awt.Color.white);
         this.setSize(710,415);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -63,55 +63,71 @@ public class VentanaRegistro extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(51, 255, 51));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Nombre Completo");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, -1));
 
+        registroTelefono.setBackground(new java.awt.Color(204, 255, 255));
         registroTelefono.addActionListener(this::registroTelefonoActionPerformed);
-        getContentPane().add(registroTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 230, 40));
+        getContentPane().add(registroTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 230, 40));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Teléfono");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, -1, -1));
 
+        registroDireccion.setBackground(new java.awt.Color(204, 255, 255));
         registroDireccion.addActionListener(this::registroDireccionActionPerformed);
-        getContentPane().add(registroDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 230, 40));
+        getContentPane().add(registroDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 250, 40));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Dirección");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, -1, -1));
 
+        registroTarjeta.setBackground(new java.awt.Color(204, 255, 255));
         registroTarjeta.addActionListener(this::registroTarjetaActionPerformed);
-        getContentPane().add(registroTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 230, 40));
+        getContentPane().add(registroTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 250, 40));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Tarjeta de crédito");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, -1, -1));
 
+        registroSocioVip.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         registroSocioVip.setLabel("Registrarse como Socio VIP");
         registroSocioVip.addActionListener(this::registroSocioVipActionPerformed);
-        getContentPane().add(registroSocioVip, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, -1, -1));
+        getContentPane().add(registroSocioVip, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, -1, -1));
 
         botonVolverLogin.setLabel("Volver atrás");
         botonVolverLogin.addActionListener(this::botonVolverLoginActionPerformed);
         getContentPane().add(botonVolverLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
+        botonConfirmarRegistro.setBackground(new java.awt.Color(153, 255, 153));
+        botonConfirmarRegistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         botonConfirmarRegistro.setText("Registrarse");
         botonConfirmarRegistro.addActionListener(this::botonConfirmarRegistroActionPerformed);
-        getContentPane().add(botonConfirmarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, -1, -1));
+        getContentPane().add(botonConfirmarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 130, 40));
 
+        registroCorreo.setBackground(new java.awt.Color(204, 255, 255));
         registroCorreo.addActionListener(this::registroCorreoActionPerformed);
-        getContentPane().add(registroCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 130, 30));
+        getContentPane().add(registroCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 230, 40));
 
+        registroContraseña.setBackground(new java.awt.Color(204, 255, 255));
         registroContraseña.setText("jPasswordField1");
-        getContentPane().add(registroContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, -1, -1));
+        getContentPane().add(registroContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, 230, 40));
 
+        registroNombre.setBackground(new java.awt.Color(204, 255, 255));
         registroNombre.addActionListener(this::registroNombreActionPerformed);
-        getContentPane().add(registroNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 250, 40));
+        getContentPane().add(registroNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 250, 40));
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Correo");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, -1, -1));
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Contraseña");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

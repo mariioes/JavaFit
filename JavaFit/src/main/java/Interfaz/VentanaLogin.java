@@ -19,7 +19,7 @@ public VentanaLogin(javax.swing.JFrame principal) {
         this.ventanaPrincipal = principal;
         initComponents();
         
-        this.getContentPane().setBackground(java.awt.Color.LIGHT_GRAY);
+        this.getContentPane().setBackground(java.awt.Color.WHITE);
         
         this.setSize(710,415);
         this.setResizable(false);
@@ -61,31 +61,41 @@ public VentanaLogin(javax.swing.JFrame principal) {
         setBackground(new java.awt.Color(255, 255, 102));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Correo electrónico");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 90, 20));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 130, 20));
 
+        iniciaContraseña.setBackground(new java.awt.Color(255, 204, 204));
+        iniciaContraseña.setForeground(new java.awt.Color(51, 51, 51));
         iniciaContraseña.setText("jPasswordField1");
         iniciaContraseña.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         iniciaContraseña.setFocusTraversalPolicyProvider(true);
         iniciaContraseña.addActionListener(this::iniciaContraseñaActionPerformed);
         getContentPane().add(iniciaContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 210, 30));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Contraseña");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, -1));
 
-        jCheckBox1.setText("jCheckBox1");
+        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jCheckBox1.setText("Acepto las políticas de privacidad");
         jCheckBox1.addActionListener(this::jCheckBox1ActionPerformed);
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, -1, -1));
+        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, -1, -1));
 
+        botonConfirmarInicio.setBackground(new java.awt.Color(255, 204, 102));
+        botonConfirmarInicio.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonConfirmarInicio.setLabel("Iniciar Sesión");
         botonConfirmarInicio.addActionListener(this::botonConfirmarInicioActionPerformed);
-        getContentPane().add(botonConfirmarInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, -1, -1));
+        getContentPane().add(botonConfirmarInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 120, 30));
 
         botonVolverLogin.setLabel("Volver atrás");
         botonVolverLogin.addActionListener(this::botonVolverLoginActionPerformed);
         getContentPane().add(botonVolverLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        iniciaCorreo.setBackground(new java.awt.Color(255, 204, 204));
+        iniciaCorreo.setForeground(new java.awt.Color(51, 51, 51));
+        iniciaCorreo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        iniciaCorreo.addActionListener(this::iniciaCorreoActionPerformed);
         getContentPane().add(iniciaCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 210, 30));
 
         pack();
@@ -149,6 +159,10 @@ public VentanaLogin(javax.swing.JFrame principal) {
 }
 
     }//GEN-LAST:event_botonConfirmarInicioActionPerformed
+
+    private void iniciaCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciaCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_iniciaCorreoActionPerformed
 
     /**
      * @param args the command line arguments

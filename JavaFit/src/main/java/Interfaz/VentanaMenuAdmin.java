@@ -51,6 +51,7 @@ public class VentanaMenuAdmin extends javax.swing.JFrame {
         botonConsultaSocios.addActionListener(this::botonConsultaSociosActionPerformed);
 
         botonConsultaReservas.setText("Consulta de Reservas");
+        botonConsultaReservas.addActionListener(this::botonConsultaReservasActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,6 +114,16 @@ public class VentanaMenuAdmin extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Error: No hay un admin logueado.");
         }
     }//GEN-LAST:event_botonConsultaSociosActionPerformed
+
+    private void botonConsultaReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultaReservasActionPerformed
+        if (this.adminActual != null) {
+            VentanaConsultarReservas vcr = new VentanaConsultarReservas(this, this.adminActual);
+            vcr.setVisible(true);
+            this.setVisible(false);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: No hay un admin logueado.");
+        } 
+    }//GEN-LAST:event_botonConsultaReservasActionPerformed
 
     /**
      * @param args the command line arguments

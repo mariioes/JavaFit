@@ -87,18 +87,22 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollBar1 = new javax.swing.JScrollBar();
+        botonVolver = new javax.swing.JButton();
+        botonReservarActividad = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaResultados = new javax.swing.JTable();
-        botonVolver = new javax.swing.JButton();
-        panelDetalles = new javax.swing.JPanel();
-        lblFoto = new javax.swing.JLabel();
-        lblFoto2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txtDescripcion = new javax.swing.JTextArea();
-        jScrollBar2 = new javax.swing.JScrollBar();
-        botonReservarActividad = new javax.swing.JButton();
+        txtDescripcion = new javax.swing.JEditorPane();
+        lblFoto2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(400, 400));
+
+        botonVolver.setText("Volver atrás");
+        botonVolver.addActionListener(this::botonVolverActionPerformed);
+
+        botonReservarActividad.setText("Reservar Actividad");
+        botonReservarActividad.addActionListener(this::botonReservarActividadActionPerformed);
 
         TablaResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,22 +117,7 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TablaResultados);
 
-        botonVolver.setText("Volver atrás");
-        botonVolver.addActionListener(this::botonVolverActionPerformed);
-
-        panelDetalles.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelDetalles.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelDetalles.add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 7, -1, -1));
-        panelDetalles.add(lblFoto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 5, 280, 130));
-
-        txtDescripcion.setEditable(false);
-        txtDescripcion.setColumns(20);
-        txtDescripcion.setLineWrap(true);
-        txtDescripcion.setRows(5);
         jScrollPane2.setViewportView(txtDescripcion);
-
-        botonReservarActividad.setText("Reservar Actividad");
-        botonReservarActividad.addActionListener(this::botonReservarActividadActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,47 +125,39 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(20, 20, 20)
-                                    .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(598, 598, 598))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(31, 31, 31)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(421, 421, 421)
-                                .addComponent(botonReservarActividad)
-                                .addGap(176, 176, 176)))
+                                .addGap(20, 20, 20)
+                                .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(360, 360, 360)
+                                .addComponent(botonReservarActividad)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(lblFoto2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonReservarActividad)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                        .addComponent(botonVolver)
-                        .addGap(16, 16, 16))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblFoto2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(botonReservarActividad)
+                .addGap(10, 10, 10)
+                .addComponent(botonVolver)
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -246,12 +227,9 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
     private javax.swing.JButton botonReservarActividad;
     private javax.swing.JButton botonVolver;
     private javax.swing.JScrollBar jScrollBar1;
-    private javax.swing.JScrollBar jScrollBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblFoto2;
-    private javax.swing.JPanel panelDetalles;
-    private javax.swing.JTextArea txtDescripcion;
+    private javax.swing.JEditorPane txtDescripcion;
     // End of variables declaration//GEN-END:variables
 }

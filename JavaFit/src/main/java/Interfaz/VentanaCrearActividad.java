@@ -182,6 +182,7 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
     }
 
     Logica.Gestor.agregar(nueva);
+    Logica.Gestor.guardarActividades();
     javax.swing.JOptionPane.showMessageDialog(this, "¡Actividad creada correctamente!");
     this.dispose();
     }//GEN-LAST:event_botonCrearActividadActionPerformed

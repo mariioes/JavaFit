@@ -18,23 +18,27 @@ public class Gestor {
     private static ArrayList<Reserva> reservas = new ArrayList<>();
 
     // --- 3. INICIALIZACIÓN GLOBAL ---
-    // ¡IMPORTANTE! Llama a este método al arrancar tu aplicación (en tu Main o Menú de Inicio)
    public static void inicializarTodo() {
         cargarAdmins();
         crearAdminJefe();
         cargarSocios();
         
         File f = new File(FICHERO_ACTIVIDADES);
-        if (!f.exists() || actividades.isEmpty()) {
+        if (!f.exists()) {
             cargarDatosPrueba();
             guardarActividades();
         } else {
             cargarActividades();
-        }
+        if (actividades.isEmpty()) { // solo si la carga falló
+            cargarDatosPrueba();
+            guardarActividades();
+    }
         cargarReservas();
         System.out.println("DEBUG: Actividades cargadas en memoria: " + actividades.size());
         System.out.println("DEBUG - Reservas cargadas: " + reservas.size());
+        System.out.println("Administradores cargados en memoria: "+admins.size());
 }
+   }
 
     // --- 4. MÉTODOS DE GUARDADO (Persistencia) ---
     public static void guardarSocios() {
@@ -83,7 +87,13 @@ public class Gestor {
         if (!f.exists()) return;
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f))) {
             actividades = (ArrayList<Actividad_Deportiva>) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) { System.err.println("Error al cargar actividades: " + e.getMessage()); }
+            for (Actividad_Deportiva act : actividades) {
+                //act.recargarImagen();
+        }
+        System.out.println("DEBUG - cargarActividades OK: " + actividades.size()); // ✅
+    } catch (IOException | ClassNotFoundException e) {
+        System.err.println("Error al cargar actividades: " + e.getMessage()); // ✅ mira este mensaje
+    }
     }
 
     public static void cargarReservas() {
