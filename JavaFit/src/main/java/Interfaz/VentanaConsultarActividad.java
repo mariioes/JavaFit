@@ -39,10 +39,10 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
     jEditorPane1.setEditable(false);
     cargarActividades();
 
-    jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+    tablaActividades.addMouseListener(new java.awt.event.MouseAdapter() {
         @Override
         public void mouseClicked(java.awt.event.MouseEvent evt) {
-            int fila = jTable1.getSelectedRow();
+            int fila = tablaActividades.getSelectedRow();
             if (fila != -1 && listaActividadesActual != null) {
                 actualizarPanelDetalles(listaActividadesActual.get(fila));
             }
@@ -51,7 +51,7 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
     }
     
     public void cargarActividades() {
-        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) jTable1.getModel();
+        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tablaActividades.getModel();
         modelo.setRowCount(0);
 
         listaActividadesActual = Logica.Gestor.getActividades();
@@ -100,7 +100,7 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
     }
     
     private void eliminarActividad() {
-        int fila = jTable1.getSelectedRow();
+        int fila = tablaActividades.getSelectedRow();
         if (fila == -1) {
             JOptionPane.showMessageDialog(this, "Selecciona una actividad para eliminar.");
             return;
@@ -119,16 +119,17 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaActividades = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonEliminarActividad = new javax.swing.JButton();
+        botonCrearActividad = new javax.swing.JButton();
+        botonModificarActividad = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaActividades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -139,41 +140,43 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
                 "Título", "Tipo", "Sala", "Monitor", "Horario", "Aforo actual", "¿Especial?", "Precio"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaActividades);
 
         jButton1.setText("Volver atrás");
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
         jScrollPane2.setViewportView(jEditorPane1);
 
-        jButton2.setText("Eliminar Actividad");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        botonEliminarActividad.setText("Eliminar Actividad");
+        botonEliminarActividad.addActionListener(this::botonEliminarActividadActionPerformed);
 
-        jButton3.setText("Crear Actividad");
-        jButton3.addActionListener(this::jButton3ActionPerformed);
+        botonCrearActividad.setText("Crear Actividad");
+        botonCrearActividad.addActionListener(this::botonCrearActividadActionPerformed);
+
+        botonModificarActividad.setText("Modificar Actividad");
+        botonModificarActividad.addActionListener(this::botonModificarActividadActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(201, 201, 201)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(192, 192, 192)))
+                        .addComponent(botonEliminarActividad)
+                        .addGap(30, 30, 30)
+                        .addComponent(botonCrearActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(botonModificarActividad))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,10 +186,11 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonEliminarActividad)
+                    .addComponent(botonCrearActividad)
+                    .addComponent(botonModificarActividad))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(19, 19, 19))
         );
@@ -201,11 +205,11 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonEliminarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActividadActionPerformed
         eliminarActividad();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonEliminarActividadActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botonCrearActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActividadActionPerformed
         if (this.adminActual != null) {
             VentanaCrearActividad vcca = new VentanaCrearActividad(this, this.adminActual);
             vcca.setVisible(true);
@@ -213,19 +217,40 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         } else {
             javax.swing.JOptionPane.showMessageDialog(this, "Error: No hay un admin logueado.");
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botonCrearActividadActionPerformed
+
+    private void botonModificarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActividadActionPerformed
+        int fila = tablaActividades.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona una actividad para modificarla");
+            return;
+        }
+        
+        // Obtenemos la actividad que queremos modificar
+        Logica.Actividad_Deportiva actividadAModificar = listaActividadesActual.get(fila);
+        
+        // Abrimos la ventana de crear actividad pero con los datos de la actividad a modificar
+        if (this.adminActual != null) {
+            VentanaCrearActividad vca = new VentanaCrearActividad(this, this.adminActual, actividadAModificar);
+            vca.setVisible(true);
+            this.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Error.");
+        }
+    }//GEN-LAST:event_botonModificarActividadActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonCrearActividad;
+    private javax.swing.JButton botonEliminarActividad;
+    private javax.swing.JButton botonModificarActividad;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaActividades;
     // End of variables declaration//GEN-END:variables
 }

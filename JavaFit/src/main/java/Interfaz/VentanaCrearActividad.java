@@ -13,12 +13,14 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaCrearActividad.class.getName());
     private javax.swing.JFrame ventanaAnterior;
     private Logica.Administrador adminActual;
+    private Logica.Actividad_Deportiva actividadEnEdicion = null;
     /**
      * Creates new form VentanaCrearActividad
      */
     public VentanaCrearActividad(javax.swing.JFrame ventana, Logica.Administrador admin) {
         this.ventanaAnterior = ventana;
         this.adminActual = admin;
+        this.actividadEnEdicion = null;
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -37,7 +39,30 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
         txtPrecio.setEnabled(false);
         
     }
-
+    
+    // Método para poder modificar las actividades
+    public VentanaCrearActividad (javax.swing.JFrame ventana, Logica.Administrador admin, Logica.Actividad_Deportiva actividad) {
+        this.ventanaAnterior = ventana;
+        this.adminActual = admin;
+        this.actividadEnEdicion = actividad;    // Guardamos la actividad que queremos modificar
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setTitle("JAVAFIT - Modificar Actividad: " + actividad.getTitulo());
+        
+        // Llamamos a un método para rellenar los campos automáticamente
+        rellenarCamposParaEdicion();
+    } 
+    
+    private void rellenarCamposParaEdicion() {
+        // Ponemos los datos de la actividad en los campos de tu ventana
+        txtTitulo.setText(actividadEnEdicion.getTitulo());
+        txtMonitor.setSelectedItem(actividadEnEdicion.getMonitor_asignado());
+        
+        comboTipo.setSelectedItem(actividadEnEdicion.getTipo_Actividad());
+        txtTitulo.setEditable(false);
+        
+        botonGuardarCambios.setText("Guardar Cambios");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,9 +84,9 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         ComboDia = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        ComboMonitor = new javax.swing.JComboBox<>();
+        txtMonitor = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        botonCrearActividad = new javax.swing.JButton();
+        botonGuardarCambios = new javax.swing.JButton();
         txtDescripcion = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JFormattedTextField();
@@ -104,15 +129,15 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
         jLabel6.setText("Día");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 37, -1));
 
-        ComboMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monitor 1", "Monitor 2", "Monitor 3", "Monitor 4" }));
-        getContentPane().add(ComboMonitor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 172, 38));
+        txtMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monitor 1", "Monitor 2", "Monitor 3", "Monitor 4" }));
+        getContentPane().add(txtMonitor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 172, 38));
 
         jLabel7.setText("Monitor");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 53, -1));
 
-        botonCrearActividad.setText("Crear Actividad");
-        botonCrearActividad.addActionListener(this::botonCrearActividadActionPerformed);
-        getContentPane().add(botonCrearActividad, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, -1, -1));
+        botonGuardarCambios.setText("Guardar Cambios");
+        botonGuardarCambios.addActionListener(this::botonGuardarCambiosActionPerformed);
+        getContentPane().add(botonGuardarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, -1, -1));
         getContentPane().add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 130, 66));
 
         jLabel8.setText("Descripción");
@@ -137,7 +162,7 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTituloActionPerformed
 
-    private void botonCrearActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActividadActionPerformed
+    private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosActionPerformed
             // Validar campos obligatorios
         if (txtTitulo.getText().trim().isEmpty()
             || txtHoraInicio.getText().trim().isEmpty()
@@ -160,7 +185,7 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
 
     // Tipo y monitor
         Logica.Tipo_Actividad tipo = Logica.Tipo_Actividad.valueOf(comboTipo.getSelectedItem().toString());
-        String monitor = ComboMonitor.getSelectedItem().toString();
+        String monitor = txtMonitor.getSelectedItem().toString();
 
     // Crear actividad normal o especial
         Logica.Actividad_Deportiva nueva;
@@ -185,7 +210,7 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
     Logica.Gestor.guardarActividades();
     javax.swing.JOptionPane.showMessageDialog(this, "¡Actividad creada correctamente!");
     this.dispose();
-    }//GEN-LAST:event_botonCrearActividadActionPerformed
+    }//GEN-LAST:event_botonGuardarCambiosActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
         txtDescripcion.setEnabled(jCheckBox2.isSelected());
@@ -205,9 +230,8 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboDia;
-    private javax.swing.JComboBox<String> ComboMonitor;
     private javax.swing.JComboBox<String> ComboSala;
-    private javax.swing.JButton botonCrearActividad;
+    private javax.swing.JButton botonGuardarCambios;
     private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox2;
@@ -223,6 +247,7 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JFormattedTextField txtHoraInicio;
+    private javax.swing.JComboBox<String> txtMonitor;
     private javax.swing.JFormattedTextField txtPrecio;
     private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
