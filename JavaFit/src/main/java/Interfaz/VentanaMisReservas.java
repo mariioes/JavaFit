@@ -75,6 +75,7 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         botonVolver.addActionListener(this::botonVolverActionPerformed);
 
         botonCancelarReserva.setText("Cancelar reserva");
+        botonCancelarReserva.addActionListener(this::botonCancelarReservaActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,6 +112,43 @@ public class VentanaMisReservas extends javax.swing.JFrame {
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
         this.dispose();
     }//GEN-LAST:event_botonVolverActionPerformed
+
+    private void botonCancelarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarReservaActionPerformed
+        int fila = tablaMisReservas.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona una actividad de la tabla.");
+            return;
+        }
+
+        Reserva miReserva = misReservasActuales.get(fila);
+        Actividad_Deportiva seleccionada = miReserva.getActividad();
+        
+        
+        // Pedimos confirmación
+        int confirmacion = javax.swing.JOptionPane.showConfirmDialog(this, 
+        "¿Estás seguro de que deseas cancelar la reserva de " + seleccionada.getTitulo() + "?", 
+        "Confirmar cancelación", 
+        javax.swing.JOptionPane.YES_NO_OPTION);
+        
+        if (confirmacion == javax.swing.JOptionPane.YES_OPTION){
+            // Llamada al método del Gestor
+            String resultado_2 = Gestor.cancelarReserva(socioLogueado, seleccionada);
+            
+        switch (resultado_2) {
+            case "EXITO":
+                misReservasActuales.remove(fila);
+                javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tablaMisReservas.getModel();
+                modelo.removeRow(fila);
+                
+                javax.swing.JOptionPane.showMessageDialog(this, "Reserva cancelada con exito");
+                break;
+                
+            case "ERROR":
+                javax.swing.JOptionPane.showMessageDialog(this, "No se ha podido encontrar la reserva para cancelar", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                break;
+            }
+        }
+    }//GEN-LAST:event_botonCancelarReservaActionPerformed
 
     /**
      * @param args the command line arguments

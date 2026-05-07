@@ -156,6 +156,25 @@ public class Gestor {
         
         return "EXITO";
     }
+    
+    public static String cancelarReserva(Socio socio, Actividad_Deportiva actividad) {
+        int indiceABorrar = -1;
+        for (int i = 0; i < reservas.size(); i++) {
+        Reserva r = reservas.get(i);
+        
+        if (r.getSocio().getCorreo().equals(socio.getCorreo()) && r.getActividad().getTitulo().equals(actividad.getTitulo())) {
+            indiceABorrar = i;
+            break;
+        }
+    }
+    if (indiceABorrar != -1) {
+        reservas.remove(indiceABorrar);
+        guardarReservas();
+        return "EXITO";
+    } else {
+        return "ERROR";
+    }
+}
 
     public static ArrayList<Actividad_Deportiva> filtrarActividades(String tipoBusqueda, String diaBusqueda, String monitorBusqueda) {
         ArrayList<Actividad_Deportiva> filtradas = new ArrayList<>();
