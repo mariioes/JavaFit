@@ -205,7 +205,19 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         for (Actividad_Deportiva act : lista) {
             String salaInfo = act.getSala().getNombre() + " (" + act.getSala().getAforo_maximo() + ")";
             String horarioInfo = act.getHorario().getHora_inicio() + " - " + act.getHorario().getHora_final();
-            String precioStr = (act instanceof Actividad_Especial) ? ((Actividad_Especial) act).getPrecio() + "€" : "Incluido";
+            String precioStr = "Incluido";
+            
+            if (act instanceof Actividad_Especial){
+                Actividad_Especial especial = (Actividad_Especial) act;
+                double precio = especial.getPrecio();
+                
+                if (socioLogueado != null && socioLogueado.esVip()) {
+                    double precioRebajado = precio * 0.90;
+                    precioStr = String.format("%.2f€ (VIP)", precioRebajado);
+                } else {
+                    precioStr = precio + "€";
+                }
+            }
 
             Object[] fila = {
                 act.getTitulo(),

@@ -17,6 +17,14 @@ public class Actividad_Especial extends Actividad_Deportiva implements Serializa
         this.descripcion = descripcion;
         this.aforo_actual = 0;
     }
+    
+    public double calcularPrecioParaSocio(Socio socio, double precio) {
+        if (socio.esVip()) {
+            return precio * 0.90;
+        } else {
+            return precio;
+        }
+    }
 
     public double getPrecio() {
         return precio;

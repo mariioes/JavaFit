@@ -233,7 +233,8 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         if (this.adminActual != null) {
             VentanaCrearActividad vca = new VentanaCrearActividad(this, this.adminActual, actividadAModificar);
             vca.setVisible(true);
-            this.setVisible(true);
+            this.setVisible(false);
+            
         } else {
             JOptionPane.showMessageDialog(this, "Error.");
         }

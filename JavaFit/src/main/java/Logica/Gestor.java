@@ -2,6 +2,7 @@ package Logica;
 
 import java.util.ArrayList;
 import java.io.*;
+import java.util.stream.Collectors;
 
 public class Gestor {
     
@@ -187,6 +188,15 @@ public class Gestor {
             }
         }
         return filtradas;
+    }
+    
+    
+    public static ArrayList<Actividad_Deportiva> buscarActividadesPorNombre(String nombreBusqueda, String tipoBusqueda, String diaBusqueda) {
+        return actividades.stream()
+        .filter(act -> nombreBusqueda.isEmpty() || act.getTitulo().toLowerCase().contains(nombreBusqueda.toLowerCase()))
+        .filter(act -> tipoBusqueda.equals("Cualquiera") || act.getTipo_Actividad().toString().equalsIgnoreCase(tipoBusqueda))
+        .filter(act -> diaBusqueda.equals("Cualquiera") || act.getHorario().getDia().equalsIgnoreCase(diaBusqueda))
+        .collect(Collectors.toCollection(ArrayList::new));
     }
     
     public static boolean eliminarReserva(Socio socio, Actividad_Deportiva actividad) {
