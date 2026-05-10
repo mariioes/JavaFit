@@ -1,24 +1,52 @@
 package Logica;
 
+/**
+ * Importamos los ArrayList y Collectors para guardar la información de socios, admins, reservas y actividades.
+ * 
+ */
 import java.util.ArrayList;
 import java.io.*;
 import java.util.stream.Collectors;
 
+/**
+ * Clase que se encarga de toda la lógica funcional del sistema JavaFit.
+ * Contiene los métodos de arranque, escritura y lectura de ficheros, se encarga de la persistencia de datos (ficheros.dat).
+ * Es la clase base para toda la parte de lógica y todos sus métodos y atributos son estáticos, no hace falta instanciarla.
+ */
 public class Gestor {
     
     // --- 1. ARCHIVOS DE GUARDADO ---
+    /** Ruta del fichero donde se guardan los administradores.*/
     private static final String FICHERO_ADMINS = "admins.dat";
+    
+    /** Ruta del fichero donde se guardan los socios.*/
     private static final String FICHERO_SOCIOS = "socios.dat";
+    
+    /** Ruta del fichero donde se guardan las actividades.*/
     private static final String FICHERO_ACTIVIDADES = "actividades.dat";
+    
+    /** Ruta del fichero donde se guardan las reservas.*/
     private static final String FICHERO_RESERVAS = "reservas.dat";
 
     // --- 2. LISTAS EN MEMORIA ---
+    /** Lista de administradores cargados en memoria. */
     private static ArrayList<Administrador> admins = new ArrayList<>();
+    
+    /** Lista de socios cargados en memoria. */
     private static ArrayList<Socio> socios = new ArrayList<>();
+    
+    /** Lista de actividades cargadas en memoria. */
     private static ArrayList<Actividad_Deportiva> actividades = new ArrayList<>();
+    
+    /** Lista de reservas cargadas en memoria. */
     private static ArrayList<Reserva> reservas = new ArrayList<>();
 
     // --- 3. INICIALIZACIÓN GLOBAL ---
+    /**
+     * Inicializa el sistema al arrancar la aplicación.
+     * Carga administradores, socios, actividades y reservas desde sus ficheros.
+     * Si no existe el fichero de actividades, carga los datos de prueba iniciales.
+     */
    public static void inicializarTodo() {
         cargarAdmins();
         crearAdminJefe();
@@ -42,24 +70,36 @@ public class Gestor {
    }
 
     // --- 4. MÉTODOS DE GUARDADO (Persistencia) ---
+    /**
+     * Guarda la lista de socios en el fichero socios.dat.
+     */
     public static void guardarSocios() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FICHERO_SOCIOS))) {
             oos.writeObject(socios);
         } catch (IOException e) { System.err.println("Error al guardar socios: " + e.getMessage()); }
     }
 
+    /**
+     * Guarda la lista de admins en el fichero admins.dat.
+     */
     public static void guardarAdmins() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FICHERO_ADMINS))) {
             oos.writeObject(admins);
         } catch (IOException e) { System.err.println("Error al guardar admins: " + e.getMessage()); }
     }
 
+    /**
+     * Guarda la lista de actividades en el fichero actividades.dat.
+     */
     public static void guardarActividades() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FICHERO_ACTIVIDADES))) {
             oos.writeObject(actividades);
         } catch (IOException e) { System.err.println("Error al guardar actividades: " + e.getMessage()); }
     }
 
+    /**
+     * Guarda la lista de reservas en el fichero reservas.dat.
+     */
     public static void guardarReservas() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FICHERO_RESERVAS))) {
             oos.writeObject(reservas);
@@ -67,6 +107,10 @@ public class Gestor {
     }
 
     // --- 5. MÉTODOS DE CARGA ---
+    
+    /**
+     * Carga la lista de socios desde el fichero socios.dat.
+     */
     public static void cargarSocios() {
         File f = new File(FICHERO_SOCIOS);
         if (!f.exists()) return;
@@ -75,6 +119,9 @@ public class Gestor {
         } catch (IOException | ClassNotFoundException e) { System.err.println("Error al cargar socios: " + e.getMessage()); }
     }
 
+    /**
+     * Carga la lista de admins desde el fichero admins.dat.
+     */
     public static void cargarAdmins() {
         File f = new File(FICHERO_ADMINS);
         if (!f.exists()) return;
@@ -83,6 +130,10 @@ public class Gestor {
         } catch (IOException | ClassNotFoundException e) { System.err.println("Error al cargar admins: " + e.getMessage()); }
     }
 
+    /**
+     * Carga la lista de actividades desde el fichero actividades.dat.
+     * Tras cargar, recarga las imágenes de cada actividad desde su ruta.
+     */
     public static void cargarActividades() {
         File f = new File(FICHERO_ACTIVIDADES);
         if (!f.exists()) return;
@@ -97,6 +148,9 @@ public class Gestor {
     }
     }
 
+    /**
+     * Carga la lista de reservas desde el fichero reservas.dat.
+     */
     public static void cargarReservas() {
         File f = new File(FICHERO_RESERVAS);
         if (!f.exists()) return;
@@ -106,6 +160,10 @@ public class Gestor {
     }
 
     // --- 6. DATOS DE PRUEBA INICIALES ---
+    /**
+     * Carga un conjunto de actividades de prueba en memoria, si se elimina una actividad no se reescribe.
+     * Solo se ejecuta la primera vez que arranca la aplicación, cuando no existe el fichero de actividades.
+     */
     public static void cargarDatosPrueba() {
         Sala sala1 = new Sala("Sala Zen", 20);
         Sala sala2 = new Sala("Sala Fitness", 30);
@@ -131,8 +189,14 @@ public class Gestor {
 
     // --- 7. LÓGICA DE NEGOCIO (RESERVAS Y FILTROS) ---
     
+    /**
+     * Intenta realizar una reserva para un socio en una actividad.
+     * Comprueba que no haya duplicados y que haya aforo disponible.
+     * @param socio Socio que quiere reservar.
+     * @param actividad Actividad que se quiere reservar.
+     * @return "DUPLICADO" si ya tiene reserva, "LLENO" si no hay plazas, "EXITO" si se realiza correctamente.
+     */
     public static String realizarReserva(Socio socio, Actividad_Deportiva actividad) {
-        // 1. REGLA: Comprobar si ya está inscrito (Evitar duplicados)
         for (Reserva r : reservas) {
             if (r.getSocio().getCorreo().equals(socio.getCorreo()) && 
                 r.getActividad().getTitulo().equals(actividad.getTitulo())) {
@@ -140,7 +204,6 @@ public class Gestor {
             }
         }
 
-        // 2. REGLA: Comprobar si la sala está llena (Aforo)
         long inscritos = reservas.stream()
                 .filter(r -> r.getActividad().getTitulo().equals(actividad.getTitulo()))
                 .count();
@@ -149,15 +212,20 @@ public class Gestor {
             return "LLENO";
         }
 
-        // 3. EXITO: Crear la reserva y guardarla
         Reserva nueva = new Reserva(socio, actividad);
         reservas.add(nueva);
         
-        guardarReservas(); // Guardado persistente instantáneo
+        guardarReservas();
         
         return "EXITO";
     }
     
+    /**
+     * Cancela una reserva existente de un socio para una actividad.
+     * @param socio Socio que cancela la reserva.
+     * @param actividad Actividad de la que se cancela la reserva.
+     * @return "EXITO" si se canceló correctamente, "ERROR" si no se encontró la reserva.
+     */
     public static String cancelarReserva(Socio socio, Actividad_Deportiva actividad) {
         int indiceABorrar = -1;
         for (int i = 0; i < reservas.size(); i++) {
@@ -177,6 +245,13 @@ public class Gestor {
     }
 }
 
+    /**
+     * Filtra las actividades según tipo, día y monitor.
+     * @param tipoBusqueda Tipo de actividad a filtrar, o "Cualquiera" para no filtrar.
+     * @param diaBusqueda Día de la semana a filtrar, o "Cualquiera" para no filtrar.
+     * @param monitorBusqueda Monitor a filtrar, o "Cualquiera" para no filtrar.
+     * @return Lista de actividades que cumplen los filtros.
+     */
     public static ArrayList<Actividad_Deportiva> filtrarActividades(String tipoBusqueda, String diaBusqueda, String monitorBusqueda) {
         ArrayList<Actividad_Deportiva> filtradas = new ArrayList<>();
         for (Actividad_Deportiva act : actividades) {
@@ -190,7 +265,13 @@ public class Gestor {
         return filtradas;
     }
     
-    
+    /**
+     * Busca actividades por nombre, tipo y día usando streams.
+     * @param nombreBusqueda Texto a buscar en el título, puede estar vacío para no filtrar.
+     * @param tipoBusqueda Tipo de actividad, o "Cualquiera" para no filtrar.
+     * @param diaBusqueda Día de la semana, o "Cualquiera" para no filtrar.
+     * @return Lista de actividades que coinciden con la búsqueda.
+     */
     public static ArrayList<Actividad_Deportiva> buscarActividadesPorNombre(String nombreBusqueda, String tipoBusqueda, String diaBusqueda) {
         return actividades.stream()
         .filter(act -> nombreBusqueda.isEmpty() || act.getTitulo().toLowerCase().contains(nombreBusqueda.toLowerCase()))
@@ -199,6 +280,12 @@ public class Gestor {
         .collect(Collectors.toCollection(ArrayList::new));
     }
     
+    /**
+     * Elimina una reserva de un socio para una actividad concreta.
+     * @param socio Socio cuya reserva se quiere eliminar.
+     * @param actividad Actividad de la que se elimina la reserva.
+     * @return true si se eliminó correctamente, false si no se encontró.
+     */
     public static boolean eliminarReserva(Socio socio, Actividad_Deportiva actividad) {
         Reserva aEliminar = null;
         for (Reserva r : reservas) {
@@ -215,6 +302,11 @@ public class Gestor {
         return false;
 }
     
+    /**
+     * Devuelve todas las reservas asociadas a un socio concreto.
+     * @param socio Socio del que se quieren obtener las reservas.
+     * @return Lista de reservas del socio.
+     */
     public static ArrayList<Reserva> obtenerReservasPorSocio(Socio socio) {
         ArrayList<Reserva> filtradas = new ArrayList<>();
         for (Reserva r : reservas) {
@@ -227,32 +319,64 @@ public class Gestor {
 }
 
     // --- 8. GETTERS, SETTERS Y GESTIÓN BÁSICA ---
+    /**
+     * Añade un nuevo socio al sistema y lo guarda en el fichero.
+     * @param nuevo Socio a añadir.
+     */
     public static void agregarSocio(Socio nuevo) {
         socios.add(nuevo);
         guardarSocios();
     }
     
+    /**
+     * Añade un nuevo admin al sistema y lo guarda en el fichero.
+     * @param nuevo Administrador a añadir.
+     */
     public static void agregarAdmin(Administrador nuevo) {
         admins.add(nuevo);
         guardarAdmins();
     }
 
+    /**
+     * Añade una nueva actividad al sistema y la guarda en el fichero.
+     * @param actividad Actividad a añadir.
+     */
     public static void agregar(Actividad_Deportiva actividad) {
         actividades.add(actividad);
         guardarActividades();
     }
     
+    /**
+     * Elimina una actividad del sistema y reescribe el fichero.
+     * @param actividad Actividad a eliminar.
+     */
     public static void eliminar(Actividad_Deportiva actividad) {
         actividades.remove(actividad);
         guardarActividades();
     }
     
+    /** @return Lista de todas las actividades deportivas. */
     public static ArrayList<Actividad_Deportiva> getActividades() { return actividades; }
+    
+    /**
+     * Reemplaza la lista de actividades y la guarda en el fichero.
+     * @param nuevasActividades Nueva lista de actividades.
+     */
     public static void setActividades(ArrayList<Actividad_Deportiva> nuevasActividades) { actividades = nuevasActividades; guardarActividades(); }
+    
+    /** @return Lista de todos los socios registrados. */
     public static ArrayList<Socio> getSocios() { return socios; }
+    
+    /** @return Lista de todas las reservas activas. */
     public static ArrayList<Reserva> getReservas() { return reservas; }
+    
+    /** @return Lista de todos los administradores. */
     public static ArrayList<Administrador> getAdmins() { return admins; }
     
+    /**
+     * Crea el administrador principal del sistema si no existe ninguno.
+     * El administrador por defecto tiene correo "admin@javafit.com" y contraseña "admin".
+     */
     public static void crearAdminJefe() {
         if (admins.isEmpty()) {
             Administrador jefe = new Administrador("admin@javafit.com", "admin");
