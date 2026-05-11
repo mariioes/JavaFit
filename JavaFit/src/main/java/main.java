@@ -5,7 +5,7 @@ import Logica.Gestor;
  * Clase principal de la aplicación JavaFit.
  * Punto de entrada del programa. Se encarga de inicializar los datos del sistema, configurar el estilo gráfico y lanzar la ventana principal.
  */
-public class main {
+public class Main {
     
     /**
      * Método principal que arranca la aplicación JavaFit.

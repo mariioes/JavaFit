@@ -265,6 +265,14 @@ public class Gestor {
         return filtradas;
     }
     
+    public static ArrayList<Socio> filtrarSocios(String nombre, String correo, boolean soloVip) {
+        return socios.stream()
+                .filter(s -> nombre.isEmpty() || (s.getNombre() != null && s.getNombre().toLowerCase().contains(nombre.toLowerCase())))
+                .filter(s -> correo.isEmpty() || (s.getCorreo() != null && s.getCorreo().toLowerCase().contains(correo.toLowerCase())))
+                .filter(s -> !soloVip || s.esVip())
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+    
     /**
      * Busca actividades por nombre, tipo y día usando streams.
      * @param nombreBusqueda Texto a buscar en el título, puede estar vacío para no filtrar.
