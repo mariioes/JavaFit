@@ -355,7 +355,10 @@ public class Gestor {
         guardarActividades();
     }
     
-    /** @return Lista de todas las actividades deportivas. */
+    /**
+     * Devuelve la lista de todas las actividad disponibles.
+     * @return Lista de todas las actividades deportivas. 
+     */
     public static ArrayList<Actividad_Deportiva> getActividades() { return actividades; }
     
     /**
@@ -364,13 +367,22 @@ public class Gestor {
      */
     public static void setActividades(ArrayList<Actividad_Deportiva> nuevasActividades) { actividades = nuevasActividades; guardarActividades(); }
     
-    /** @return Lista de todos los socios registrados. */
+    /**
+     * Devuelve la lista de todos los socios registrados.
+     * @return Lista de todos los socios registrados. 
+    */
     public static ArrayList<Socio> getSocios() { return socios; }
     
-    /** @return Lista de todas las reservas activas. */
+    /**
+     * Devuelve la lista de todas las reservas actualmente activas.
+     * @return Lista de todas las reservas activas. 
+    */
     public static ArrayList<Reserva> getReservas() { return reservas; }
     
-    /** @return Lista de todos los administradores. */
+    /** 
+     * Devuelve la lista de los administradores.
+     * @return Lista de todos los administradores. 
+     */
     public static ArrayList<Administrador> getAdmins() { return admins; }
     
     /**

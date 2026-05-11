@@ -1,15 +1,22 @@
 package Interfaz;
 import Logica.Socio;
 import Logica.Gestor;
+
 /**
- *
- * @author gdsergio1307
+ * Ventana de registro de nuevos socios en JavaFit.
+ * Recoge los datos del socio (nombre, teléfono, dirección, correo, contraseña, tarjeta y si es VIP), los valida y los guarda en el sistema mediante el Gestor.
  */
 public class VentanaRegistro extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaRegistro.class.getName());
+    /** Referencia a la ventana desde la que se abrió el login de admin. */
     private javax.swing.JFrame ventanaPrincipal;
 
+    /**
+     * Constructor de VentanaRegistro.
+     * Inicializa la ventana, aplica una máscara de 9 dígitos al campo de teléfono y configura el comportamiento al cerrarla.
+     * @param principal Ventana principal desde la que se abre el registro.
+     */
     public VentanaRegistro(javax.swing.JFrame principal) {
         this.ventanaPrincipal = principal;
         initComponents();
@@ -143,11 +150,21 @@ public class VentanaRegistro extends javax.swing.JFrame {
     private void registroSocioVipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroSocioVipActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_registroSocioVipActionPerformed
-
+    
+    /**
+     * Cierra la ventana de registro y restaura la ventana principal.
+     * @param evt Evento de acción del botón.
+     */
     private void botonVolverLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverLoginActionPerformed
         this.dispose();
     }//GEN-LAST:event_botonVolverLoginActionPerformed
 
+    /**
+     * Recoge y valida todos los campos del formulario de registro.
+     * Comprueba nombre, teléfono, correo, dirección, tarjeta y contraseña.
+     * Si todo es correcto, crea el socio y lo guarda en el sistema.
+     * @param evt Evento de acción del botón.
+     */
     private void botonConfirmarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarRegistroActionPerformed
         String nombre = registroNombre.getText().trim();
         String telefono = registroTelefono.getText().replace("_", "").trim();
@@ -200,7 +217,10 @@ public class VentanaRegistro extends javax.swing.JFrame {
         }
     }
 
-// Método auxiliar para los mensajes
+    /**
+     * Muestra un mensaje de error de validación en un cuadro de diálogo.
+     * @param mensaje Texto del error a mostrar.
+     */
     private void mostrarError(String mensaje) {
         javax.swing.JOptionPane.showMessageDialog(this, mensaje, "Error de validación", javax.swing.JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_botonConfirmarRegistroActionPerformed

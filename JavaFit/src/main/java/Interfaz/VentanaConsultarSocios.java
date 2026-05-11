@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Interfaz;
 import Logica.Actividad_Deportiva;
 import Logica.Actividad_Especial;
@@ -11,17 +7,26 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author gdsergio1307
+ * Ventana que permite al administrador consultar los datos de todos los socios registrados en JavaFit.
+ * Muestra una tabla con los socios y un panel lateral con el detalle del socio seleccionado.
  */
 public class VentanaConsultarSocios extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaConsultarSocios.class.getName());
+    /** Referencia al menú del administrador para restaurarlo al cerrar. */
     private javax.swing.JFrame ventanaAdmin;
+    
+    /** Lista de socios mostrados en la tabla, sincronizada con las filas. */
     private ArrayList<Socio> listaSociosActual;
+    
+    /** Administrador que está consultando los socios. */
     private Logica.Administrador adminActual;
+
     /**
-     * Creates new form VentanaConsultarSocios
+     * Constructor de VentanaConsultarSocios.
+     * Carga los socios en la tabla y añade el listener de clic para mostrar detalles.
+     * @param ventanaAdmin Ventana del menú del administrador desde la que se abre.
+     * @param admin Administrador que está realizando la consulta.
      */
     public VentanaConsultarSocios(javax.swing.JFrame ventanaAdmin, Logica.Administrador admin) {
         this.adminActual = admin;
@@ -55,7 +60,11 @@ public class VentanaConsultarSocios extends javax.swing.JFrame {
 });
         
     }
-        private void cargarSocios() {
+    /**
+     * Obtiene la lista de socios del Gestor y la muestra en la tabla.
+     * Vacía la tabla antes de rellenarla para evitar duplicados.
+     */
+    private void cargarSocios() {
         DefaultTableModel modelo = (DefaultTableModel) tablaSocios.getModel();
         modelo.setRowCount(0);
 
@@ -71,6 +80,10 @@ public class VentanaConsultarSocios extends javax.swing.JFrame {
             });
         }
     }
+    /**
+     * Muestra los datos completos del socio seleccionado en el panel lateral.
+     * @param s Socio seleccionado en la tabla.
+     */
         private void actualizarPanelDetalles(Socio s) {
             String texto = "Nombre: " + s.getNombre() + "\n"
             + "Correo: " + s.getCorreo() + "\n"
@@ -154,16 +167,16 @@ public class VentanaConsultarSocios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cierra la ventana y restaura el menú del administrador.
+     * @param evt Evento de acción del botón.
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
         if (ventanaAdmin!=null) {
             ventanaAdmin.setVisible(true);         
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

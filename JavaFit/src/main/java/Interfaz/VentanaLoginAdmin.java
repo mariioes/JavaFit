@@ -7,21 +7,26 @@ package Interfaz;
 import Logica.Administrador;
 import Logica.Usuario;
 import Logica.Gestor;
+
 /**
- *
- * @author mario
+ * Ventana de inicio de sesión para administradores de JavaFit.
+ * Valida el formato del correo y la longitud de la contraseña antes de comprobar las credenciales. Si son correctas, abre el menú de administrador.
  */
 public class VentanaLoginAdmin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaLoginAdmin.class.getName());
     
-    // Variable para guardar la ventana anterior
+    /** Referencia a la ventana desde la que se abrió el login de admin. */
     private javax.swing.JFrame ventanaPadre;
 
+    /**
+     * Constructor de VentanaLoginAdmin.
+     * @param padre  Ventana desde la que se abre, normalmente VentanaPrincipal.
+     */
     public VentanaLoginAdmin(javax.swing.JFrame padre) {
-        this.ventanaPadre = padre; //Guardamos la referencia
+        this.ventanaPadre = padre;
         initComponents();
-        this.setLocationRelativeTo(null); // Centra la ventana en la pantalla
+        this.setLocationRelativeTo(null);
     }
     
     /**
@@ -117,6 +122,10 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_registrarCorreoAdminActionPerformed
 
+    /**
+     * Cierra el login de admin y restaura la ventana principal.
+     * @param evt Evento de acción del botón.
+     */
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
         this.dispose(); // Cierra la ventana de login
         if (ventanaPadre != null) {
@@ -124,6 +133,11 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonVolverActionPerformed
 
+    /**
+     * Valida el formato del correo y la contraseña, luego busca el administrador
+     * en memoria. Si las credenciales son correctas abre VentanaMenuAdmin.
+     * @param evt Evento de acción del botón.
+     */
     private void botonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarSesionActionPerformed
         String correo = registrarCorreoAdmin.getText().trim();
         String contraseña = new String(registrarContraseñaAdmin.getPassword());

@@ -4,18 +4,22 @@ import java.awt.Color;
 
 
 /**
- *
- * @author gdsergio1307
+ * Ventana de inicio de sesión para socios de JavaFit.
+ * Permite al socio introducir su correo y contraseña para acceder al menú principal.
+ * Si las credenciales son correctas, abre la VentanaMenuSocio.
  */
 public class VentanaLogin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaLogin.class.getName());
+    /** Referencia a la ventana principal, para restaurarla si el login se cancela. */
     private javax.swing.JFrame ventanaPrincipal;
+    
     /**
-     * Creates new form VentanaLogin
-     * @param principal
+     * Constructor de VentanaLogin.
+     * Inicializa la ventana y configura el comportamiento al cerrarla.
+     * @param principal Ventana principal desde la que se abre el login.
      */
-public VentanaLogin(javax.swing.JFrame principal) {
+    public VentanaLogin(javax.swing.JFrame principal) {
         this.ventanaPrincipal = principal;
         initComponents();
         
@@ -109,10 +113,20 @@ public VentanaLogin(javax.swing.JFrame principal) {
         // TODO add your handling code here:
     }//GEN-LAST:event_iniciaContraseñaActionPerformed
 
+    /**
+     * Cierra la ventana de login y restaura la ventana principal.
+     * @param evt Evento de acción del botón.
+     */
     private void botonVolverLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverLoginActionPerformed
         this.dispose();
     }//GEN-LAST:event_botonVolverLoginActionPerformed
 
+    /**
+     * Valida las credenciales introducidas por el socio.
+     * Si son correctas, abre el menú del socio y cierra el login y la ventana principal.
+     * Si son incorrectas, muestra un mensaje de error.
+     * @param evt Evento de acción del botón.
+     */
     private void botonConfirmarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarInicioActionPerformed
 
         // Usamos trim() para quitar espacios accidentales
@@ -163,11 +177,6 @@ public VentanaLogin(javax.swing.JFrame principal) {
     private void iniciaCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciaCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_iniciaCorreoActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonConfirmarInicio;

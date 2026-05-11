@@ -1,20 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Interfaz;
-import Logica.Administrador;
 /**
- *
+ * Ventana del menú principal del administrador en JavaFit.
+ * Permite al administrador acceder a la gestión de actividades,
+ * consulta de socios, consulta de reservas y cerrar sesión.
  * @author gdsergio1307
  */
 public class VentanaMenuAdmin extends javax.swing.JFrame {
     
+    /** Administrador que ha iniciado sesión. */
     private Logica.Administrador adminActual;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaMenuAdmin.class.getName());
 
     /**
-     * Creates new form VentanaMenuAdmin
+     * Constructor de VentanaMenuAdmin.
+     * @param admin Administrador que ha iniciado sesión correctamente.
      */
     public VentanaMenuAdmin(Logica.Administrador admin) {
         this.adminActual = admin;
@@ -88,6 +87,10 @@ public class VentanaMenuAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cierra la sesión del administrador y vuelve a la ventana principal.
+     * @param evt Evento de acción del botón.
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose(); // Cerramos el menú actual
         //Creamos y mostramos la ventana principal de inicio
@@ -95,6 +98,10 @@ public class VentanaMenuAdmin extends javax.swing.JFrame {
         inicio.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Abre la ventana de gestión de actividades donde el admin puede consultar, crear y eliminar actividades.
+     * @param evt Evento de acción del botón.
+     */
     private void botonGestionarActividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGestionarActividadesActionPerformed
         if (this.adminActual != null) {
             VentanaConsultarActividad vca = new VentanaConsultarActividad(this, this.adminActual);
@@ -105,6 +112,10 @@ public class VentanaMenuAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonGestionarActividadesActionPerformed
 
+    /**
+     * Abre la ventana de consulta de socios donde el admin puede ver los datos de todos los socios registrados.
+     * @param evt Evento de acción del botón.
+     */
     private void botonConsultaSociosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultaSociosActionPerformed
         if (this.adminActual != null) {
             VentanaConsultarSocios vcs = new VentanaConsultarSocios(this, this.adminActual);
@@ -115,6 +126,10 @@ public class VentanaMenuAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonConsultaSociosActionPerformed
 
+    /**
+     * Abre la ventana de consulta de reservas donde el admin puede ver todas las reservas activas del sistema.
+     * @param evt Evento de acción del botón.
+     */
     private void botonConsultaReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultaReservasActionPerformed
         if (this.adminActual != null) {
             VentanaConsultarReservas vcr = new VentanaConsultarReservas(this, this.adminActual);
@@ -125,9 +140,6 @@ public class VentanaMenuAdmin extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_botonConsultaReservasActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonConsultaReservas;

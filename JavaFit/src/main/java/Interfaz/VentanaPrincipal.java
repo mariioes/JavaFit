@@ -1,25 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Interfaz;
 
 import java.awt.Color;
 
 /**
- *
- * @author gdsergio1307
+ * Ventana principal de la aplicación JavaFit.
+ * Es la primera pantalla que ve el usuario al arrancar el programa.
+ * Permite acceder al login de socios, al registro y al login de administradores.
+ * Muestra una imagen de fondo cargada desde los recursos del proyecto.
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName());
 
     /**
-     * Creates new form VentanaPrincipal
+     * Constructor de VentanaPrincipal.
+     * Inicializa la ventana, carga los socios en memoria, establece la imagen de fondo y aplica estilos visuales a los botones.
      */
     public VentanaPrincipal() {
         Logica.Gestor.cargarSocios();
-        // 1. Creamos el panel con la ruta de tu imagen en resources
         PanelFondo contenedorFondo = new PanelFondo("/imagenes/imagen_inicio.jpg");
 
     
@@ -88,18 +86,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Abre la ventana de login de socios y oculta la ventana principal.
+     * @param evt Evento de acción del botón.
+     */
     private void botonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarSesionActionPerformed
         VentanaLogin ventanaDatos = new VentanaLogin(this);
         this.setVisible(false);
         ventanaDatos.setVisible(true);
     }//GEN-LAST:event_botonIniciarSesionActionPerformed
 
+    /**
+     * Abre la ventana de registro de nuevos socios y oculta la ventana principal.
+     * @param evt Evento de acción del botón.
+     */
     private void botonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarseActionPerformed
         VentanaRegistro ventanaDatos = new VentanaRegistro(this);
         this.setVisible(false);
         ventanaDatos.setVisible(true);
     }//GEN-LAST:event_botonRegistrarseActionPerformed
 
+    /**
+     * Abre la ventana de login de administradores y oculta la ventana principal.
+     * @param evt Evento de acción del botón.
+     */
     private void botonIniciarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarAdminActionPerformed
         // Creamos la instancia de la ventana de login de admin
         VentanaLoginAdmin loginAdmin = new VentanaLoginAdmin(this);
@@ -142,6 +152,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 }
 
+/**
+ * Panel personalizado que muestra una imagen de fondo escalada al tamaño del panel.
+ * Se usa como contenedor principal de VentanaPrincipal.
+ */
 class PanelFondo extends javax.swing.JPanel {
     private java.awt.Image imagen;
 
@@ -152,6 +166,10 @@ class PanelFondo extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Sobreescribe el método de pintado para dibujar la imagen de fondo adaptada al tamaño actual del panel.
+     * @param g Contexto gráfico sobre el que se dibuja.
+     */
     @Override
     protected void paintComponent(java.awt.Graphics g) {
         super.paintComponent(g);

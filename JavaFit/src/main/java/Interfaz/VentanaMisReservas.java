@@ -11,15 +11,29 @@ import Logica.Actividad_Deportiva;
 import Logica.Actividad_Especial;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+
 /**
- *
+ * Ventana que muestra las reservas activas del socio en JavaFit.
+ * Permite consultar todas las actividades reservadas y cancelar cualquiera de ellas.
  * @author gdsergio1307
  */
 public class VentanaMisReservas extends javax.swing.JFrame {
+    
+    /** Socio cuyas reservas se están mostrando. */
     private Socio socioLogueado;
+    
+    /** Referencia al menú del socio para restaurarlo al cerrar esta ventana. */
     private javax.swing.JFrame ventanaMenu;
-    private ArrayList<Reserva> misReservasActuales; // Para tener a mano los objetos reales
+    
+    /** Lista de reservas actuales del socio, sincronizada con la tabla. */
+    private ArrayList<Reserva> misReservasActuales;
 
+    /**
+     * Constructor de VentanaMisReservas.
+     * Carga las reservas del socio en la tabla al abrirse.
+     * @param menu Ventana del menú del socio desde la que se abre.
+     * @param socio Socio cuyas reservas se van a mostrar.
+     */
     public VentanaMisReservas(javax.swing.JFrame menu, Socio socio) {
         this.ventanaMenu = menu;
         this.socioLogueado = socio;
@@ -44,9 +58,7 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         });
     }
 
-    /**
-     * Este método pide al Gestor las reservas de este socio y las pone en la tabla.
-     */
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -109,10 +121,19 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cierra la ventana y restaura el menú del socio.
+     * @param evt Evento de acción del botón.
+     */
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
         this.dispose();
     }//GEN-LAST:event_botonVolverActionPerformed
 
+    /**
+     * Cancela la reserva seleccionada en la tabla tras pedir confirmación al socio.
+     * Llama al Gestor para eliminar la reserva y actualiza la tabla si tiene éxito.
+     * @param evt Evento de acción del botón.
+     */
     private void botonCancelarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarReservaActionPerformed
         int fila = tablaMisReservas.getSelectedRow();
         if (fila == -1) {
@@ -123,8 +144,6 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         Reserva miReserva = misReservasActuales.get(fila);
         Actividad_Deportiva seleccionada = miReserva.getActividad();
         
-        
-        // Pedimos confirmación
         int confirmacion = javax.swing.JOptionPane.showConfirmDialog(this, 
         "¿Estás seguro de que deseas cancelar la reserva de " + seleccionada.getTitulo() + "?", 
         "Confirmar cancelación", 
@@ -151,9 +170,9 @@ public class VentanaMisReservas extends javax.swing.JFrame {
     }//GEN-LAST:event_botonCancelarReservaActionPerformed
 
     /**
-     * @param args the command line arguments
+     * Obtiene las reservas del socio desde el Gestor y las muestra en la tabla.
+     * Vacía la tabla antes de rellenarla para evitar duplicados.
      */
-    
     public void actualizarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tablaMisReservas.getModel();
         modelo.setRowCount(0); // Vaciamos la tabla para no duplicar datos

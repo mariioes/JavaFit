@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
 package Interfaz;
 
 import Logica.Actividad_Deportiva;
 import Logica.Actividad_Especial;
-import Logica.Sala;
 import Logica.Socio;
 import Logica.Gestor;
 import java.util.ArrayList;
@@ -15,15 +9,30 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+/**
+ * Ventana que muestra los resultados de la búsqueda de actividades deportivas en JavaFit.
+ * Presenta una tabla con las actividades filtradas y un panel lateral con la imagen y descripción de la actividad seleccionada. Permite al socio reservar una actividad.
+ * Los socios VIP obtienen un 10% de descuento en actividades especiales.
+ */
 public class VentanaResultadosActividades extends javax.swing.JFrame {
     
+    /** Socio que está consultando y puede reservar actividades. */
     private Socio socioLogueado;
+    /** Lista de actividades mostradas en la tabla, sincronizada con las filas. */
     private ArrayList<Actividad_Deportiva> listaActividadesActual;
+    
+    /** Referencia al menú del socio para restaurarlo al volver. */
     private javax.swing.JFrame ventanaAnterior;
-    /**
-     * Creates new form VentanaResultadosActividades
-     */
+
+
     private javax.swing.JFrame ventanaMenu;
+    
+    /**
+     * Constructor de VentanaResultadosActividades.
+     * Configura la ventana y añade el listener de clic sobre la tabla.
+     * @param menu Ventana del menú del socio desde la que se navega.
+     * @param socio Socio que está realizando la búsqueda.
+     */
     public VentanaResultadosActividades(javax.swing.JFrame menu, Socio socio) {
         initComponents();
         this.ventanaMenu = menu;
@@ -47,6 +56,11 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
     });
     }
     
+    /**
+     * Actualiza el panel lateral con la descripción e imagen de la actividad seleccionada.
+     * Si es una actividad especial muestra su descripción propia; si no, muestra los datos generales de la actividad.
+     * @param act Actividad seleccionada en la tabla.
+     */
     private void actualizarPanelDetalles(Actividad_Deportiva act) {
     // 1. Descripción
         if (act instanceof Actividad_Especial) {
@@ -161,6 +175,10 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cierra la ventana de resultados y restaura el menú del socio.
+     * @param evt Evento de acción del botón.
+     */
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
         this.dispose();
         if (ventanaMenu != null) {
@@ -168,6 +186,11 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonVolverActionPerformed
 
+    /**
+     * Reserva la actividad seleccionada en la tabla para el socio logueado.
+     * Muestra un mensaje según el resultado: éxito, duplicado o aforo completo.
+     * @param evt Evento de acción del botón.
+     */
     private void botonReservarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservarActividadActionPerformed
         int fila = TablaResultados.getSelectedRow();
         if (fila == -1) {
@@ -194,9 +217,10 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
     }//GEN-LAST:event_botonReservarActividadActionPerformed
 
     /**
-     * @param args the command line arguments
+     * Recibe la lista de actividades filtradas y las muestra en la tabla.
+     * Aplica descuento del 10% en el precio para socios VIP en actividades especiales.
+     * @param lista Lista de actividades a mostrar en la tabla.
      */
-    
     public void cargarDatosEnTabla(ArrayList<Actividad_Deportiva> lista) {
         this.listaActividadesActual = lista;
         DefaultTableModel modelo = (DefaultTableModel) TablaResultados.getModel();

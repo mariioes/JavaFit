@@ -1,21 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Interfaz;
 
 /**
- *
- * @author gdsergio1307
+ * Ventana que permite al administrador crear nuevas actividades deportivas en JavaFit o modificar una actividad existente.
+ * Si se abre sin actividad, funciona como formulario de creación.
+ * Si se abre con una actividad, rellena los campos automáticamente para editarla.
+ * Permite crear tanto actividades normales como actividades especiales con precio y descripción.
  */
 public class VentanaCrearActividad extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaCrearActividad.class.getName());
+    
+    /** Referencia a la ventana anterior para restaurarla al cerrar. */
     private javax.swing.JFrame ventanaAnterior;
+    
+    /** Administrador que está creando o modificando la actividad. */
     private Logica.Administrador adminActual;
+    
+    /** Actividad que se está editando. Null si se está creando una nueva. */
     private Logica.Actividad_Deportiva actividadEnEdicion = null;
+    
     /**
-     * Creates new form VentanaCrearActividad
+     * Constructor para crear una nueva actividad.
+     * Inicializa el formulario vacío con los campos de precio y descripción desactivados.
+     * @param ventana Ventana anterior desde la que se abre.
+     * @param admin Administrador que realiza la acción.
      */
     public VentanaCrearActividad(javax.swing.JFrame ventana, Logica.Administrador admin) {
         this.ventanaAnterior = ventana;
@@ -40,7 +48,13 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
         
     }
     
-    // Método para poder modificar las actividades
+    /**
+     * Constructor para modificar una actividad existente.
+     * Rellena automáticamente los campos con los datos de la actividad recibida.
+     * @param ventana Ventana anterior desde la que se abre.
+     * @param admin Administrador que realiza la acción.
+     * @param actividad Actividad cuyos datos se van a editar.
+     */
     public VentanaCrearActividad (javax.swing.JFrame ventana, Logica.Administrador admin, Logica.Actividad_Deportiva actividad) {
         this.ventanaAnterior = ventana;
         this.adminActual = admin;
@@ -53,6 +67,10 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
         rellenarCamposParaEdicion();
     } 
     
+    /**
+     * Rellena los campos del formulario con los datos de la actividad en edición.
+     * Bloquea el campo título para que no pueda modificarse.
+     */
     private void rellenarCamposParaEdicion() {
         // Ponemos los datos de la actividad en los campos de tu ventana
         txtTitulo.setText(actividadEnEdicion.getTitulo());
@@ -162,6 +180,12 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTituloActionPerformed
 
+    /**
+     * Valida los campos del formulario y crea o guarda la actividad.
+     * Si el checkbox de actividad especial está marcado, valida también precio y descripción.
+     * Guarda la actividad en el sistema mediante el Gestor.
+     * @param evt Evento de acción del botón.
+     */
     private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosActionPerformed
             // Validar campos obligatorios
         if (txtTitulo.getText().trim().isEmpty()
@@ -212,11 +236,21 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
     this.dispose();
     }//GEN-LAST:event_botonGuardarCambiosActionPerformed
 
+    
+    /**
+     * Activa o desactiva los campos de precio y descripción
+     * según si el checkbox de actividad especial está marcado.
+     * @param evt Evento de acción del checkbox.
+     */
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
         txtDescripcion.setEnabled(jCheckBox2.isSelected());
         txtPrecio.setEnabled(jCheckBox2.isSelected());
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
+    /**
+     * Cierra la ventana y restaura la ventana anterior.
+     * @param evt Evento de acción del botón.
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
         if (ventanaAnterior != null) {
@@ -224,9 +258,6 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboDia;

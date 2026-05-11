@@ -1,19 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Interfaz;
 import Logica.Socio;
+
 /**
- *
- * @author gdsergio1307
+ * Ventana del menú principal del socio en JavaFit.
+ * Permite al socio acceder a las funciones disponibles: reservar actividades, consultar sus reservas, ver/modificar sus datos y cerrar sesión.
  */
 public class VentanaMenuSocio extends javax.swing.JFrame {
+    
+    /** Socio que ha iniciado sesión y está usando la aplicación. */
     private Socio socioActual;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaMenuSocio.class.getName());
     
     /**
-     * Creates new form VentanaMenuSocio
+     * Constructor de VentanaMenuSocio.
+     * @param socio Socio que ha iniciado sesión correctamente.
      */
     public VentanaMenuSocio(Socio socio) {
         this.socioActual = socio;
@@ -97,6 +97,10 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Abre la ventana de búsqueda de actividades para que el socio pueda reservar.
+     * @param evt Evento de acción del botón.
+     */
     private void botonReservarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservarActividadActionPerformed
         if (this.socioActual != null) {
             VentanaBuscarActividad vba = new VentanaBuscarActividad(this, this.socioActual);
@@ -107,6 +111,10 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonReservarActividadActionPerformed
 
+    /**
+     * Abre la ventana con las reservas activas del socio.
+     * @param evt Evento de acción del botón.
+     */
     private void botonMisReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMisReservasActionPerformed
         if (this.socioActual != null) {
             VentanaMisReservas vmr = new VentanaMisReservas(this, this.socioActual);
@@ -117,6 +125,10 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonMisReservasActionPerformed
 
+    /**
+     * Abre la ventana con los datos personales del socio.
+     * @param evt Evento de acción del botón.
+     */
     private void botonDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDatosActionPerformed
 // 1. Verificamos que el socio no sea null
         if (this.socioActual != null) {
@@ -131,17 +143,16 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonDatosActionPerformed
 
+    /**
+     * Cierra la sesión del socio y vuelve a la ventana principal.
+     * @param evt Evento de acción del botón.
+     */
     private void botonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarSesionActionPerformed
         this.dispose(); // Cerramos el menú actual
         //Creamos y mostramos la ventana principal de inicio
         VentanaPrincipal inicio = new VentanaPrincipal();
         inicio.setVisible(true);
     }//GEN-LAST:event_botonCerrarSesionActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCerrarSesion;

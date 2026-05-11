@@ -1,23 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Interfaz;
 import javax.swing.JOptionPane;
 import Logica.Gestor;
+
 /**
- *
- * @author gdsergio1307
+ * Ventana que permite al administrador gestionar las actividades deportivas de JavaFit.
+ * Muestra una tabla con todas las actividades y un panel lateral con el detalle de la seleccionada.
+ * Permite crear nuevas actividades, modificar las existentes y eliminarlas.
  */
 public class VentanaConsultarActividad extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaConsultarActividad.class.getName());
+    
+    /** Referencia al menú del administrador para restaurarlo al cerrar. */
     private javax.swing.JFrame ventanaAdmin;
+    /** Lista de actividades mostradas en la tabla, sincronizada con las filas. */
     private java.util.ArrayList<Logica.Actividad_Deportiva> listaActividadesActual;
+    /** Administrador que está gestionando las actividades. */
     private Logica.Administrador adminActual;
 
     /**
-     * Creates new form VentanaConsultarActividad
+     * Constructor de VentanaConsultarActividad.
+     * Carga las actividades en la tabla y añade el listener de clic para mostrar detalles.
+     * @param ventanaAdmin Ventana del menú del administrador desde la que se abre.
+     * @param admin Administrador que está realizando la gestión.
      */
     public VentanaConsultarActividad(javax.swing.JFrame ventanaAdmin, Logica.Administrador admin) {
         this.ventanaAdmin = ventanaAdmin;
@@ -50,6 +55,11 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
     });
     }
     
+    /**
+     * Obtiene la lista de actividades del Gestor y las muestra en la tabla.
+     * Calcula el aforo restante de cada actividad contando las reservas activas.
+     * Vacía la tabla antes de rellenarla para evitar duplicados.
+     */
     public void cargarActividades() {
         javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tablaActividades.getModel();
         modelo.setRowCount(0);
@@ -77,6 +87,11 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
     }
 }
 
+    /**
+     * Muestra los detalles completos de la actividad seleccionada en el panel lateral,
+     * incluyendo el aforo restante calculado a partir de las reservas activas.
+     * @param act Actividad seleccionada en la tabla.
+     */
     private void actualizarPanelDetalles(Logica.Actividad_Deportiva act) {
         long inscritos = Logica.Gestor.getReservas().stream()
             .filter(r -> r.getActividad().getTitulo().equals(act.getTitulo()))
@@ -99,6 +114,10 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         jEditorPane1.setText(texto);
     }
     
+    /**
+     * Elimina la actividad seleccionada en la tabla tras pedir confirmación al administrador.
+     * Refresca la tabla tras la eliminación.
+     */
     private void eliminarActividad() {
         int fila = tablaActividades.getSelectedRow();
         if (fila == -1) {
@@ -198,6 +217,10 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cierra la ventana y restaura el menú del administrador.
+     * @param evt Evento de acción del botón.
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
         if (ventanaAdmin!=null) {
@@ -205,10 +228,18 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Llama al método de eliminar actividad.
+     * @param evt Evento de acción del botón.
+     */
     private void botonEliminarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActividadActionPerformed
         eliminarActividad();
     }//GEN-LAST:event_botonEliminarActividadActionPerformed
 
+    /**
+     * Abre la ventana de creación de actividades para añadir una nueva.
+     * @param evt Evento de acción del botón.
+     */
     private void botonCrearActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActividadActionPerformed
         if (this.adminActual != null) {
             VentanaCrearActividad vcca = new VentanaCrearActividad(this, this.adminActual);
@@ -219,6 +250,10 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonCrearActividadActionPerformed
 
+    /**
+     * Abre la ventana de creación de actividades con los datos de la actividad seleccionada para permitir su modificación.
+     * @param evt Evento de acción del botón.
+     */
     private void botonModificarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActividadActionPerformed
         int fila = tablaActividades.getSelectedRow();
         if (fila == -1) {
@@ -239,10 +274,6 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error.");
         }
     }//GEN-LAST:event_botonModificarActividadActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCrearActividad;

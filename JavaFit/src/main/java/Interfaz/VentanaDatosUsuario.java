@@ -2,11 +2,25 @@ package Interfaz;
 import Logica.Socio;
 import Logica.Gestor;
 
+/**
+ * Ventana que muestra y permite editar los datos personales del socio en JavaFit.
+ * Carga los datos actuales del socio en los campos al abrirse y permite modificarlos.
+ * Valida todos los campos antes de guardar y actualiza el fichero de socios.
+ */
 public class VentanaDatosUsuario extends javax.swing.JFrame {
     
+    /** Referencia al menú del socio para restaurarlo al cerrar esta ventana. */
     private javax.swing.JFrame VentanaMenuSocio;
+    
+    /** Socio cuyos datos se están mostrando y editando. */
     private Socio socioActual;
     
+    /**
+     * Constructor de VentanaDatosUsuario.
+     * Carga los datos del socio en los campos del formulario y aplica una máscara de 9 dígitos al campo de teléfono.
+     * @param menu Ventana del menú del socio desde la que se abre.
+     * @param socio Socio cuyos datos se van a mostrar y editar.
+     */
     public VentanaDatosUsuario(javax.swing.JFrame menu, Socio socio) {
         this.VentanaMenuSocio = menu;
         this.socioActual = socio;
@@ -135,11 +149,20 @@ public class VentanaDatosUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_registroSocioVipActionPerformed
 
+    /**
+     * Cierra la ventana y restaura el menú del socio.
+     * @param evt Evento de acción del botón.
+     */
     private void botonVolverLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverLoginActionPerformed
         this.dispose();
         
     }//GEN-LAST:event_botonVolverLoginActionPerformed
 
+    /**
+     * Valida todos los campos del formulario y si son correctos actualiza los datos del socio y los guarda en el fichero mediante el Gestor.
+     * Valida nombre, teléfono, correo, dirección, tarjeta y contraseña.
+     * @param evt Evento de acción del botón.
+     */
     private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosActionPerformed
         String nombre = registroNombre.getText().trim();
         String telefono = registroTelefono.getText().replace("_", "").trim();
@@ -181,7 +204,10 @@ public class VentanaDatosUsuario extends javax.swing.JFrame {
         }
     }
 
-    // Método auxiliar para errores
+    /**
+     * Muestra un mensaje de error de validación en un cuadro de diálogo.
+     * @param mensaje Texto del error a mostrar.
+     */
     private void mostrarError(String mensaje) {
         javax.swing.JOptionPane.showMessageDialog(this, mensaje, "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
     

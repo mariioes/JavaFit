@@ -1,23 +1,27 @@
 package Interfaz;
 
 import Logica.Socio;
-import Logica.Actividad_Deportiva;
-import java.util.ArrayList;
 
 /**
- *
- * @author gdsergio1307
+ * Ventana que permite al socio buscar actividades deportivas disponibles en JavaFit.
+ * Ofrece filtros por tipo de actividad, día de la semana y monitor.
+ * Al buscar, abre la VentanaResultadosActividades con las actividades filtradas.
  */
 public class VentanaBuscarActividad extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaBuscarActividad.class.getName());
 
-    /**
-     * Creates new form VentanaReservarActividad
-     */
+    /** Referencia a la ventana anterior para restaurarla al cerrar. */
     private javax.swing.JFrame ventanaAnterior;
+    
+    /** Socio que está realizando la búsqueda. */
     private Socio socioActual;
 
+    /**
+     * Constructor de VentanaBuscarActividad.
+     * @param menu Ventana del menú del socio desde la que se abre.
+     * @param socio Socio que va a realizar la búsqueda.
+     */
     public VentanaBuscarActividad(javax.swing.JFrame menu, Socio socio) {
         this.ventanaAnterior = menu;
         this.socioActual = socio;
@@ -138,6 +142,10 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buscarMonitorActionPerformed
 
+    /**
+     * Cierra la ventana de búsqueda y restaura el menú del socio.
+     * @param evt Evento de acción del botón.
+     */
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
         this.dispose(); // Cierra esta ventana
         if (ventanaAnterior != null) {
@@ -145,6 +153,11 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonVolverActionPerformed
 
+    /**
+     * Recoge los filtros seleccionados, consulta al Gestor las actividades
+     * que los cumplen y abre la VentanaResultadosActividades con los resultados.
+     * @param evt Evento de acción del botón.
+     */
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
                                              
     // 1. Obtener filtros
@@ -173,11 +186,6 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
     // Hacer que desaparezca la ventana de búsqueda
     this.setVisible(false); // Cerramos la de búsqueda       
     }//GEN-LAST:event_botonBuscarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
