@@ -72,13 +72,13 @@ public class VentanaMisReservas extends javax.swing.JFrame {
 
         tablaMisReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Actividad", "Fecha", "Precio", "Tipo", "Sala", "Monitor"
             }
         ));
         jScrollPane1.setViewportView(tablaMisReservas);
@@ -96,15 +96,15 @@ public class VentanaMisReservas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(211, 211, 211)
-                        .addComponent(botonCancelarReserva)))
-                .addContainerGap(177, Short.MAX_VALUE))
+                        .addComponent(botonCancelarReserva))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,14 +180,30 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         // 1. Pedimos al Gestor la lista filtrada
         misReservasActuales = Gestor.obtenerReservasPorSocio(socioLogueado);
         
+        if (misReservasActuales == null || misReservasActuales.isEmpty()) {
+            return; // Si no hay reservas, no hacemos nada más
+        }
+        
         // 2. Rellenamos la tabla
         for (Reserva r : misReservasActuales) {
+            // A. Calculamos el precio igual que en otras ventanas
+            boolean esEspecial = r.getActividad() instanceof Logica.Actividad_Especial;
+            String precioStr = esEspecial ? r.getPrecio_total() + "€" : "Incluido";
+            
+            // B. Juntamos el día y las horas para que quede bien en la columna Fecha
+            String fechaHorario = r.getActividad().getHorario().getDia() + " (" + 
+                                  r.getActividad().getHorario().getHora_inicio() + "-" + 
+                                  r.getActividad().getHorario().getHora_final() + ")";
+            
+            // C. Creamos la fila con los 6 datos en orden
+            
             Object[] fila = {
-                r.getActividad().getTitulo(),
-                r.getActividad().getHorario().getDia(),
-                r.getActividad().getHorario().getHora_inicio(),
-                r.getActividad().getSala().getNombre(),
-                r.getActividad().getMonitor_asignado()
+                r.getActividad().getTitulo(),                   // Col 1: Actividad
+                fechaHorario,                                // Col 2: Fecha (Horario completo)
+                precioStr,                                      // Col 3: Precio
+                r.getActividad().getTipo_Actividad().toString(),  // Col 4: Tipo
+                r.getActividad().getSala().getNombre(),         // Col 5: Sala
+                r.getActividad().getMonitor_asignado()          // Col 6: Monitor
             };
             modelo.addRow(fila);
         }
