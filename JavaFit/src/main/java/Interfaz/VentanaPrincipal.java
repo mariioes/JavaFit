@@ -40,7 +40,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonIniciarSesion.setForeground(java.awt.Color.WHITE);
         botonIniciarSesion.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
         
-        botonRegistrarse.setBackground(Color.orange);
+        botonRegistrarse.setBackground(Color.GREEN);
         botonRegistrarse.setForeground(java.awt.Color.WHITE);
         botonRegistrarse.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
         
@@ -74,6 +74,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonIniciarSesion.addActionListener(this::botonIniciarSesionActionPerformed);
         getContentPane().add(botonIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 190, 40));
 
+        botonRegistrarse.setBackground(new java.awt.Color(153, 255, 153));
         botonRegistrarse.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonRegistrarse.setLabel("Registrarse");
         botonRegistrarse.addActionListener(this::botonRegistrarseActionPerformed);

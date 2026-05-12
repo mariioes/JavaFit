@@ -120,10 +120,14 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
 
         jLabel1.setText("Título");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 38, 71, -1));
+
+        txtHoraInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
         getContentPane().add(txtHoraInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 169, 30));
 
         jLabel2.setText("Hora inicio");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 38, 77, -1));
+
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
         getContentPane().add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 193, 34));
 
         jLabel3.setText("Hora fin");
@@ -135,7 +139,7 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
         jLabel4.setText("Tipo de Actividad");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 102, 102, -1));
 
-        ComboSala.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala Zen", "Sala Fitness" }));
+        ComboSala.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sala Zen", "Sala Fitness", "Piscina climatizada", "Sala de elípticas", "Sala adaptada MR", "Sala Fitness reducida" }));
         getContentPane().add(ComboSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 172, 36));
 
         jLabel5.setText("Sala");
@@ -147,7 +151,7 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
         jLabel6.setText("Día");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 37, -1));
 
-        txtMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monitor 1", "Monitor 2", "Monitor 3", "Monitor 4" }));
+        txtMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Iago Palazón", "Lorena Menéndez", "Paco Díaz", "Natalia Romareda" }));
         getContentPane().add(txtMonitor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 172, 38));
 
         jLabel7.setText("Monitor");

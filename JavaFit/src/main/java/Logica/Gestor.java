@@ -167,6 +167,10 @@ public class Gestor {
     public static void cargarDatosPrueba() {
         Sala sala1 = new Sala("Sala Zen", 20);
         Sala sala2 = new Sala("Sala Fitness", 30);
+        Sala sala3 = new Sala("Piscina climatizada", 18);
+        Sala sala4 = new Sala("Sala de elípticas", 35);
+        Sala sala5 = new Sala("Sala adaptada MR", 10);
+        Sala sala6 = new Sala("Sala Fitness reducida", 5);
         Horario h1 = new Horario("Lunes", "09:00", "10:30");
         Horario h2 = new Horario("Jueves", "18:00", "19:30");
         Horario h3 = new Horario("Martes", "11:00", "12:00");
@@ -174,16 +178,16 @@ public class Gestor {
         Tipo_Actividad yoga = Tipo_Actividad.YOGA; 
         Tipo_Actividad cardio = Tipo_Actividad.CARDIO;
 
-        Actividad_Deportiva act1 = new Actividad_Deportiva("Yoga Matinal", yoga, sala1, h1, "Monitor 1", 0, "/imagenes/foto_yoga_1.jpg");
+        Actividad_Deportiva act1 = new Actividad_Deportiva("Yoga Matinal", yoga, sala1, h1, "Iago Palazón", 0, "/imagenes/foto_yoga_1.jpg");
         actividades.add(act1);
         
-        Actividad_Deportiva act2 = new Actividad_Deportiva("Yoga Tarde", yoga, sala1, h2, "Monitor 2", 0, "/imagenes/foto_yoga_2.jpg");
+        Actividad_Deportiva act2 = new Actividad_Deportiva("Yoga Tarde", yoga, sala1, h2, "Lorena Menéndez", 0, "/imagenes/foto_yoga_2.jpg");
         actividades.add(act2);
 
-        Actividad_Deportiva act3 = new Actividad_Deportiva("Zumba", cardio, sala2, h3, "Monitor 3", 0, "/imagenes/foto_zumba_1.jpg");
+        Actividad_Deportiva act3 = new Actividad_Deportiva("Zumba", cardio, sala2, h3, "Paco Díaz", 0, "/imagenes/foto_zumba_1.jpg");
         actividades.add(act3);
 
-        Actividad_Especial especial1 = new Actividad_Especial(15.0, "Sesión intensiva de fin de semana", "Masterclass Yoga", yoga, sala2, h2, "Monitor 4", 0, "/imagenes/foto_yoga_especial_1");
+        Actividad_Especial especial1 = new Actividad_Especial(15.0, "Sesión intensiva de fin de semana", "Masterclass Yoga", yoga, sala2, h2, "Natalia Romareda", 0, "/imagenes/foto_yoga_especial_1");
         actividades.add(especial1);
     }
 

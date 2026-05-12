@@ -56,17 +56,34 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
     }
     
     /**
-     * Obtiene la lista de actividades del Gestor y las muestra en la tabla.
-     * Calcula el aforo restante de cada actividad contando las reservas activas.
-     * Vacía la tabla antes de rellenarla para evitar duplicados.
+     * Carga todas las actividades sin ningún filtro (comportamiento original).
      */
     public void cargarActividades() {
+        cargarActividadesFiltradas(""); // Cadena vacía = no filtra nada
+    }
+/**
+     * Obtiene la lista de actividades, aplica un filtro por palabra y rellena la tabla.
+     */
+    public void cargarActividadesFiltradas(String palabra) {
         javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tablaActividades.getModel();
-        modelo.setRowCount(0);
+        modelo.setRowCount(0); // Limpiamos la tabla
 
-        listaActividadesActual = Logica.Gestor.getActividades();
+        // Pasamos la palabra a minúsculas para que dé igual cómo escriba el usuario
+        String textoBusqueda = palabra.toLowerCase().trim();
+
+        // AQUÍ ESTÁ EL FILTER: 
+        // Cogemos todas las actividades, abrimos un stream, filtramos, y lo volvemos a convertir en ArrayList
+        listaActividadesActual = (java.util.ArrayList<Logica.Actividad_Deportiva>) Logica.Gestor.getActividades().stream()
+            .filter(act -> textoBusqueda.isEmpty() || // Si no hay texto, pasan todas
+                           act.getTitulo().toLowerCase().contains(textoBusqueda) ||
+                           act.getMonitor_asignado().toLowerCase().contains(textoBusqueda) ||
+                           act.getSala().getNombre().toLowerCase().contains(textoBusqueda) ||
+                           act.getTipo_Actividad().toString().toLowerCase().contains(textoBusqueda))
+            .collect(java.util.stream.Collectors.toList());
+
+        // Rellenamos la tabla solo con las que han superado el filtro
         for (Logica.Actividad_Deportiva act : listaActividadesActual) {
-        // Calculamos aforo restante
+            // Calculamos aforo restante
             long inscritos = Logica.Gestor.getReservas().stream()
                 .filter(r -> r.getActividad().getTitulo().equals(act.getTitulo()))
                 .count();
@@ -77,15 +94,17 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
             String horario = act.getHorario().getDia() + " " + act.getHorario().getHora_inicio() + "-" + act.getHorario().getHora_final();
 
             modelo.addRow(new Object[]{
-            act.getTitulo(),
-            act.getTipo_Actividad().toString(),
-            act.getSala().getNombre(),
-            act.getMonitor_asignado(),horario,
-            restante + "/" + act.getSala().getAforo_maximo(),
-            esEspecial ? "Sí" : "No",
-            precio});
+                act.getTitulo(),
+                act.getTipo_Actividad().toString(),
+                act.getSala().getNombre(),
+                act.getMonitor_asignado(),
+                horario,
+                restante + "/" + act.getSala().getAforo_maximo(),
+                esEspecial ? "Sí" : "No",
+                precio
+            });
+        }
     }
-}
 
     /**
      * Muestra los detalles completos de la actividad seleccionada en el panel lateral,
@@ -137,29 +156,20 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaActividades = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
         botonEliminarActividad = new javax.swing.JButton();
         botonCrearActividad = new javax.swing.JButton();
         botonModificarActividad = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaActividades = new javax.swing.JTable();
+        txtBuscador = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        botonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        tablaActividades.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Título", "Tipo", "Sala", "Monitor", "Horario", "Aforo actual", "¿Especial?", "Precio"
-            }
-        ));
-        jScrollPane1.setViewportView(tablaActividades);
 
         jButton1.setText("Volver atrás");
         jButton1.addActionListener(this::jButton1ActionPerformed);
@@ -175,41 +185,85 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         botonModificarActividad.setText("Modificar Actividad");
         botonModificarActividad.addActionListener(this::botonModificarActividadActionPerformed);
 
+        tablaActividades.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Título", "Tipo", "Sala", "Monitor", "Horario", "Aforo actual", "¿Especial?", "Precio"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaActividades);
+
+        jScrollPane3.setViewportView(jScrollPane1);
+
+        jLabel1.setText("Buscar:");
+
+        botonBuscar.setText("Filtrar");
+        botonBuscar.addActionListener(this::botonBuscarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
                         .addComponent(botonEliminarActividad)
-                        .addGap(30, 30, 30)
+                        .addGap(51, 51, 51)
                         .addComponent(botonCrearActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(botonModificarActividad))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jButton1)
+                        .addGap(55, 55, 55)
+                        .addComponent(botonModificarActividad)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonBuscar)
+                .addGap(131, 131, 131))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonEliminarActividad)
-                    .addComponent(botonCrearActividad)
-                    .addComponent(botonModificarActividad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botonEliminarActividad)
+                            .addComponent(botonCrearActividad)
+                            .addComponent(botonModificarActividad))
+                        .addGap(53, 53, 53)))
                 .addComponent(jButton1)
                 .addGap(19, 19, 19))
         );
@@ -275,14 +329,22 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonModificarActividadActionPerformed
 
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+        cargarActividadesFiltradas(txtBuscador.getText());        // TODO add your handling code here:
+    }//GEN-LAST:event_botonBuscarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonCrearActividad;
     private javax.swing.JButton botonEliminarActividad;
     private javax.swing.JButton botonModificarActividad;
     private javax.swing.JButton jButton1;
     private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tablaActividades;
+    private javax.swing.JTextField txtBuscador;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,6 +9,7 @@ import Logica.Socio;
 import java.util.ArrayList;
 import Logica.Actividad_Deportiva;
 import Logica.Actividad_Especial;
+import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 
@@ -42,6 +43,7 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         this.setLocationRelativeTo(null); 
         this.setResizable(false);
         this.setTitle("JavaFit - Mis Reservas");
+        this.getContentPane().setBackground(Color.white);
         
         // Al abrir la ventana, cargamos los datos en la tabla inmediatamente
         actualizarTabla();
@@ -83,10 +85,16 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaMisReservas);
 
+        botonVolver.setBackground(new java.awt.Color(255, 204, 153));
         botonVolver.setText("Volver atrás");
+        botonVolver.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         botonVolver.addActionListener(this::botonVolverActionPerformed);
 
+        botonCancelarReserva.setBackground(new java.awt.Color(255, 51, 51));
+        botonCancelarReserva.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        botonCancelarReserva.setForeground(new java.awt.Color(255, 255, 255));
         botonCancelarReserva.setText("Cancelar reserva");
+        botonCancelarReserva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         botonCancelarReserva.addActionListener(this::botonCancelarReservaActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -99,11 +107,11 @@ public class VentanaMisReservas extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(211, 211, 211)
-                        .addComponent(botonCancelarReserva))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(260, 260, 260)
+                        .addComponent(botonCancelarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(116, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -111,10 +119,10 @@ public class VentanaMisReservas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(botonCancelarReserva)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(botonVolver)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonCancelarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonVolver, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addGap(48, 48, 48))
         );
 

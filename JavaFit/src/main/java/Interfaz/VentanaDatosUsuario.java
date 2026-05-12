@@ -1,6 +1,7 @@
 package Interfaz;
 import Logica.Socio;
 import Logica.Gestor;
+import java.awt.Color;
 
 /**
  * Ventana que muestra y permite editar los datos personales del socio en JavaFit.
@@ -31,6 +32,7 @@ public class VentanaDatosUsuario extends javax.swing.JFrame {
         this.setSize(710, 415);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(Color.white);
         
         // 2. Rellenamos los datos en pantalla
         registroNombre.setText(socioActual.getNombre());
@@ -85,54 +87,78 @@ public class VentanaDatosUsuario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Nombre Completo");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, -1));
 
+        registroNombre.setBackground(new java.awt.Color(204, 255, 255));
+        registroNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         registroNombre.setFormatterFactory(null);
         registroNombre.addActionListener(this::registroNombreActionPerformed);
         getContentPane().add(registroNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 250, 40));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Teléfono");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, -1, -1));
 
+        registroDireccion.setBackground(new java.awt.Color(204, 255, 255));
+        registroDireccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         registroDireccion.addActionListener(this::registroDireccionActionPerformed);
         getContentPane().add(registroDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 250, 40));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Dirección");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, -1));
 
+        registroTarjeta.setBackground(new java.awt.Color(204, 255, 255));
+        registroTarjeta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         registroTarjeta.addActionListener(this::registroTarjetaActionPerformed);
         getContentPane().add(registroTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 250, 40));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Tarjeta de crédito");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
 
+        registroSocioVip.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         registroSocioVip.setText("Socio VIP");
         registroSocioVip.addActionListener(this::registroSocioVipActionPerformed);
-        getContentPane().add(registroSocioVip, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, -1, -1));
+        getContentPane().add(registroSocioVip, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, -1, -1));
 
+        botonVolverLogin.setBackground(new java.awt.Color(255, 204, 153));
+        botonVolverLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         botonVolverLogin.setLabel("Volver atrás");
         botonVolverLogin.addActionListener(this::botonVolverLoginActionPerformed);
-        getContentPane().add(botonVolverLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        getContentPane().add(botonVolverLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, 30));
 
+        botonGuardarCambios.setBackground(new java.awt.Color(0, 204, 255));
+        botonGuardarCambios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         botonGuardarCambios.setText("Guardar cambios");
+        botonGuardarCambios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         botonGuardarCambios.addActionListener(this::botonGuardarCambiosActionPerformed);
-        getContentPane().add(botonGuardarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, -1, -1));
+        getContentPane().add(botonGuardarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, 140, 30));
 
+        registroCorreo.setBackground(new java.awt.Color(204, 255, 255));
+        registroCorreo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         registroCorreo.addActionListener(this::registroCorreoActionPerformed);
         getContentPane().add(registroCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, 250, 40));
 
+        registroContraseña.setBackground(new java.awt.Color(204, 255, 255));
         registroContraseña.setText("jPasswordField1");
-        getContentPane().add(registroContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 260, 40));
+        registroContraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(registroContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 250, 40));
 
+        registroTelefono.setBackground(new java.awt.Color(204, 255, 255));
+        registroTelefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         registroTelefono.addActionListener(this::registroTelefonoActionPerformed);
         getContentPane().add(registroTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 250, 40));
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Correo");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, -1, -1));
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Contraseña");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

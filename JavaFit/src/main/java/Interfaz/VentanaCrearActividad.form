@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -46,6 +46,11 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtHoraInicio">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format subtype="1" type="2"/>
+        </Property>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="290" y="60" width="169" height="30"/>
@@ -63,6 +68,11 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format subtype="1" type="2"/>
+        </Property>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="280" y="130" width="193" height="34"/>
@@ -112,9 +122,13 @@
     <Component class="javax.swing.JComboBox" name="ComboSala">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
+          <StringArray count="6">
             <StringItem index="0" value="Sala Zen"/>
             <StringItem index="1" value="Sala Fitness"/>
+            <StringItem index="2" value="Piscina climatizada"/>
+            <StringItem index="3" value="Sala de el&#xed;pticas"/>
+            <StringItem index="4" value="Sala adaptada MR"/>
+            <StringItem index="5" value="Sala Fitness reducida"/>
           </StringArray>
         </Property>
       </Properties>
@@ -174,10 +188,10 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
-            <StringItem index="0" value="Monitor 1"/>
-            <StringItem index="1" value="Monitor 2"/>
-            <StringItem index="2" value="Monitor 3"/>
-            <StringItem index="3" value="Monitor 4"/>
+            <StringItem index="0" value="Iago Palaz&#xf3;n"/>
+            <StringItem index="1" value="Lorena Men&#xe9;ndez"/>
+            <StringItem index="2" value="Paco D&#xed;az"/>
+            <StringItem index="3" value="Natalia Romareda"/>
           </StringArray>
         </Property>
       </Properties>
