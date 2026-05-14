@@ -66,7 +66,6 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
         botonIniciarSesion.addActionListener(this::botonIniciarSesionActionPerformed);
 
         registrarContraseñaAdmin.setBackground(new java.awt.Color(255, 255, 204));
-        registrarContraseñaAdmin.setText("jPasswordField1");
         registrarContraseñaAdmin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

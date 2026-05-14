@@ -71,7 +71,6 @@ public class VentanaLogin extends javax.swing.JFrame {
 
         iniciaContraseña.setBackground(new java.awt.Color(255, 204, 204));
         iniciaContraseña.setForeground(new java.awt.Color(51, 51, 51));
-        iniciaContraseña.setText("jPasswordField1");
         iniciaContraseña.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         iniciaContraseña.setFocusTraversalPolicyProvider(true);
         iniciaContraseña.addActionListener(this::iniciaContraseñaActionPerformed);

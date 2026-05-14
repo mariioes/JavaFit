@@ -121,7 +121,6 @@ public class VentanaRegistro extends javax.swing.JFrame {
         getContentPane().add(registroCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 230, 40));
 
         registroContraseña.setBackground(new java.awt.Color(204, 255, 255));
-        registroContraseña.setText("jPasswordField1");
         getContentPane().add(registroContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, 230, 40));
 
         registroNombre.setBackground(new java.awt.Color(204, 255, 255));

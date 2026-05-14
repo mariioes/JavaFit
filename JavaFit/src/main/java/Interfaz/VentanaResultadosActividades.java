@@ -113,7 +113,6 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         lblFoto2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(400, 400));
 
         botonVolver.setBackground(new java.awt.Color(255, 204, 153));
         botonVolver.setText("Volver atrás");

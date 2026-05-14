@@ -3,13 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaz;
+import Logica.Actividad_Deportiva;
+import Logica.Actividad_Especial;
 import Logica.Gestor;
 import Logica.Reserva;
 import Logica.Socio;
 import java.util.ArrayList;
-import Logica.Actividad_Deportiva;
-import Logica.Actividad_Especial;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 
@@ -58,10 +59,28 @@ public class VentanaMisReservas extends javax.swing.JFrame {
                 }
             }
         });
+        
+        // Evento para detectar el clic en la tabla de reservas
+        tablaMisReservas.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int fila = tablaMisReservas.getSelectedRow();
+                // Usamos misReservasActuales que es la lista que tienes declarada arriba
+                if (fila != -1 && misReservasActuales != null) {
+                    Reserva seleccionada = misReservasActuales.get(fila);
+                    actualizarPanelDetalles(seleccionada.getActividad());
+                }
+            // Margen texto
+            txtDescripcion.setMargin(new java.awt.Insets(10, 10, 10, 10));
+            
+            }
+        }); 
     }
 
 
     @SuppressWarnings("unchecked")
+                
+               
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -69,18 +88,21 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         tablaMisReservas = new javax.swing.JTable();
         botonVolver = new javax.swing.JButton();
         botonCancelarReserva = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtDescripcion = new javax.swing.JTextArea();
+        lblFotos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tablaMisReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Actividad", "Fecha", "Precio", "Tipo", "Sala", "Monitor"
+                "Actividad", "Tipo", "Sala (Aforo)", "Dia", "Horario", "Monitor", "Precio"
             }
         ));
         jScrollPane1.setViewportView(tablaMisReservas);
@@ -97,6 +119,10 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         botonCancelarReserva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         botonCancelarReserva.addActionListener(this::botonCancelarReservaActionPerformed);
 
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setRows(5);
+        jScrollPane2.setViewportView(txtDescripcion);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,31 +130,70 @@ public class VentanaMisReservas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonCancelarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblFotos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(260, 260, 260)
-                        .addComponent(botonCancelarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(116, Short.MAX_VALUE))
+                        .addGap(22, 22, 22)
+                        .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonCancelarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonVolver, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                .addGap(48, 48, 48))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74)
+                        .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
+                        .addComponent(botonCancelarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     private void actualizarPanelDetalles(Actividad_Deportiva act) {
+    // 1. Descripción
+        if (act instanceof Actividad_Especial) {
+            Actividad_Especial especial = (Actividad_Especial) act;
+            txtDescripcion.setText(especial.getDescripcion());
+        } else {
+            String texto = "Actividad: " + act.getTitulo() + "\n"
+                + "Monitor: " + act.getMonitor_asignado() + "\n"
+                + "Sala: " + act.getSala().getNombre() + "\n"
+                + "Aforo: " + act.getSala().getAforo_maximo() + " personas.";
+                txtDescripcion.setText(texto);
+        }
+
+    // 2. Imagen
+    ImageIcon icono = act.getImagen();
+    if (icono != null && icono.getImage() != null) {
+        // Usamos tamaño fijo en lugar de getWidth()/getHeight()
+        int ancho = 270;
+        int alto = 120;
+
+        java.awt.Image imgEscalada = icono.getImage()
+                .getScaledInstance(ancho, alto, java.awt.Image.SCALE_SMOOTH);
+
+        lblFotos.setIcon(new ImageIcon(imgEscalada));
+        lblFotos.setText("");
+    } else {
+        lblFotos.setIcon(null);
+        lblFotos.setText("Sin imagen");
+    }
+        }
     /**
      * Cierra la ventana y restaura el menú del socio.
      * @param evt Evento de acción del botón.
@@ -194,24 +259,28 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         
         // 2. Rellenamos la tabla
         for (Reserva r : misReservasActuales) {
+            
+            // Obtenemos la actividad de la reserva
+            Actividad_Deportiva act = r.getActividad();
+            
             // A. Calculamos el precio igual que en otras ventanas
             boolean esEspecial = r.getActividad() instanceof Logica.Actividad_Especial;
             String precioStr = esEspecial ? r.getPrecio_total() + "€" : "Incluido";
             
-            // B. Juntamos el día y las horas para que quede bien en la columna Fecha
-            String fechaHorario = r.getActividad().getHorario().getDia() + " (" + 
-                                  r.getActividad().getHorario().getHora_inicio() + "-" + 
-                                  r.getActividad().getHorario().getHora_final() + ")";
+            // B. Preparamos los textos compuestos (Sala con aforo y Horario separado)
+            String salaInfo = act.getSala().getNombre() + " (" + act.getSala().getAforo_maximo() + ")";
+            String horarioInfo = act.getHorario().getHora_inicio() + " - " + act.getHorario().getHora_final();
             
             // C. Creamos la fila con los 6 datos en orden
             
             Object[] fila = {
-                r.getActividad().getTitulo(),                   // Col 1: Actividad
-                fechaHorario,                                // Col 2: Fecha (Horario completo)
-                precioStr,                                      // Col 3: Precio
-                r.getActividad().getTipo_Actividad().toString(),  // Col 4: Tipo
-                r.getActividad().getSala().getNombre(),         // Col 5: Sala
-                r.getActividad().getMonitor_asignado()          // Col 6: Monitor
+            act.getTitulo(),                    
+                act.getTipo_Actividad().toString(),
+                salaInfo,        
+                act.getHorario().getDia(),
+                horarioInfo,
+                act.getMonitor_asignado(),
+                precioStr
             };
             modelo.addRow(fila);
         }
@@ -221,6 +290,9 @@ public class VentanaMisReservas extends javax.swing.JFrame {
     private javax.swing.JButton botonCancelarReserva;
     private javax.swing.JButton botonVolver;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblFotos;
     private javax.swing.JTable tablaMisReservas;
+    private javax.swing.JTextArea txtDescripcion;
     // End of variables declaration//GEN-END:variables
 }
