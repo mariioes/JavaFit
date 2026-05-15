@@ -20,7 +20,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Logica.Gestor.cargarSocios();
         PanelFondo contenedorFondo = new PanelFondo("/imagenes/imagen_inicio.jpg");
 
-    
+        Logica.HerramientasVisuales.ponerIconoJavaFit(this);
         // 2. Le ponemos el mismo layout para que el Design funcione bien
         contenedorFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
     

@@ -1,0 +1,21 @@
+=========================================
+         RECIBO DE RESERVA - JAVAFIT     
+=========================================
+Fecha de emisión: 15/05/2026 19:09:28
+-----------------------------------------
+DATOS DEL SOCIO:
+  Nombre: Sergio Gutiérrez
+  Correo: sergio@gmail.com
+  VIP: true
+-----------------------------------------
+DATOS DE LA ACTIVIDAD:
+  Actividad: Elíptica Indoor
+  Sala:      Sala Fitness
+  Día:       Lunes
+  Horario:   20:00 - 21:00
+-----------------------------------------
+Tipo de clase: ACTIVIDAD ESTÁNDAR
+Precio: INCLUIDO EN LA CUOTA MENSUAL
+=========================================
+    ¡Gracias por confiar en JavaFit!     
+=========================================

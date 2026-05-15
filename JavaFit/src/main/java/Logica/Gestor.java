@@ -6,6 +6,8 @@ package Logica;
  */
 import java.util.ArrayList;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 /**
@@ -220,7 +222,7 @@ public class Gestor {
         reservas.add(nueva);
         
         guardarReservas();
-        
+        generarReciboTxt(nueva);
         return "EXITO";
     }
     
@@ -406,6 +408,53 @@ public class Gestor {
             Administrador jefe = new Administrador("admin@javafit.com", "admin");
             admins.add(jefe);
             guardarAdmins(); 
+        }
+    }
+    
+    public static void generarReciboTxt(Logica.Reserva reserva) {
+        // Creamos un nombre de archivo único para que no se sobrescriban. 
+        // Ejemplo: Recibo_juan_Yoga.txt
+        String nombreFichero = "Recibo_" + reserva.getSocio().getNombre().replace(" ", "") + "_" 
+                             + reserva.getActividad().getTitulo().replace(" ", "") + ".txt";
+
+        // Usamos try-with-resources para que el archivo se cierre automáticamente al terminar
+        try (PrintWriter out = new PrintWriter(new FileWriter(nombreFichero))) {
+            
+            out.println("=========================================");
+            out.println("         RECIBO DE RESERVA - JAVAFIT     ");
+            out.println("=========================================");
+            out.println("Fecha de emisión: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+            out.println("-----------------------------------------");
+            out.println("DATOS DEL SOCIO:");
+            out.println("  Nombre: " + reserva.getSocio().getNombre());
+            out.println("  Correo: " + reserva.getSocio().getCorreo());
+            out.println("  VIP: "+reserva.getSocio().esVip());
+            // out.println("  Tipo: " + (reserva.getSocio().isVip() ? "Socio VIP" : "Socio Básico"));
+            out.println("-----------------------------------------");
+            out.println("DATOS DE LA ACTIVIDAD:");
+            out.println("  Actividad: " + reserva.getActividad().getTitulo());
+            out.println("  Sala:      " + reserva.getActividad().getSala().getNombre());
+            out.println("  Día:       " + reserva.getActividad().getHorario().getDia());
+            out.println("  Horario:   " + reserva.getActividad().getHorario().getHora_inicio() + " - " + reserva.getActividad().getHorario().getHora_final());
+            out.println("-----------------------------------------");
+            
+            // Comprobamos si es especial para poner el precio
+            if (reserva.getActividad() instanceof Logica.Actividad_Especial) {
+                out.println("Tipo de clase: ACTIVIDAD ESPECIAL");
+                out.println("TOTAL CARGADO EN TARJETA: " + reserva.getPrecio_total() + " euros");
+            } else {
+                out.println("Tipo de clase: ACTIVIDAD ESTÁNDAR");
+                out.println("Precio: INCLUIDO EN LA CUOTA MENSUAL");
+            }
+            
+            out.println("=========================================");
+            out.println("    ¡Gracias por confiar en JavaFit!     ");
+            out.println("=========================================");
+
+            System.out.println("Recibo generado con éxito: " + nombreFichero);
+
+        } catch (IOException e) {
+            System.err.println("Error crítico al generar el recibo .txt: " + e.getMessage());
         }
     }
 }
