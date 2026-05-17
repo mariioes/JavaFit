@@ -17,17 +17,12 @@ import java.util.stream.Collectors;
  */
 public class Gestor {
     
-    // --- 1. ARCHIVOS DE GUARDADO ---
-    /** Ruta del fichero donde se guardan los administradores.*/
     private static final String FICHERO_ADMINS = "admins.dat";
     
-    /** Ruta del fichero donde se guardan los socios.*/
     private static final String FICHERO_SOCIOS = "socios.dat";
     
-    /** Ruta del fichero donde se guardan las actividades.*/
     private static final String FICHERO_ACTIVIDADES = "actividades.dat";
     
-    /** Ruta del fichero donde se guardan las reservas.*/
     private static final String FICHERO_RESERVAS = "reservas.dat";
 
     // --- 2. LISTAS EN MEMORIA ---
@@ -428,7 +423,7 @@ public class Gestor {
             out.println("DATOS DEL SOCIO:");
             out.println("  Nombre: " + reserva.getSocio().getNombre());
             out.println("  Correo: " + reserva.getSocio().getCorreo());
-            out.println("  VIP: "+reserva.getSocio().esVip());
+            out.println("  VIP: " + (reserva.getSocio().esVip() ? "Si" : "No"));
             // out.println("  Tipo: " + (reserva.getSocio().isVip() ? "Socio VIP" : "Socio Básico"));
             out.println("-----------------------------------------");
             out.println("DATOS DE LA ACTIVIDAD:");

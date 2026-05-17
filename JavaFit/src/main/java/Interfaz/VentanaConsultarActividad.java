@@ -28,11 +28,11 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         this.ventanaAdmin = ventanaAdmin;
         this.adminActual = admin;
         initComponents();
-            this.setLocationRelativeTo(null);
-    this.setResizable(false);
-    this.setTitle("JAVAFIT - Consultar Actividades");
-    this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
-    this.addWindowListener(new java.awt.event.WindowAdapter() {
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setTitle("JAVAFIT - Consultar Actividades");
+        this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
         @Override
         public void windowClosed(java.awt.event.WindowEvent e) {
             if (ventanaAdmin != null) {
@@ -41,10 +41,10 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
             }
         }
     });
-    jEditorPane1.setEditable(false);
-    cargarActividades();
+        jEditorPane1.setEditable(false);
+        cargarActividades();
 
-    tablaActividades.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaActividades.addMouseListener(new java.awt.event.MouseAdapter() {
         @Override
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             int fila = tablaActividades.getSelectedRow();
@@ -66,7 +66,7 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
      */
     public void cargarActividadesFiltradas(String palabra) {
         javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tablaActividades.getModel();
-        modelo.setRowCount(0); // Limpiamos la tabla
+        modelo.setRowCount(0);
 
         // Pasamos la palabra a minúsculas para que dé igual cómo escriba el usuario
         String textoBusqueda = palabra.toLowerCase().trim();
@@ -149,7 +149,7 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         if (confirmar == JOptionPane.YES_OPTION) {
             Gestor.eliminar(listaActividadesActual.get(fila));
             JOptionPane.showMessageDialog(this, "Actividad eliminada correctamente.");
-            cargarActividades(); // Refresca la tabla
+            cargarActividades();
         }
         }
     @SuppressWarnings("unchecked")

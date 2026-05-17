@@ -10,39 +10,41 @@ import java.awt.Color;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName());
-
     /**
      * Constructor de VentanaPrincipal.
      * Inicializa la ventana, carga los socios en memoria, establece la imagen de fondo y aplica estilos visuales a los botones.
      */
     public VentanaPrincipal() {
-        Logica.Gestor.cargarSocios();
-        PanelFondo contenedorFondo = new PanelFondo("/imagenes/imagen_inicio.jpg");
+        Logica.Gestor.cargarSocios(); // Cargamos los socios actuales antes de iniciar.
+        PanelFondo contenedorFondo = new PanelFondo("/imagenes/imagen_inicio.jpg"); // Creamos una nueva instancia de Panel Fondo.
 
-        Logica.HerramientasVisuales.ponerIconoJavaFit(this);
-        // 2. Le ponemos el mismo layout para que el Design funcione bien
-        contenedorFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Logica.HerramientasVisuales.ponerIconoJavaFit(this); // Llamamos a la clase Herramientas Visuales para poner icono.
+
+        contenedorFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout()); // Ponemos AbsoluteLayout para poder colocar los componentes.
     
-        // 3. Sustituimos el panel por defecto por el nuestro [cite: 651, 652]
+        //Sustituimos el panel por defecto por el nuestro.
         this.setContentPane(contenedorFondo);
-    
-        // 4. Inicializamos los componentes (botones, etc.)
-        initComponents();
-        // Chivato para confirmar que funcionó
+      
+        initComponents(); //Inicializamos los componentes (botones, etc.)
+        
+        // Print para confirmar que funcionó.
         System.out.println("Carga inicial finalizada. Socios en memoria: " + Logica.Gestor.getSocios().size());
     
         // 5. Centramos y damos tamaño
         this.setSize(710, 415);
         this.setLocationRelativeTo(null); 
         
-        botonIniciarSesion.setBackground(new java.awt.Color(52, 152, 219)); // Un azul bonito
+        botonIniciarSesion.setBackground(new java.awt.Color(52, 152, 219)); // Personalizamos los botones.
         botonIniciarSesion.setForeground(java.awt.Color.WHITE);
         botonIniciarSesion.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        botonIniciarSesion.setToolTipText("Pulse para iniciar sesión con tu cuenta de Socio");
         
         botonRegistrarse.setBackground(Color.GREEN);
         botonRegistrarse.setForeground(java.awt.Color.WHITE);
         botonRegistrarse.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        botonRegistrarse.setToolTipText("Pulse para darse de alta en JavaFit");
+        
+        botonIniciarAdmin.setToolTipText("Reservado para administradores");
         
     }
 
@@ -92,9 +94,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * @param evt Evento de acción del botón.
      */
     private void botonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarSesionActionPerformed
-        VentanaLogin ventanaDatos = new VentanaLogin(this);
-        this.setVisible(false);
-        ventanaDatos.setVisible(true);
+        VentanaLogin ventanaDatos = new VentanaLogin(this); // Creamos instancia de ventana.
+        this.setVisible(false); // Ocultamos esta.
+        ventanaDatos.setVisible(true);  // Hacemos visible la nueva ventana.
     }//GEN-LAST:event_botonIniciarSesionActionPerformed
 
     /**
@@ -112,36 +114,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * @param evt Evento de acción del botón.
      */
     private void botonIniciarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarAdminActionPerformed
-        // Creamos la instancia de la ventana de login de admin
         VentanaLoginAdmin loginAdmin = new VentanaLoginAdmin(this);
-        // La hacemos visible
         loginAdmin.setVisible(true);
-        // Ocultamos la principal
         this.setVisible(false);
     }//GEN-LAST:event_botonIniciarAdminActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) { 
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) { // Ponemos Nimbus como se indica.
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new VentanaPrincipal().setVisible(true));
     }
 
@@ -157,7 +155,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
  * Panel personalizado que muestra una imagen de fondo escalada al tamaño del panel.
  * Se usa como contenedor principal de VentanaPrincipal.
  */
-class PanelFondo extends javax.swing.JPanel {
+class PanelFondo extends javax.swing.JPanel { 
     private java.awt.Image imagen;
 
     public PanelFondo(String rutaRecurso) {
@@ -175,7 +173,6 @@ class PanelFondo extends javax.swing.JPanel {
     protected void paintComponent(java.awt.Graphics g) {
         super.paintComponent(g);
         if (imagen != null) {
-            // Dibuja la imagen adaptada al tamaño total del panel [cite: 591]
             g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
         }
     }
