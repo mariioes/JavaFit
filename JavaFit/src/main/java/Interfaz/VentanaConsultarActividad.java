@@ -1,6 +1,8 @@
 package Interfaz;
 import javax.swing.JOptionPane;
 import Logica.Gestor;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Ventana que permite al administrador gestionar las actividades deportivas de JavaFit.
@@ -58,41 +60,41 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
     /**
      * Carga todas las actividades sin ningún filtro (comportamiento original).
      */
-    public void cargarActividades() {
-        cargarActividadesFiltradas(""); // Cadena vacía = no filtra nada
-    }
-/**
-     * Obtiene la lista de actividades, aplica un filtro por palabra y rellena la tabla.
+    /**
+     * Carga todas las actividades del sistema en la tabla sin filtros.
      */
-    public void cargarActividadesFiltradas(String palabra) {
+    public void cargarActividades() {
+        cargarActividades(Logica.Gestor.getActividades()); 
+    }
+
+    public void cargarActividades(java.util.ArrayList<Logica.Actividad_Deportiva> actividadesAMostrar) {
         javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tablaActividades.getModel();
-        modelo.setRowCount(0);
+        modelo.setRowCount(0); // Vaciar la tabla
 
-        // Pasamos la palabra a minúsculas para que dé igual cómo escriba el usuario
-        String textoBusqueda = palabra.toLowerCase().trim();
+        this.listaActividadesActual = actividadesAMostrar;
 
-        // AQUÍ ESTÁ EL FILTER: 
-        // Cogemos todas las actividades, abrimos un stream, filtramos, y lo volvemos a convertir en ArrayList
-        listaActividadesActual = (java.util.ArrayList<Logica.Actividad_Deportiva>) Logica.Gestor.getActividades().stream()
-            .filter(act -> textoBusqueda.isEmpty() || // Si no hay texto, pasan todas
-                           act.getTitulo().toLowerCase().contains(textoBusqueda) ||
-                           act.getMonitor_asignado().toLowerCase().contains(textoBusqueda) ||
-                           act.getSala().getNombre().toLowerCase().contains(textoBusqueda) ||
-                           act.getTipo_Actividad().toString().toLowerCase().contains(textoBusqueda))
-            .collect(java.util.stream.Collectors.toList());
+        // Si la lista está vacía, no hacemos nada más
+        if (actividadesAMostrar == null || actividadesAMostrar.isEmpty()) {
+            return;
+        }
 
-        // Rellenamos la tabla solo con las que han superado el filtro
+        // Rellenamos la tabla recorriendo la lista que nos han pasado
         for (Logica.Actividad_Deportiva act : listaActividadesActual) {
+            
             // Calculamos aforo restante
             long inscritos = Logica.Gestor.getReservas().stream()
                 .filter(r -> r.getActividad().getTitulo().equals(act.getTitulo()))
                 .count();
             int restante = act.getSala().getAforo_maximo() - (int) inscritos;
 
+            // Comprobamos si es especial para el precio
             boolean esEspecial = act instanceof Logica.Actividad_Especial;
             String precio = esEspecial ? ((Logica.Actividad_Especial) act).getPrecio() + "€" : "Incluido";
+            
+            // Formateamos el horario
             String horario = act.getHorario().getDia() + " " + act.getHorario().getHora_inicio() + "-" + act.getHorario().getHora_final();
 
+            // Añadimos la fila
             modelo.addRow(new Object[]{
                 act.getTitulo(),
                 act.getTipo_Actividad().toString(),
@@ -165,9 +167,16 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaActividades = new javax.swing.JTable();
-        txtBuscador = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        botonNombre = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        botonTipoActividad = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        botonDia = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        botonMonitor = new javax.swing.JComboBox<>();
         botonBuscar = new javax.swing.JButton();
+        checkActividadEspecial = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -200,10 +209,27 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(jScrollPane1);
 
-        jLabel1.setText("Buscar:");
+        jLabel2.setText("Nombre:");
 
-        botonBuscar.setText("Filtrar");
+        botonNombre.addActionListener(this::botonNombreActionPerformed);
+
+        jLabel3.setText("Tipo de Actividad:");
+
+        botonTipoActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "YOGA", "MUSCULACION", "NATACION", "CARDIO" }));
+
+        jLabel4.setText("Día:");
+
+        botonDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo" }));
+
+        jLabel5.setText("Monitor:");
+
+        botonMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Monitor 1", "Monitor 2", "Monitor 3", "Monitor 4" }));
+
+        botonBuscar.setText("Buscar");
         botonBuscar.addActionListener(this::botonBuscarActionPerformed);
+
+        checkActividadEspecial.setText("Solo Actividades Especiales");
+        checkActividadEspecial.addActionListener(this::checkActividadEspecialActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,58 +238,82 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
+                        .addGap(38, 38, 38)
                         .addComponent(botonEliminarActividad)
-                        .addGap(51, 51, 51)
+                        .addGap(43, 43, 43)
                         .addComponent(botonCrearActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addComponent(botonModificarActividad)))
+                        .addGap(36, 36, 36)
+                        .addComponent(botonModificarActividad))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(botonNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(botonTipoActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(87, 87, 87)
+                                        .addComponent(jLabel5))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(botonDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(botonMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(botonBuscar)
+                                                .addGap(28, 28, 28))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(checkActividadEspecial)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(botonBuscar)
-                .addGap(131, 131, 131))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botonBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(160, 160, 160))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botonEliminarActividad)
-                            .addComponent(botonCrearActividad)
-                            .addComponent(botonModificarActividad))
-                        .addGap(53, 53, 53)))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botonNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonTipoActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonBuscar))
+                        .addGap(10, 10, 10)
+                        .addComponent(checkActividadEspecial)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonCrearActividad)
+                    .addComponent(botonModificarActividad)
+                    .addComponent(botonEliminarActividad))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(19, 19, 19))
         );
@@ -329,22 +379,58 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonModificarActividadActionPerformed
 
+    private void botonNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonNombreActionPerformed
+
+    private void checkActividadEspecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkActividadEspecialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkActividadEspecialActionPerformed
+
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
-        cargarActividadesFiltradas(txtBuscador.getText());        // TODO add your handling code here:
+        String nombre = botonNombre.getText().trim().toLowerCase();
+        String tipo = botonTipoActividad.getSelectedItem().toString();
+        String dia = botonDia.getSelectedItem().toString();
+        String monitor = botonMonitor.getSelectedItem().toString();
+        
+        final boolean soloEspecial = checkActividadEspecial.isSelected();
+        
+        ArrayList<Logica.Actividad_Deportiva> actividadesFiltradas = Logica.Gestor.getActividades().stream()
+            // Comprobamos directamente sobre la actividad 'a'
+            .filter(a -> nombre.isEmpty() || a.getTitulo().toLowerCase().contains(nombre))
+            .filter(a -> tipo.equals("Cualquiera") || a.getTipo_Actividad().toString().equals(tipo))
+            .filter(a -> dia.equals("Cualquiera") || a.getHorario().getDia().equals(dia))
+            .filter(a -> monitor.equals("Cualquiera") || a.getMonitor_asignado().equals(monitor))
+            // Filtro adaptado usando Polimorfismo (Tema 2-5)
+            .filter(a -> !soloEspecial || a instanceof Logica.Actividad_Especial) 
+            .collect(Collectors.toCollection(ArrayList::new));
+        
+        cargarActividades(actividadesFiltradas);
+        
+        if (actividadesFiltradas.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "No se han encontrado actividades con estos criterios");
+        }
     }//GEN-LAST:event_botonBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonCrearActividad;
+    private javax.swing.JComboBox<String> botonDia;
     private javax.swing.JButton botonEliminarActividad;
     private javax.swing.JButton botonModificarActividad;
+    private javax.swing.JComboBox<String> botonMonitor;
+    private javax.swing.JTextField botonNombre;
+    private javax.swing.JComboBox<String> botonTipoActividad;
+    private javax.swing.JCheckBox checkActividadEspecial;
     private javax.swing.JButton jButton1;
     private javax.swing.JEditorPane jEditorPane1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tablaActividades;
-    private javax.swing.JTextField txtBuscador;
     // End of variables declaration//GEN-END:variables
 }
