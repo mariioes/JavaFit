@@ -16,6 +16,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         Logica.Gestor.cargarSocios(); // Cargamos los socios actuales antes de iniciar.
+        Logica.Gestor.cargarAdmins();
         PanelFondo contenedorFondo = new PanelFondo("/imagenes/imagen_inicio.jpg"); // Creamos una nueva instancia de Panel Fondo.
 
         Logica.HerramientasVisuales.ponerIconoJavaFit(this); // Llamamos a la clase Herramientas Visuales para poner icono.
@@ -162,6 +163,7 @@ class PanelFondo extends javax.swing.JPanel {
         java.net.URL url = getClass().getResource(rutaRecurso);
         if (url != null) {
             this.imagen = new javax.swing.ImageIcon(url).getImage();
+            this.setOpaque(false);
         }
     }
 

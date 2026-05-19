@@ -26,6 +26,11 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
      */
     public VentanaLoginAdmin(javax.swing.JFrame padre) {
         this.ventanaPadre = padre;
+        PanelFondo contenedorFondo = new PanelFondo("/imagenes/fondoRegistro.jpg"); // Creamos una nueva instancia de Panel Fondo.
+        Logica.HerramientasVisuales.ponerIconoJavaFit(this); // Llamamos a la clase Herramientas Visuales para poner icono.
+        contenedorFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout()); // Ponemos AbsoluteLayout para poder colocar los componentes.
+    
+        this.setContentPane(contenedorFondo);
         initComponents();
         this.setLocationRelativeTo(null);
         
