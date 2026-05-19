@@ -21,11 +21,13 @@ public class VentanaRegistro extends javax.swing.JFrame {
         this.ventanaPrincipal = principal;
         initComponents();
         
-        this.getContentPane().setBackground(java.awt.Color.white);
+        this.getContentPane().setBackground(java.awt.Color.BLACK);
         this.setSize(710,415);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         
+        PanelFondo contenedorFondo = new PanelFondo("/imagenes/fondoRegistro.jpg");
+        this.setContentPane(contenedorFondo);
         try {
             javax.swing.text.MaskFormatter mf = new javax.swing.text.MaskFormatter("#########");
             mf.setPlaceholderCharacter('_');
@@ -74,6 +76,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nombre Completo");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, -1));
 
@@ -82,6 +85,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
         getContentPane().add(registroTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 230, 40));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Teléfono");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, -1, -1));
 
@@ -90,6 +94,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
         getContentPane().add(registroDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 250, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Dirección");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, -1, -1));
 
@@ -98,10 +103,12 @@ public class VentanaRegistro extends javax.swing.JFrame {
         getContentPane().add(registroTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 250, 40));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Tarjeta de crédito");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, -1, -1));
 
         registroSocioVip.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        registroSocioVip.setForeground(new java.awt.Color(255, 255, 255));
         registroSocioVip.setLabel("Registrarse como Socio VIP");
         registroSocioVip.addActionListener(this::registroSocioVipActionPerformed);
         getContentPane().add(registroSocioVip, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, -1, -1));
@@ -128,10 +135,12 @@ public class VentanaRegistro extends javax.swing.JFrame {
         getContentPane().add(registroNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 250, 40));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Correo");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Contraseña");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, -1, -1));
 

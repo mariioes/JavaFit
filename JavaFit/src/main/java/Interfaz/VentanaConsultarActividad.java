@@ -37,7 +37,10 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         public void windowClosed(java.awt.event.WindowEvent e) {
             if (ventanaAdmin != null) {
                 ventanaAdmin.setVisible(true);
-                ((VentanaConsultarActividad) ventanaAdmin).cargarActividades();
+            if (ventanaAdmin instanceof VentanaConsultarActividad ventanaConsultarActividad) {
+            // Si dice que sí, ya podemos transformarla sin peligro
+                    ventanaConsultarActividad.cargarActividades();
+            }
             }
         }
     });

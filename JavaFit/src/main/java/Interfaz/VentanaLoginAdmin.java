@@ -7,6 +7,7 @@ package Interfaz;
 import Logica.Administrador;
 import Logica.Usuario;
 import Logica.Gestor;
+import java.awt.Color;
 
 /**
  * Ventana de inicio de sesión para administradores de JavaFit.
@@ -27,6 +28,9 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
         this.ventanaPadre = padre;
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        this.getContentPane().setBackground(Color.black);
+        this.setTitle("JAVAFIT - Iniciar Sesión como Administrador");
     }
     
     /**
@@ -44,18 +48,21 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
         botonVolver = new javax.swing.JButton();
         botonIniciarSesion = new javax.swing.JButton();
         registrarContraseñaAdmin = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        registrarCorreoAdmin.setBackground(new java.awt.Color(255, 255, 204));
         registrarCorreoAdmin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        registrarCorreoAdmin.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         registrarCorreoAdmin.addActionListener(this::registrarCorreoAdminActionPerformed);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("Correo electrónico");
+        jLabel1.setForeground(new java.awt.Color(153, 255, 153));
+        jLabel1.setText("CORREO ELECTRÓNICO");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Contraseña");
+        jLabel2.setForeground(new java.awt.Color(153, 255, 153));
+        jLabel2.setText("CONTRASEÑA");
 
         botonVolver.setText("Volver atrás");
         botonVolver.addActionListener(this::botonVolverActionPerformed);
@@ -65,8 +72,12 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
         botonIniciarSesion.setText("Iniciar Sesión");
         botonIniciarSesion.addActionListener(this::botonIniciarSesionActionPerformed);
 
-        registrarContraseñaAdmin.setBackground(new java.awt.Color(255, 255, 204));
+        registrarContraseñaAdmin.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         registrarContraseñaAdmin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel3.setFont(new java.awt.Font("Stencil", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 255, 153));
+        jLabel3.setText("JavaFit");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,24 +95,32 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
                         .addComponent(botonIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(299, 299, 299))))
             .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(botonVolver)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(66, 66, 66))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(285, 285, 285)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(290, 290, 290)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(botonVolver)))
+                        .addGap(285, 285, 285)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(botonVolver)
-                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(botonVolver))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel3)))
+                .addGap(54, 54, 54)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(registrarCorreoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -111,7 +130,7 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
                 .addComponent(registrarContraseñaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(botonIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         pack();
@@ -188,6 +207,7 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
     private javax.swing.JButton botonVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField registrarContraseñaAdmin;
     private javax.swing.JFormattedTextField registrarCorreoAdmin;
     // End of variables declaration//GEN-END:variables

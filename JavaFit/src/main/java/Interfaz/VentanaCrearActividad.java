@@ -76,7 +76,12 @@ public class VentanaCrearActividad extends javax.swing.JFrame {
         txtTitulo.setText(actividadEnEdicion.getTitulo());
         txtMonitor.setSelectedItem(actividadEnEdicion.getMonitor_asignado());
         
+        txtHoraInicio.setText(actividadEnEdicion.getHorario().getHora_inicio());
+        jFormattedTextField1.setText(actividadEnEdicion.getHorario().getHora_final());
+        
         comboTipo.setSelectedItem(actividadEnEdicion.getTipo_Actividad());
+        ComboSala.setSelectedItem(actividadEnEdicion.getSala().getNombre());
+        txtMonitor.setSelectedItem(actividadEnEdicion.getMonitor_asignado());
         txtTitulo.setEditable(false);
         
         botonGuardarCambios.setText("Guardar Cambios");

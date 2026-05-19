@@ -37,7 +37,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonIniciarSesion.setBackground(new java.awt.Color(52, 152, 219)); // Personalizamos los botones.
         botonIniciarSesion.setForeground(java.awt.Color.WHITE);
         botonIniciarSesion.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
-        botonIniciarSesion.setToolTipText("Pulse para iniciar sesión con tu cuenta de Socio");
+        botonIniciarSesion.setToolTipText("Pulse para iniciar sesión con su cuenta de Socio");
         
         botonRegistrarse.setBackground(Color.GREEN);
         botonRegistrarse.setForeground(java.awt.Color.WHITE);

@@ -23,7 +23,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         this.ventanaPrincipal = principal;
         initComponents();
         
-        this.getContentPane().setBackground(java.awt.Color.WHITE);
+        this.getContentPane().setBackground(java.awt.Color.BLACK);
         
         this.setSize(710,415);
         this.setResizable(false);
@@ -66,6 +66,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Correo electrónico");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 130, 20));
 
@@ -77,10 +78,12 @@ public class VentanaLogin extends javax.swing.JFrame {
         getContentPane().add(iniciaContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 210, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Contraseña");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, -1));
 
         jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setText("Acepto las políticas de privacidad");
         jCheckBox1.addActionListener(this::jCheckBox1ActionPerformed);
         getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, -1, -1));
