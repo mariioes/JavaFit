@@ -1,6 +1,8 @@
 package Interfaz;
 import Logica.Socio;
 import Logica.Gestor;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  * Ventana de registro de nuevos socios en JavaFit.
@@ -24,6 +26,15 @@ public class VentanaRegistro extends javax.swing.JFrame {
         this.setSize(710, 415);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/LogoJavaFit.png"));
+        Image img = icon.getImage().getScaledInstance(
+        jLabel7.getWidth(),
+        jLabel7.getHeight(),
+        Image.SCALE_SMOOTH
+        );
+        jLabel7.setIcon(new ImageIcon(img));
+
         
         try {
             javax.swing.text.MaskFormatter mf = new javax.swing.text.MaskFormatter("#########");
@@ -69,6 +80,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
         registroNombre = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 255, 51));
@@ -148,6 +160,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Contraseña");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 110, 90));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -259,6 +272,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPasswordField registroContraseña;
     private javax.swing.JFormattedTextField registroCorreo;
     private javax.swing.JFormattedTextField registroDireccion;

@@ -1,6 +1,8 @@
 package Interfaz;
 
 import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -36,6 +38,15 @@ public class VentanaLogin extends javax.swing.JFrame {
         // Configuramos para que al darle a la 'X' o al botón Volver pase esto:
         this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/LogoJavaFit.png"));
+        Image img = icon.getImage().getScaledInstance(
+        jLabel5.getWidth(),
+        jLabel5.getHeight(),
+        Image.SCALE_SMOOTH
+        );
+        jLabel5.setIcon(new ImageIcon(img));
+
+        
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent e) {
@@ -57,6 +68,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         iniciaContraseña = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
@@ -64,6 +76,10 @@ public class VentanaLogin extends javax.swing.JFrame {
         botonConfirmarInicio = new javax.swing.JButton();
         botonVolverLogin = new javax.swing.JButton();
         iniciaCorreo = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/LogoJavaFit.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaFit - Ventana de Inicio de Sesión");
@@ -72,10 +88,11 @@ public class VentanaLogin extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Correo electrónico");
+        jLabel1.setText("CORREO ELECTRÓNICO");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 130, 20));
 
         iniciaContraseña.setBackground(new java.awt.Color(204, 255, 255));
+        iniciaContraseña.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         iniciaContraseña.setForeground(new java.awt.Color(51, 51, 51));
         iniciaContraseña.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         iniciaContraseña.setFocusTraversalPolicyProvider(true);
@@ -84,7 +101,7 @@ public class VentanaLogin extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Contraseña");
+        jLabel2.setText("CONTRASEÑA");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, -1));
 
         jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -94,20 +111,24 @@ public class VentanaLogin extends javax.swing.JFrame {
         getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, -1, -1));
 
         botonConfirmarInicio.setBackground(new java.awt.Color(0, 255, 102));
-        botonConfirmarInicio.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        botonConfirmarInicio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonConfirmarInicio.setLabel("Iniciar Sesión");
         botonConfirmarInicio.addActionListener(this::botonConfirmarInicioActionPerformed);
         getContentPane().add(botonConfirmarInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 120, 30));
 
+        botonVolverLogin.setBackground(new java.awt.Color(255, 102, 102));
+        botonVolverLogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         botonVolverLogin.setLabel("Volver atrás");
         botonVolverLogin.addActionListener(this::botonVolverLoginActionPerformed);
         getContentPane().add(botonVolverLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         iniciaCorreo.setBackground(new java.awt.Color(204, 255, 255));
+        iniciaCorreo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         iniciaCorreo.setForeground(new java.awt.Color(51, 51, 51));
         iniciaCorreo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         iniciaCorreo.addActionListener(this::iniciaCorreoActionPerformed);
         getContentPane().add(iniciaCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 210, 30));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 0, 140, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -193,5 +214,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }
