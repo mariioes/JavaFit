@@ -19,13 +19,98 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
     public VentanaMenuSocio(Socio socio) {
         this.socioActual = socio;
         initComponents();
-        this.setSize(710, 415);
+        this.setSize(700, 420);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         
-        this.getContentPane().setBackground(Color.white);
+        // Fondo degradado
+        javax.swing.JPanel panelFondo = new javax.swing.JPanel() {
+        @Override
+        protected void paintComponent(java.awt.Graphics g) {
+            super.paintComponent(g);
+            java.awt.Graphics2D g2d = (java.awt.Graphics2D) g;
+            g2d.setPaint(new java.awt.GradientPaint(
+                0, 0, new Color(15, 20, 40),
+                0, getHeight(), new Color(25, 40, 70)
+            ));
+            g2d.fillRect(0, 0, getWidth(), getHeight());
+        }
+    };
+    panelFondo.setLayout(null);
+    setContentPane(panelFondo);
         
-    }
+    
+    // Titulo
+    javax.swing.JLabel lblTitulo = new javax.swing.JLabel("MENÚ DE SOCIO", javax.swing.SwingConstants.CENTER);
+    lblTitulo.setFont(new java.awt.Font("Segoe UI Black", java.awt.Font.BOLD, 28));
+    lblTitulo.setForeground(new Color(0, 230, 180));
+    lblTitulo.setBounds(0, 10, 700, 45);
+    panelFondo.add(lblTitulo);
+    
+    // Botones
+    estilizarBoton(botonReservarActividad, "Reservar Actividad", new Color(0, 200, 160));
+    botonReservarActividad.setBounds(150, 75, 400, 60);
+    panelFondo.add(botonReservarActividad);
+    
+    estilizarBoton(botonMisReservas, "Mis Reservas", new Color(70, 130, 220));
+    botonMisReservas.setBounds(150, 160, 400, 60);
+    panelFondo.add(botonMisReservas);
+
+    estilizarBoton(botonDatos, "Mis Datos", new Color(100, 80, 200));
+    botonDatos.setBounds(150, 245, 400, 60);
+    panelFondo.add(botonDatos);
+    
+    // ── CERRAR SESIÓN ────────────────────────────────────────────
+    botonCerrarSesion.setText("Cerrar Sesión");
+    botonCerrarSesion.setBounds(260, 335, 180, 38);
+    botonCerrarSesion.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+    botonCerrarSesion.setForeground(Color.WHITE);
+    botonCerrarSesion.setBackground(new Color(180, 40, 40));
+    botonCerrarSesion.setFocusPainted(false);
+    botonCerrarSesion.setBorderPainted(false);
+    botonCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    botonCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent e) {
+            botonCerrarSesion.setBackground(new Color(220, 60, 60));
+        }
+        public void mouseExited(java.awt.event.MouseEvent e) {
+            botonCerrarSesion.setBackground(new Color(180, 40, 40));
+        }
+    });
+    panelFondo.add(botonCerrarSesion);
+}
+    // Estilo de los botones
+    private void estilizarBoton(javax.swing.JButton btn, String texto, Color color) {
+        btn.setText(texto);
+        btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 16));
+        btn.setForeground(Color.WHITE);
+        btn.setBackground(color);
+        btn.setContentAreaFilled(false);
+        btn.setBorderPainted(false);
+        btn.setFocusPainted(false);
+        btn.setOpaque(false);
+        btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+        @Override
+        public void paint(java.awt.Graphics g, javax.swing.JComponent c) {
+            java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+            g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
+                                java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(btn.getBackground());
+            g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 20, 20);
+            g2.dispose();
+            super.paint(g, c);
+        }
+    });
+    btn.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent e) {
+            btn.setBackground(color.darker());
+        }
+        public void mouseExited(java.awt.event.MouseEvent e) {
+            btn.setBackground(color);
+        }
+    });
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,7 +126,7 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
         botonMisReservas = new javax.swing.JButton();
         botonDatos = new javax.swing.JButton();
         botonCerrarSesion = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Socio - JavaFit");
@@ -68,8 +153,9 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
         botonCerrarSesion.setText("Cerrar Sesión");
         botonCerrarSesion.addActionListener(this::botonCerrarSesionActionPerformed);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
-        jLabel1.setText("MENU DE SOCIO");
+        lblTitulo.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(0, 230, 180));
+        lblTitulo.setText("MENU DE SOCIO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,7 +165,7 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(195, 195, 195)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                         .addComponent(botonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -103,7 +189,7 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(botonCerrarSesion)
                                 .addGap(0, 0, Short.MAX_VALUE)))
@@ -182,6 +268,6 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
     private javax.swing.JButton botonMisReservas;
     private javax.swing.JButton botonReservarActividad;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblTitulo;
     // End of variables declaration//GEN-END:variables
 }

@@ -41,8 +41,129 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
                 }
             }
         });
-        this.getContentPane().setBackground(Color.white);
-    }
+        // Fondo degradado
+    javax.swing.JPanel panelFondo = new javax.swing.JPanel() {
+        @Override
+        protected void paintComponent(java.awt.Graphics g) {
+            super.paintComponent(g);
+            java.awt.Graphics2D g2d = (java.awt.Graphics2D) g;
+            g2d.setPaint(new java.awt.GradientPaint(
+                0, 0, new java.awt.Color(15, 20, 40),
+                0, getHeight(), new java.awt.Color(25, 40, 70)
+            ));
+            g2d.fillRect(0, 0, getWidth(), getHeight());
+        }
+    };
+    panelFondo.setLayout(null);
+    setContentPane(panelFondo);
+    
+    
+    // Título
+    javax.swing.JLabel lblTitulo = new javax.swing.JLabel("BÚSQUEDA DE ACTIVIDADES", javax.swing.SwingConstants.CENTER);
+    lblTitulo.setFont(new java.awt.Font("Segoe UI Black", java.awt.Font.BOLD, 26));
+    lblTitulo.setForeground(new java.awt.Color(0, 230, 180));
+    lblTitulo.setBounds(0, 15, 710, 45);
+    panelFondo.add(lblTitulo);
+    
+    // Labels de los filtros
+    jLabel1.setForeground(java.awt.Color.WHITE);
+    jLabel1.setBounds(63, 90, 167, 20);
+    panelFondo.add(jLabel1);
+
+    jLabel2.setForeground(java.awt.Color.WHITE);
+    jLabel2.setBounds(280, 90, 133, 20);
+    panelFondo.add(jLabel2);
+
+    jLabel3.setForeground(java.awt.Color.WHITE);
+    jLabel3.setBounds(500, 90, 82, 20);
+    panelFondo.add(jLabel3);
+    
+    // ComboBoxes
+    estilizarCombo(buscaTipoActividad);
+    buscaTipoActividad.setBounds(63, 115, 160, 34);
+    panelFondo.add(buscaTipoActividad);
+
+    estilizarCombo(buscarDiaSemana);
+    buscarDiaSemana.setBounds(270, 115, 160, 34);
+    panelFondo.add(buscarDiaSemana);
+
+    estilizarCombo(buscarMonitor);
+    buscarMonitor.setBounds(477, 115, 160, 34);
+    panelFondo.add(buscarMonitor);
+    
+    // Botón Buscar
+    estilizarBoton(botonBuscar, "Buscar Actividad", new java.awt.Color(0, 200, 160));
+    botonBuscar.setBounds(255, 185, 200, 55);
+    panelFondo.add(botonBuscar);
+    
+    // Botón Volver
+    botonVolver.setText("← Volver atrás");
+    botonVolver.setBounds(25, 330, 130, 35);
+    botonVolver.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12));
+    botonVolver.setForeground(java.awt.Color.WHITE);
+    botonVolver.setBackground(new java.awt.Color(180, 40, 40));
+    botonVolver.setFocusPainted(false);
+    botonVolver.setBorderPainted(false);
+    botonVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    botonVolver.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent e) {
+            botonVolver.setBackground(new java.awt.Color(220, 60, 60));
+        }
+        public void mouseExited(java.awt.event.MouseEvent e) {
+            botonVolver.setBackground(new java.awt.Color(180, 40, 40));
+        }
+    });
+    panelFondo.add(botonVolver);
+}
+    // Estilo de los botones
+    private void estilizarBoton(javax.swing.JButton btn, String texto, java.awt.Color color) {
+    btn.setText(texto);
+    btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 16));
+    btn.setForeground(java.awt.Color.WHITE);
+    btn.setBackground(color);
+    btn.setContentAreaFilled(false);
+    btn.setBorderPainted(false);
+    btn.setFocusPainted(false);
+    btn.setOpaque(false);
+    btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    btn.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
+        @Override
+        public void paint(java.awt.Graphics g, javax.swing.JComponent c) {
+            java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+            g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
+                                java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(btn.getBackground());
+            g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 20, 20);
+            g2.dispose();
+            super.paint(g, c);
+        }
+    });
+    btn.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseEntered(java.awt.event.MouseEvent e) {
+            btn.setBackground(color.darker());
+        }
+        public void mouseExited(java.awt.event.MouseEvent e) {
+            btn.setBackground(color);
+        }
+    });
+}
+// Estilo de los ComboBox
+private void estilizarCombo(javax.swing.JComboBox<String> combo) {
+    combo.setBackground(new java.awt.Color(30, 40, 65));
+    combo.setForeground(java.awt.Color.WHITE);
+    combo.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+    combo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 230, 180), 1));
+    combo.setRenderer(new javax.swing.DefaultListCellRenderer() {
+        @Override
+        public java.awt.Component getListCellRendererComponent(javax.swing.JList<?> list,
+                Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            setBackground(isSelected ? new java.awt.Color(0, 180, 140) : new java.awt.Color(30, 40, 65));
+            setForeground(java.awt.Color.WHITE);
+            return this;
+        }
+    });
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,7 +182,7 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
         buscarMonitor = new javax.swing.JComboBox<>();
         botonVolver = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Búsqueda de Actividades - JavaFit");
@@ -98,8 +219,8 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Monitor");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
-        jLabel4.setText("BÚSQUEDA DE ACTIVIDADES");
+        lblTitulo.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
+        lblTitulo.setText("BÚSQUEDA DE ACTIVIDADES");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,7 +249,7 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(85, 85, 85)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(263, 263, 263)
                                 .addComponent(botonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -142,7 +263,7 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -225,6 +346,6 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblTitulo;
     // End of variables declaration//GEN-END:variables
 }
