@@ -122,32 +122,10 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
     btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 16));
     btn.setForeground(java.awt.Color.WHITE);
     btn.setBackground(color);
-    btn.setContentAreaFilled(false);
-    btn.setBorderPainted(false);
     btn.setFocusPainted(false);
-    btn.setOpaque(false);
     btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    btn.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
-        @Override
-        public void paint(java.awt.Graphics g, javax.swing.JComponent c) {
-            java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
-            g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
-                                java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setColor(btn.getBackground());
-            g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 20, 20);
-            g2.dispose();
-            super.paint(g, c);
-        }
-    });
-    btn.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseEntered(java.awt.event.MouseEvent e) {
-            btn.setBackground(color.darker());
-        }
-        public void mouseExited(java.awt.event.MouseEvent e) {
-            btn.setBackground(color);
-        }
-    });
 }
+    
 // Estilo de los ComboBox
 private void estilizarCombo(javax.swing.JComboBox<String> combo) {
     combo.setBackground(new java.awt.Color(30, 40, 65));

@@ -69,7 +69,7 @@ public class VentanaMisReservas extends javax.swing.JFrame {
                 // Usamos misReservasActuales que es la lista que tienes declarada arriba
                 if (fila != -1 && misReservasActuales != null) {
                     Reserva seleccionada = misReservasActuales.get(fila);
-                    actualizarPanelDetalles(seleccionada.getActividad());
+                    actualizarPanelDetalles(seleccionada);
                 }
             // Margen texto
             txtDescripcion.setMargin(new java.awt.Insets(10, 10, 10, 10));
@@ -165,18 +165,34 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     private void actualizarPanelDetalles(Actividad_Deportiva act) {
+     private void actualizarPanelDetalles(Reserva reserva) {
     // 1. Descripción
-        if (act instanceof Actividad_Especial) {
+        Actividad_Deportiva act = reserva.getActividad();
+        
+        // Es especial o no y su precio
+        boolean esEspecial = act instanceof Actividad_Especial;
+        String precio = esEspecial ? reserva.getPrecio_total() + "€" : "Incluido";
+        
+        java.time.format.DateTimeFormatter formato = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaExactaStr = reserva.getFechaReserva().format(formato);
+        
+        // Montamos el texto que se va a ver en el cuadro
+        String texto = "Actividad: " + act.getTitulo() + "\n"
+            + "Monitor: " + act.getMonitor_asignado() + "\n"
+            + "Sala: " + act.getSala().getNombre() + "\n"
+            + "Aforo: " + act.getSala().getAforo_maximo() + " personas.\n"
+            + "Fecha exacta: " + fechaExactaStr + "\n" 
+            + "Horario: " + act.getHorario().getHora_inicio() + " - " + act.getHorario().getHora_final() + "\n"
+            + "¿Especial?: " + (esEspecial ? "Sí" : "No") + "\n"
+            + "Precio: " + precio;
+        // Si es una actividad especial, le ponemos la descripción delante
+        if (esEspecial) {
             Actividad_Especial especial = (Actividad_Especial) act;
-            txtDescripcion.setText(especial.getDescripcion());
-        } else {
-            String texto = "Actividad: " + act.getTitulo() + "\n"
-                + "Monitor: " + act.getMonitor_asignado() + "\n"
-                + "Sala: " + act.getSala().getNombre() + "\n"
-                + "Aforo: " + act.getSala().getAforo_maximo() + " personas.";
-                txtDescripcion.setText(texto);
+            texto = especial.getDescripcion() + "\n\n" + texto;
         }
+
+        txtDescripcion.setText(texto);
+        
 
     // 2. Imagen
     ImageIcon icono = act.getImagen();

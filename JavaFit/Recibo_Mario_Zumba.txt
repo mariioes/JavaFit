@@ -1,0 +1,21 @@
+=========================================
+         RECIBO DE RESERVA - JAVAFIT     
+=========================================
+Fecha de emisión: 24/05/2026 19:44:21
+-----------------------------------------
+DATOS DEL SOCIO:
+  Nombre: Mario
+  Correo: prueba@gmail.com
+  VIP: No
+-----------------------------------------
+DATOS DE LA ACTIVIDAD:
+  Actividad: Zumba
+  Sala:      Sala Fitness
+  Día:       Martes
+  Horario:   11:00 - 12:00
+-----------------------------------------
+Tipo de clase: ACTIVIDAD ESTÁNDAR
+Precio: INCLUIDO EN LA CUOTA MENSUAL
+=========================================
+    ¡Gracias por confiar en JavaFit!     
+=========================================

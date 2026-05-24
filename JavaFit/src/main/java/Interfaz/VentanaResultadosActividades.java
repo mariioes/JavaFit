@@ -112,6 +112,8 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JEditorPane();
         lblFoto2 = new javax.swing.JLabel();
+        spinnerFechaReserva = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -142,21 +144,32 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(txtDescripcion);
 
+        spinnerFechaReserva.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        spinnerFechaReserva.setModel(new javax.swing.SpinnerDateModel());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel1.setText("Fecha de la reserva:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonReservarActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(spinnerFechaReserva))
+                                .addGap(81, 81, 81))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(269, 269, 269)))
+                        .addComponent(botonReservarActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblFoto2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
@@ -168,19 +181,21 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(botonReservarActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblFoto2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                        .addComponent(lblFoto2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonReservarActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(78, 78, 78))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(spinnerFechaReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63))))
         );
 
         pack();
@@ -211,12 +226,35 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
 
         Actividad_Deportiva seleccionada = listaActividadesActual.get(fila);
         
+        // Obtenemos el valor del Spinner y lo pasamos a LocalDate
+        java.util.Date fechaSeleccionada = (java.util.Date) spinnerFechaReserva.getValue();
+        java.time.LocalDate fechaReserva = fechaSeleccionada.toInstant()
+                .atZone(java.time.ZoneId.systemDefault())
+                .toLocalDate();
+        
+        // Traducimos el número de día a texto (sin tildes, igual que en tu JComboBox original)
+        int numeroDia = fechaReserva.getDayOfWeek().getValue();
+        String[] diasEspanol = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
+        String diaElegidoStr = diasEspanol[numeroDia - 1]; 
+        
+        String diaActividad = seleccionada.getHorario().getDia();
+        
+        if (!diaElegidoStr.equalsIgnoreCase(diaActividad)) {
+            JOptionPane.showMessageDialog(this, 
+                "Error: Esta actividad se imparte los " + diaActividad + ".\nHas seleccionado un " + diaElegidoStr + " en el calendario.", 
+                "Fecha incorrecta", 
+                JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        
         // Llamada al método de reserva que añadimos al Gestor
-        String resultado = Gestor.realizarReserva(socioLogueado, seleccionada);
+        String resultado = Gestor.realizarReserva(socioLogueado, seleccionada, fechaReserva);
 
         switch (resultado) {
             case "EXITO":
-                JOptionPane.showMessageDialog(this, "¡Reserva confirmada!");
+                java.time.format.DateTimeFormatter formatoEspanol = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String fechaEspañol = fechaReserva.format(formatoEspanol);
+                JOptionPane.showMessageDialog(this, "¡Reserva confirmada para el " + fechaEspañol + "!");
                 break;
             case "DUPLICADO":
                 JOptionPane.showMessageDialog(this, "Ya tienes una reserva para esta actividad.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -271,10 +309,12 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
     private javax.swing.JTable TablaResultados;
     private javax.swing.JButton botonReservarActividad;
     private javax.swing.JButton botonVolver;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblFoto2;
+    private javax.swing.JSpinner spinnerFechaReserva;
     private javax.swing.JEditorPane txtDescripcion;
     // End of variables declaration//GEN-END:variables
 }

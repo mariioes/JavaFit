@@ -81,37 +81,15 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
     panelFondo.add(botonCerrarSesion);
 }
     // Estilo de los botones
-    private void estilizarBoton(javax.swing.JButton btn, String texto, Color color) {
-        btn.setText(texto);
-        btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 16));
-        btn.setForeground(Color.WHITE);
-        btn.setBackground(color);
-        btn.setContentAreaFilled(false);
-        btn.setBorderPainted(false);
-        btn.setFocusPainted(false);
-        btn.setOpaque(false);
-        btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
-        @Override
-        public void paint(java.awt.Graphics g, javax.swing.JComponent c) {
-            java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
-            g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
-                                java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setColor(btn.getBackground());
-            g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 20, 20);
-            g2.dispose();
-            super.paint(g, c);
-        }
-    });
-    btn.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseEntered(java.awt.event.MouseEvent e) {
-            btn.setBackground(color.darker());
-        }
-        public void mouseExited(java.awt.event.MouseEvent e) {
-            btn.setBackground(color);
-        }
-    });
+    private void estilizarBoton(javax.swing.JButton btn, String texto, java.awt.Color color) {
+    btn.setText(texto);
+    btn.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 16));
+    btn.setForeground(java.awt.Color.WHITE);
+    btn.setBackground(color);
+    btn.setFocusPainted(false);
+    btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

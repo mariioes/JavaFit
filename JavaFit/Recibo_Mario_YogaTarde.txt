@@ -1,0 +1,21 @@
+=========================================
+         RECIBO DE RESERVA - JAVAFIT     
+=========================================
+Fecha de emisión: 24/05/2026 19:50:43
+-----------------------------------------
+DATOS DEL SOCIO:
+  Nombre: Mario
+  Correo: prueba@gmail.com
+  VIP: No
+-----------------------------------------
+DATOS DE LA ACTIVIDAD:
+  Actividad: Yoga Tarde
+  Sala:      Sala Zen
+  Día:       Jueves
+  Horario:   18:00 - 19:30
+-----------------------------------------
+Tipo de clase: ACTIVIDAD ESTÁNDAR
+Precio: INCLUIDO EN LA CUOTA MENSUAL
+=========================================
+    ¡Gracias por confiar en JavaFit!     
+=========================================

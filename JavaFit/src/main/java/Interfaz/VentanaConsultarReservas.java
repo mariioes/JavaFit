@@ -79,6 +79,8 @@ public class VentanaConsultarReservas extends javax.swing.JFrame {
         javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tablaReservas.getModel();
         modelo.setRowCount(0);
         
+        // Vaciamos la tabla antes de rellenarla para evitar duplicados
+        modelo.setRowCount(0);
         this.listaReservasActual = reservasAMostrar;
         
         if (reservasAMostrar == null || reservasAMostrar.isEmpty()) {
@@ -86,23 +88,24 @@ public class VentanaConsultarReservas extends javax.swing.JFrame {
         }
         
         for (Logica.Reserva reserva : listaReservasActual) {
-        // Calculamos aforo restante
+        
 
             boolean esEspecial = reserva.getActividad() instanceof Logica.Actividad_Especial;
             String precio = esEspecial ? ((Logica.Reserva) reserva).getPrecio_total() + "€" : "Incluido";
-            String horario = reserva.getActividad().getHorario().getDia() + " " + reserva.getActividad().getHorario().getHora_inicio() + "-" + reserva.getActividad().getHorario().getHora_final();
+            String diaSemana = reserva.getActividad().getHorario().getDia();
+            String horario = reserva.getActividad().getHorario().getHora_inicio() + " - " + reserva.getActividad().getHorario().getHora_final();
 
             modelo.addRow(new Object[]{
-                reserva.getSocio().getNombre(),
-                reserva.getActividad().getTitulo(),
-                reserva.getActividad().getHorario().getHora_inicio(),
-                reserva.getPrecio_total(),
-                reserva.getActividad().getTipo_Actividad().toString(),
-                reserva.getActividad().getSala().getNombre(),
-                reserva.getActividad().getMonitor_asignado(),horario,
-                esEspecial ? "Sí" : "No",
-                precio
-            });
+                reserva.getSocio().getNombre(),              
+                reserva.getActividad().getTitulo(),                      
+                diaSemana,                                               
+                horario,                                              
+                reserva.getActividad().getTipo_Actividad().toString(),       
+                reserva.getActividad().getSala().getNombre(),             
+                reserva.getActividad().getMonitor_asignado(),            
+                esEspecial ? "Sí" : "No",                                  
+                precio                                            
+        });
         }
     }
     /**
@@ -113,15 +116,20 @@ public class VentanaConsultarReservas extends javax.swing.JFrame {
 
         boolean esEspecial = reserva.getActividad() instanceof Logica.Actividad_Especial;
         String precio = esEspecial ? ((Logica.Reserva) reserva).getPrecio_total() + "€" : "Incluido";
-
+        
+        java.time.format.DateTimeFormatter formato = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaExactaStr = reserva.getFechaReserva().format(formato);
+        
         String texto = "Título: " + reserva.getActividad().getTitulo() + "\n"
             + "Tipo: " + reserva.getActividad().getTipo_Actividad().toString() + "\n"
             + "Sala: " + reserva.getActividad().getSala().getNombre() + "\n"
             + "Monitor: " + reserva.getActividad().getMonitor_asignado() + "\n"
             + "Día: " + reserva.getActividad().getHorario().getDia() + "\n"
+            + "Fecha Exacta: " + fechaExactaStr + "\n"
             + "Horario: " + reserva.getActividad().getHorario().getHora_inicio() + " - " + reserva.getActividad().getHorario().getHora_final() + "\n"
             + "¿Especial?: " + (esEspecial ? "Sí" : "No") + "\n"
             + "Precio: " + precio;
+            
 
         jEditorPane1.setText(texto);
     }
@@ -144,18 +152,20 @@ public class VentanaConsultarReservas extends javax.swing.JFrame {
         botonMonitor = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         checkVip = new javax.swing.JCheckBox();
+        spinnerFecha = new javax.swing.JSpinner();
+        checkFiltrarFecha = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tablaReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Socio", "Nombre actividad", "Fecha", "Precio", "Tipo", "Sala", "Monitor"
+                "Socio", "Actividad", "Día", "Horario", "Tipo", "Sala", "Monitor", "¿Especial?", "Precio"
             }
         ));
         jScrollPane1.setViewportView(tablaReservas);
@@ -187,42 +197,55 @@ public class VentanaConsultarReservas extends javax.swing.JFrame {
 
         checkVip.setText("Solo socios VIP");
 
+        spinnerFecha.setModel(new javax.swing.SpinnerDateModel());
+
+        checkFiltrarFecha.setText("Filtrar por fecha");
+        checkFiltrarFecha.addActionListener(this::checkFiltrarFechaActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel3))
-                            .addComponent(nombreActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonTipoActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(boton_Dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(botonMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(botonBuscar))
-                            .addComponent(jLabel4)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addComponent(jLabel3))
+                                .addComponent(nombreActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(16, 16, 16)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(botonTipoActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(boton_Dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(botonMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(37, 37, 37)
+                                    .addComponent(botonBuscar))
+                                .addComponent(jLabel4)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
                             .addComponent(jButton1)
                             .addGap(291, 291, 291)
-                            .addComponent(checkVip))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(checkVip)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(spinnerFecha)
+                            .addComponent(checkFiltrarFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -232,6 +255,10 @@ public class VentanaConsultarReservas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68)
+                        .addComponent(spinnerFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(checkFiltrarFecha)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -286,13 +313,36 @@ public class VentanaConsultarReservas extends javax.swing.JFrame {
         String monitor = botonMonitor.getSelectedItem().toString();
         final boolean soloVip = checkVip.isSelected();
         
+        java.time.LocalDate fechaLimite = null;
+        
+        // Comprobamos si el administrador ha marcado la casilla de filtrar por fecha
+        if (checkFiltrarFecha.isSelected()) {
+            java.util.Date fechaSeleccionada = (java.util.Date) spinnerFecha.getValue();
+        
+        fechaLimite = fechaSeleccionada.toInstant()
+                .atZone(java.time.ZoneId.systemDefault())
+                .toLocalDate();
+        }
+        final java.time.LocalDate fechaFiltroDefinitiva = fechaLimite;
+        
+        java.util.List<String> ordenDias = java.util.Arrays.asList(
+        "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"
+        );
+        
         ArrayList<Logica.Reserva> reservasFiltradas = Logica.Gestor.getReservas().stream()
                 .filter(r -> nombre.isEmpty() || r.getActividad().getTitulo().toLowerCase().contains(nombre))
                 .filter(r -> tipo.equals("Cualquiera") || r.getActividad().getTipo_Actividad().toString().equals(tipo))
                 .filter(r -> dia.equals("Cualquiera") || r.getActividad().getHorario().getDia().equals(dia))
                 .filter(r -> monitor.equals("Cualquiera") || r.getActividad().getMonitor_asignado().equals(monitor))
                 .filter(r -> !soloVip || r.getSocio().esVip())
-        .collect(Collectors.toCollection(ArrayList:: new));
+                
+                // Si marca o no la casilla
+                .filter(r -> fechaFiltroDefinitiva == null || 
+                         r.getFechaReserva().isEqual(fechaFiltroDefinitiva) || 
+                         r.getFechaReserva().isAfter(fechaFiltroDefinitiva))
+                
+            .sorted(java.util.Comparator.comparing(Logica.Reserva::getFechaReserva))
+            .collect(Collectors.toCollection(ArrayList:: new));
         
         cargarReservas(reservasFiltradas);
         
@@ -306,12 +356,17 @@ public class VentanaConsultarReservas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_boton_DiaActionPerformed
 
+    private void checkFiltrarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkFiltrarFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkFiltrarFechaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
     private javax.swing.JComboBox<String> botonMonitor;
     private javax.swing.JComboBox<String> botonTipoActividad;
     private javax.swing.JComboBox<String> boton_Dia;
+    private javax.swing.JCheckBox checkFiltrarFecha;
     private javax.swing.JCheckBox checkVip;
     private javax.swing.JButton jButton1;
     private javax.swing.JEditorPane jEditorPane1;
@@ -322,6 +377,7 @@ public class VentanaConsultarReservas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField nombreActividad;
+    private javax.swing.JSpinner spinnerFecha;
     private javax.swing.JTable tablaReservas;
     // End of variables declaration//GEN-END:variables
 }

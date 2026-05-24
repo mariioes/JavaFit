@@ -197,7 +197,7 @@ public class Gestor {
      * @param actividad Actividad que se quiere reservar.
      * @return "DUPLICADO" si ya tiene reserva, "LLENO" si no hay plazas, "EXITO" si se realiza correctamente.
      */
-    public static String realizarReserva(Socio socio, Actividad_Deportiva actividad) {
+    public static String realizarReserva(Socio socio, Actividad_Deportiva actividad, java.time.LocalDate fecha) {
         for (Reserva r : reservas) {
             if (r.getSocio().getCorreo().equals(socio.getCorreo()) && 
                 r.getActividad().getTitulo().equals(actividad.getTitulo())) {
@@ -213,7 +213,7 @@ public class Gestor {
             return "LLENO";
         }
 
-        Reserva nueva = new Reserva(socio, actividad);
+        Reserva nueva = new Reserva(socio, actividad, fecha);
         reservas.add(nueva);
         
         guardarReservas();

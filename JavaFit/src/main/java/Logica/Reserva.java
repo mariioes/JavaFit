@@ -1,6 +1,7 @@
 package Logica;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * Clase que representa una reserva dentro del sistema JavaFit.
@@ -12,17 +13,17 @@ public class Reserva implements Serializable {
     private Actividad_Deportiva actividad;
     private double precio_total;
     private double precio_pagado;
+    private LocalDate fechaReserva;
 
     /**
      * Constructor de Reserva.
      * @param socio Instancia de Socio con todos sus atributos.
      * @param actividad Instancia de Actividad_Deportiva con todos sus atributos.
      */
-    public Reserva(Socio socio, Actividad_Deportiva actividad) {
+    public Reserva(Socio socio, Actividad_Deportiva actividad, LocalDate fechaReserva) {    
         this.socio = socio;
         this.actividad = actividad;
-        this.precio_total = precio_total;
-        this.precio_pagado = precio_pagado;
+        this.fechaReserva = fechaReserva;
     }
 
     /**
@@ -65,6 +66,11 @@ public class Reserva implements Serializable {
         this.socio = socio;
     }
 
+    public LocalDate getFechaReserva() {
+        return fechaReserva;
+    }
+    
+
     /**
      * Establece una nueva actividad para la reserva.
      * @param actividad Nueva actividad.
@@ -95,5 +101,9 @@ public class Reserva implements Serializable {
      */
     public boolean esReservaValida(Reserva reserva) {
         return true;
+    }
+
+    public void setFechaReserva(LocalDate fechaReserva) {
+        this.fechaReserva = fechaReserva;
     }
 }
