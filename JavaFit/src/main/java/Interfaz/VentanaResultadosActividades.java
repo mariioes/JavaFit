@@ -36,13 +36,23 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
      */
     public VentanaResultadosActividades(javax.swing.JFrame menu, Socio socio) {
         initComponents();
+        jScrollPane1.getViewport().setBackground(new java.awt.Color(15, 20, 40));
+        jScrollPane2.getViewport().setBackground(new java.awt.Color(15, 20, 40));
+        getContentPane().setBackground(new java.awt.Color(15, 20, 40));
+        TablaResultados.getTableHeader().setDefaultRenderer(new javax.swing.table.DefaultTableCellRenderer() {
+    {
+        setBackground(new java.awt.Color(0, 150, 120));
+        setForeground(java.awt.Color.WHITE);
+        setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    }
+});
+        
         this.ventanaMenu = menu;
         this.socioLogueado = socio; // Guardamos el socio que nos pasan
         this.setSize(900, 500);
         this.setLocationRelativeTo(null); // Centra la ventana
         this.setResizable(false);        // Bloquea el tamaño
         this.setTitle("JAVAFIT - Resultados de Búsqueda");
-        this.getContentPane().setBackground(Color.white);
         Logica.HerramientasVisuales.ponerIconoJavaFit(this);
         
         // AÑADIMOS EL EVENTO DE CLIC A LA TABLA
@@ -116,19 +126,25 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(15, 20, 40));
 
-        botonVolver.setBackground(new java.awt.Color(255, 204, 153));
+        botonVolver.setBackground(new java.awt.Color(180, 40, 40));
+        botonVolver.setForeground(new java.awt.Color(255, 255, 255));
         botonVolver.setText("Volver atrás");
         botonVolver.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         botonVolver.addActionListener(this::botonVolverActionPerformed);
 
-        botonReservarActividad.setBackground(new java.awt.Color(0, 255, 51));
+        botonReservarActividad.setBackground(new java.awt.Color(0, 200, 160));
         botonReservarActividad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         botonReservarActividad.setForeground(new java.awt.Color(255, 255, 255));
         botonReservarActividad.setText("Reservar Actividad");
         botonReservarActividad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         botonReservarActividad.addActionListener(this::botonReservarActividadActionPerformed);
 
+        jScrollPane1.setBackground(new java.awt.Color(15, 20, 40));
+
+        TablaResultados.setBackground(new java.awt.Color(30, 40, 65));
+        TablaResultados.setForeground(new java.awt.Color(255, 255, 255));
         TablaResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -140,14 +156,24 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
                 "Actividad", "Tipo", "Sala (Aforo)", "Día", "Horario ", "Monitor", "Precio"
             }
         ));
+        TablaResultados.setGridColor(new java.awt.Color(0, 230, 180));
+        TablaResultados.setSelectionBackground(new java.awt.Color(0, 180, 140));
         jScrollPane1.setViewportView(TablaResultados);
 
+        jScrollPane2.setBackground(new java.awt.Color(15, 20, 40));
+
+        txtDescripcion.setBackground(new java.awt.Color(30, 40, 65));
+        txtDescripcion.setForeground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(txtDescripcion);
+
+        lblFoto2.setBackground(new java.awt.Color(15, 20, 40));
 
         spinnerFechaReserva.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         spinnerFechaReserva.setModel(new javax.swing.SpinnerDateModel());
 
+        jLabel1.setBackground(new java.awt.Color(15, 20, 40));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Fecha de la reserva:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
