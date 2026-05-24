@@ -8,7 +8,7 @@ public class HerramientasVisuales {
     
     public static void ponerIconoJavaFit(JFrame ventana) {
         try {
-            java.net.URL url = ventana.getClass().getResource("/imagenes/LogoJavaFit.png");
+            java.net.URL url = ventana.getClass().getResource("/imagenes/LogoFavicon.png");
             if (url != null) {
                 Image icono = new ImageIcon(url).getImage();
                 ventana.setIconImage(icono);

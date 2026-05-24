@@ -36,6 +36,7 @@ public class VentanaConsultarSocios extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("JAVAFIT - Consultar Socios");
+        Logica.HerramientasVisuales.ponerIconoJavaFit(this);
         this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         
         

@@ -43,6 +43,7 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         this.setResizable(false);        // Bloquea el tamaño
         this.setTitle("JAVAFIT - Resultados de Búsqueda");
         this.getContentPane().setBackground(Color.white);
+        Logica.HerramientasVisuales.ponerIconoJavaFit(this);
         
         // AÑADIMOS EL EVENTO DE CLIC A LA TABLA
         TablaResultados.addMouseListener(new java.awt.event.MouseAdapter() {

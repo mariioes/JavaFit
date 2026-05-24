@@ -31,6 +31,7 @@ public class VentanaConsultarReservas extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("JAVAFIT - Consultar Reservas");
+        Logica.HerramientasVisuales.ponerIconoJavaFit(this);
         this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
         @Override

@@ -22,6 +22,7 @@ public class VentanaMenuAdmin extends javax.swing.JFrame {
         this.setSize(710, 415);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        Logica.HerramientasVisuales.ponerIconoJavaFit(this);
         
         // Fondo degradado
     javax.swing.JPanel panelFondo = new javax.swing.JPanel() {

@@ -33,6 +33,7 @@ public class VentanaBuscarActividad extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+        Logica.HerramientasVisuales.ponerIconoJavaFit(this);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent e) {

@@ -27,6 +27,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         Logica.HerramientasVisuales.ponerIconoJavaFit(this); // Llamamos a la clase Herramientas Visuales para poner icono.
         contenedorFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout()); // Ponemos AbsoluteLayout para poder colocar los componentes.
     
+        
         this.setContentPane(contenedorFondo);
         initComponents();
         

@@ -22,6 +22,7 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
         this.setSize(700, 420);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        Logica.HerramientasVisuales.ponerIconoJavaFit(this);
         
         // Fondo degradado
         javax.swing.JPanel panelFondo = new javax.swing.JPanel() {

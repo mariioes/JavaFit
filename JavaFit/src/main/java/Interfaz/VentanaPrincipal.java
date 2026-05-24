@@ -1,6 +1,7 @@
 package Interfaz;
 
 import java.awt.Color;
+import javax.swing.BorderFactory;
 
 /**
  * Ventana principal de la aplicación JavaFit.
@@ -36,16 +37,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null); 
         
         botonIniciarSesion.setBackground(new java.awt.Color(52, 152, 219)); // Personalizamos los botones.
-        botonIniciarSesion.setForeground(java.awt.Color.WHITE);
+        botonIniciarSesion.setForeground(java.awt.Color.blue);
         botonIniciarSesion.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
         botonIniciarSesion.setToolTipText("Pulse para iniciar sesión con su cuenta de Socio");
+        botonIniciarSesion.setFocusPainted(false);
+        botonIniciarSesion.setBorderPainted(false);
+        botonIniciarSesion.setContentAreaFilled(false);
         
         botonRegistrarse.setBackground(Color.GREEN);
-        botonRegistrarse.setForeground(java.awt.Color.WHITE);
+        botonRegistrarse.setForeground(java.awt.Color.green);
         botonRegistrarse.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
         botonRegistrarse.setToolTipText("Pulse para darse de alta en JavaFit");
+        botonRegistrarse.setFocusPainted(false);
+        botonRegistrarse.setBorderPainted(false);
+        botonRegistrarse.setContentAreaFilled(false);
         
         botonIniciarAdmin.setToolTipText("Reservado para administradores");
+        botonIniciarAdmin.setBackground(new Color(30,30,30));
+        botonIniciarAdmin.setForeground(Color.WHITE);
+        botonIniciarAdmin.setBorder(BorderFactory.createLineBorder(new Color(0,255,120)
+));
         
     }
 
@@ -58,7 +69,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         botonIniciarSesion = new javax.swing.JButton();
         botonRegistrarse = new javax.swing.JButton();
         botonIniciarAdmin = new javax.swing.JButton();
@@ -67,21 +77,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setTitle("JavaFit - Menú de Inicio");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setBackground(new java.awt.Color(204, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("JavaFit");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 60, 20));
-
+        botonIniciarSesion.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        botonIniciarSesion.setForeground(new java.awt.Color(51, 153, 255));
         botonIniciarSesion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonIniciarSesion.setLabel("Iniciar Sesión");
         botonIniciarSesion.addActionListener(this::botonIniciarSesionActionPerformed);
         getContentPane().add(botonIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 190, 40));
 
         botonRegistrarse.setBackground(new java.awt.Color(153, 255, 153));
+        botonRegistrarse.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        botonRegistrarse.setForeground(new java.awt.Color(102, 255, 102));
         botonRegistrarse.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         botonRegistrarse.setLabel("Registrarse");
         botonRegistrarse.addActionListener(this::botonRegistrarseActionPerformed);
-        getContentPane().add(botonRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 190, 40));
+        getContentPane().add(botonRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 190, 40));
 
         botonIniciarAdmin.setText("Iniciar sesión como Administrador");
         botonIniciarAdmin.addActionListener(this::botonIniciarAdminActionPerformed);
@@ -148,7 +157,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botonIniciarAdmin;
     private javax.swing.JButton botonIniciarSesion;
     private javax.swing.JButton botonRegistrarse;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
 
@@ -176,6 +184,8 @@ class PanelFondo extends javax.swing.JPanel {
         super.paintComponent(g);
         if (imagen != null) {
             g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            g.setColor(new Color(0, 0, 0, 15));
+            g.fillRect(0, 0, getWidth(), getHeight());
         }
     }
 }

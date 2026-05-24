@@ -33,6 +33,7 @@ public class VentanaDatosUsuario extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.white);
+        Logica.HerramientasVisuales.ponerIconoJavaFit(this);
         
         // 2. Rellenamos los datos en pantalla
         registroNombre.setText(socioActual.getNombre());

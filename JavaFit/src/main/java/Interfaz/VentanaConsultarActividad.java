@@ -34,6 +34,7 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         this.setResizable(false);
         this.setTitle("JAVAFIT - Consultar Actividades");
         this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+        Logica.HerramientasVisuales.ponerIconoJavaFit(this);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
         @Override
         public void windowClosed(java.awt.event.WindowEvent e) {

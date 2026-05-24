@@ -45,6 +45,7 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         this.setResizable(false);
         this.setTitle("JavaFit - Mis Reservas");
         this.getContentPane().setBackground(Color.white);
+        Logica.HerramientasVisuales.ponerIconoJavaFit(this);
         
         // Al abrir la ventana, cargamos los datos en la tabla inmediatamente
         actualizarTabla();
