@@ -30,6 +30,16 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         this.ventanaAdmin = ventanaAdmin;
         this.adminActual = admin;
         initComponents();
+        jScrollPane1.getViewport().setBackground(new java.awt.Color(15, 20, 40));
+        jScrollPane2.getViewport().setBackground(new java.awt.Color(15, 20, 40));
+        getContentPane().setBackground(new java.awt.Color(15, 20, 40));
+        tablaActividades.getTableHeader().setDefaultRenderer(new javax.swing.table.DefaultTableCellRenderer() {
+    {
+        setBackground(new java.awt.Color(0, 150, 120));
+        setForeground(java.awt.Color.WHITE);
+        setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    }
+});
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("JAVAFIT - Consultar Actividades");
@@ -187,6 +197,8 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         jButton1.setText("Volver atrás");
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
+        jEditorPane1.setBackground(new java.awt.Color(30, 40, 65));
+        jEditorPane1.setForeground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(jEditorPane1);
 
         botonEliminarActividad.setText("Eliminar Actividad");
@@ -198,6 +210,8 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
         botonModificarActividad.setText("Modificar Actividad");
         botonModificarActividad.addActionListener(this::botonModificarActividadActionPerformed);
 
+        tablaActividades.setBackground(new java.awt.Color(30, 40, 65));
+        tablaActividades.setForeground(new java.awt.Color(255, 255, 255));
         tablaActividades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -213,25 +227,30 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(jScrollPane1);
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombre:");
 
         botonNombre.addActionListener(this::botonNombreActionPerformed);
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Tipo de Actividad:");
 
         botonTipoActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "YOGA", "MUSCULACION", "NATACION", "CARDIO" }));
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Día:");
 
         botonDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo" }));
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Monitor:");
 
-        botonMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Monitor 1", "Monitor 2", "Monitor 3", "Monitor 4" }));
+        botonMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Iago Palazón", "Lorena Menéndez", "Paco Díaz", "Natalia Romareda" }));
 
         botonBuscar.setText("Buscar");
         botonBuscar.addActionListener(this::botonBuscarActionPerformed);
 
+        checkActividadEspecial.setForeground(new java.awt.Color(255, 255, 255));
         checkActividadEspecial.setText("Solo Actividades Especiales");
         checkActividadEspecial.addActionListener(this::checkActividadEspecialActionPerformed);
 

@@ -40,11 +40,22 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         this.ventanaMenu = menu;
         this.socioLogueado = socio;
         initComponents();
+
+        jScrollPane1.getViewport().setBackground(new java.awt.Color(15, 20, 40));
+        jScrollPane2.getViewport().setBackground(new java.awt.Color(15, 20, 40));
+        getContentPane().setBackground(new java.awt.Color(15, 20, 40));
+        tablaMisReservas.getTableHeader().setDefaultRenderer(new javax.swing.table.DefaultTableCellRenderer() {
+    {
+        setBackground(new java.awt.Color(0, 150, 120));
+        setForeground(java.awt.Color.WHITE);
+        setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    }
+});
         
         this.setLocationRelativeTo(null); 
         this.setResizable(false);
         this.setTitle("JavaFit - Mis Reservas");
-        this.getContentPane().setBackground(Color.white);
+
         Logica.HerramientasVisuales.ponerIconoJavaFit(this);
         
         // Al abrir la ventana, cargamos los datos en la tabla inmediatamente
@@ -94,7 +105,10 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         lblFotos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(15, 20, 40));
 
+        tablaMisReservas.setBackground(new java.awt.Color(30, 40, 65));
+        tablaMisReservas.setForeground(new java.awt.Color(255, 255, 255));
         tablaMisReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -120,7 +134,9 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         botonCancelarReserva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         botonCancelarReserva.addActionListener(this::botonCancelarReservaActionPerformed);
 
+        txtDescripcion.setBackground(new java.awt.Color(30, 40, 65));
         txtDescripcion.setColumns(20);
+        txtDescripcion.setForeground(new java.awt.Color(255, 255, 255));
         txtDescripcion.setRows(5);
         jScrollPane2.setViewportView(txtDescripcion);
 

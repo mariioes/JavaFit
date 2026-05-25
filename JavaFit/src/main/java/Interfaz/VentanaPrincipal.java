@@ -32,25 +32,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // Print para confirmar que funcionó.
         System.out.println("Carga inicial finalizada. Socios en memoria: " + Logica.Gestor.getSocios().size());
     
-        // 5. Centramos y damos tamaño
         this.setSize(710, 415);
         this.setLocationRelativeTo(null); 
         
         botonIniciarSesion.setBackground(new java.awt.Color(52, 152, 219)); // Personalizamos los botones.
-        botonIniciarSesion.setForeground(java.awt.Color.blue);
+        botonIniciarSesion.setForeground(java.awt.Color.white);
         botonIniciarSesion.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
         botonIniciarSesion.setToolTipText("Pulse para iniciar sesión con su cuenta de Socio");
         botonIniciarSesion.setFocusPainted(false);
         botonIniciarSesion.setBorderPainted(false);
-        botonIniciarSesion.setContentAreaFilled(false);
         
         botonRegistrarse.setBackground(Color.GREEN);
-        botonRegistrarse.setForeground(java.awt.Color.green);
+        botonRegistrarse.setForeground(java.awt.Color.white);
         botonRegistrarse.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
         botonRegistrarse.setToolTipText("Pulse para darse de alta en JavaFit");
         botonRegistrarse.setFocusPainted(false);
         botonRegistrarse.setBorderPainted(false);
-        botonRegistrarse.setContentAreaFilled(false);
         
         botonIniciarAdmin.setToolTipText("Reservado para administradores");
         botonIniciarAdmin.setBackground(new Color(30,30,30));

@@ -186,7 +186,7 @@ private void estilizarCombo(javax.swing.JComboBox<String> combo) {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Día de la semana");
 
-        buscarMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Monitor 1", "Monitor 2", "Monitor 3", "Monitor 4" }));
+        buscarMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Iago Palazón", "Lorena Menéndez", "Paco Díaz", "Natalia Romareda" }));
         buscarMonitor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         buscarMonitor.addActionListener(this::buscarMonitorActionPerformed);
 

@@ -1,0 +1,21 @@
+=========================================
+         RECIBO DE RESERVA - JAVAFIT     
+=========================================
+Fecha de emisión: 25/05/2026 13:44:42
+-----------------------------------------
+DATOS DEL SOCIO:
+  Nombre: Sergio Gutiérrez
+  Correo: sergio@gmail.com
+  VIP: Si
+-----------------------------------------
+DATOS DE LA ACTIVIDAD:
+  Actividad: Aquagym
+  Sala:      Sala Fitness
+  Día:       Viernes
+  Horario:   13:00 - 14:15
+-----------------------------------------
+Tipo de clase: ACTIVIDAD ESTÁNDAR
+Precio: INCLUIDO EN LA CUOTA MENSUAL
+=========================================
+    ¡Gracias por confiar en JavaFit!     
+=========================================

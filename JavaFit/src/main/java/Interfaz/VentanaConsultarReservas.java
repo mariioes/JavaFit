@@ -28,6 +28,16 @@ public class VentanaConsultarReservas extends javax.swing.JFrame {
         this.ventanaAdmin = ventanaAdmin;
         this.adminActual = admin;
         initComponents();
+        jScrollPane1.getViewport().setBackground(new java.awt.Color(15, 20, 40));
+        jScrollPane2.getViewport().setBackground(new java.awt.Color(15, 20, 40));
+        getContentPane().setBackground(new java.awt.Color(15, 20, 40));
+        tablaReservas.getTableHeader().setDefaultRenderer(new javax.swing.table.DefaultTableCellRenderer() {
+    {
+        setBackground(new java.awt.Color(0, 150, 120));
+        setForeground(java.awt.Color.WHITE);
+        setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    }
+});
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("JAVAFIT - Consultar Reservas");
@@ -157,6 +167,8 @@ public class VentanaConsultarReservas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tablaReservas.setBackground(new java.awt.Color(30, 40, 65));
+        tablaReservas.setForeground(new java.awt.Color(255, 255, 255));
         tablaReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -173,6 +185,8 @@ public class VentanaConsultarReservas extends javax.swing.JFrame {
         jButton1.setText("Volver atrás");
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
+        jEditorPane1.setBackground(new java.awt.Color(30, 40, 65));
+        jEditorPane1.setForeground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(jEditorPane1);
 
         nombreActividad.addActionListener(this::nombreActividadActionPerformed);
@@ -185,20 +199,26 @@ public class VentanaConsultarReservas extends javax.swing.JFrame {
         botonBuscar.setText("Buscar");
         botonBuscar.addActionListener(this::botonBuscarActionPerformed);
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Tipo de Actividad:");
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Dia:");
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombre:");
 
         botonMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cualquiera", "Monitor 1", "Monitor 2", "Monitor 3", "Monitor 4" }));
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Monitor:");
 
+        checkVip.setForeground(new java.awt.Color(255, 255, 255));
         checkVip.setText("Solo socios VIP");
 
         spinnerFecha.setModel(new javax.swing.SpinnerDateModel());
 
+        checkFiltrarFecha.setForeground(new java.awt.Color(255, 255, 255));
         checkFiltrarFecha.setText("Filtrar por fecha");
         checkFiltrarFecha.addActionListener(this::checkFiltrarFechaActionPerformed);
 

@@ -33,6 +33,16 @@ public class VentanaConsultarSocios extends javax.swing.JFrame {
         this.adminActual = admin;
         this.ventanaAdmin = ventanaAdmin;
         initComponents();
+        jScrollPane1.getViewport().setBackground(new java.awt.Color(15, 20, 40));
+        jScrollPane2.getViewport().setBackground(new java.awt.Color(15, 20, 40));
+        getContentPane().setBackground(new java.awt.Color(15, 20, 40));
+        tablaSocios.getTableHeader().setDefaultRenderer(new javax.swing.table.DefaultTableCellRenderer() {
+    {
+        setBackground(new java.awt.Color(0, 150, 120));
+        setForeground(java.awt.Color.WHITE);
+        setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    }
+});
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("JAVAFIT - Consultar Socios");
@@ -125,11 +135,15 @@ public class VentanaConsultarSocios extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jEditorPane1.setBackground(new java.awt.Color(30, 40, 65));
+        jEditorPane1.setForeground(new java.awt.Color(255, 255, 255));
         jScrollPane3.setViewportView(jEditorPane1);
 
         jButton1.setText("Volver atrás");
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
+        tablaSocios.setBackground(new java.awt.Color(30, 40, 65));
+        tablaSocios.setForeground(new java.awt.Color(255, 255, 255));
         tablaSocios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -145,12 +159,15 @@ public class VentanaConsultarSocios extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(jScrollPane1);
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nombre:");
 
         txtCorreo.addActionListener(this::txtCorreoActionPerformed);
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Correo:");
 
+        checkVip.setForeground(new java.awt.Color(255, 255, 255));
         checkVip.setText("Solo socios VIP");
         checkVip.addActionListener(this::checkVipActionPerformed);
 
