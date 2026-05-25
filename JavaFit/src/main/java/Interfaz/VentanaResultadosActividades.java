@@ -6,6 +6,7 @@ import Logica.Socio;
 import Logica.Gestor;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -36,6 +37,7 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
      */
     public VentanaResultadosActividades(javax.swing.JFrame menu, Socio socio) {
         initComponents();
+        spinnerFechaReserva.setValue(new Date());
         jScrollPane1.getViewport().setBackground(new java.awt.Color(15, 20, 40));
         jScrollPane2.getViewport().setBackground(new java.awt.Color(15, 20, 40));
         getContentPane().setBackground(new java.awt.Color(15, 20, 40));
@@ -167,7 +169,9 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         lblFoto2.setBackground(new java.awt.Color(15, 20, 40));
 
         spinnerFechaReserva.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        spinnerFechaReserva.setModel(new javax.swing.SpinnerDateModel());
+        spinnerFechaReserva.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(1779813840000L), null, null, java.util.Calendar.DAY_OF_YEAR));
+        spinnerFechaReserva.setToolTipText("Seleccione el día de la actividad");
+        spinnerFechaReserva.setEditor(new javax.swing.JSpinner.DateEditor(spinnerFechaReserva, "dd/MM/yyyy"));
 
         jLabel1.setBackground(new java.awt.Color(15, 20, 40));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -263,6 +267,12 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         
         String diaActividad = seleccionada.getHorario().getDia();
         
+        Date fechaHoy = new Date(); 
+        if (fechaSeleccionada.before(fechaHoy)) {
+            JOptionPane.showMessageDialog(this, "Error: No puedes reservar una fecha pasada.", "Fecha inválida", JOptionPane.ERROR_MESSAGE);
+        } else {
+            System.out.println("Fecha válida, procesando..."); }
+        
         if (!diaElegidoStr.equalsIgnoreCase(diaActividad)) {
             JOptionPane.showMessageDialog(this, 
                 "Error: Esta actividad se imparte los " + diaActividad + ".\nHas seleccionado un " + diaElegidoStr + " en el calendario.", 
@@ -270,7 +280,7 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
                 JOptionPane.ERROR_MESSAGE);
             return; 
         }
-        
+
         // Llamada al método de reserva que añadimos al Gestor
         String resultado = Gestor.realizarReserva(socioLogueado, seleccionada, fechaReserva);
 
