@@ -27,7 +27,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //Sustituimos el panel por defecto por el nuestro.
         this.setContentPane(contenedorFondo);
       
-        initComponents(); //Inicializamos los componentes (botones, etc.)
+        initComponents();
         
         // Print para confirmar que funcionó.
         System.out.println("Carga inicial finalizada. Socios en memoria: " + Logica.Gestor.getSocios().size());

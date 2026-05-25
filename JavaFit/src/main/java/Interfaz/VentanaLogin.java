@@ -36,7 +36,6 @@ public class VentanaLogin extends javax.swing.JFrame {
         this.setSize(710,415);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        // Configuramos para que al darle a la 'X' o al botón Volver pase esto:
         this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/LogoJavaFit.png"));
@@ -167,9 +166,8 @@ public class VentanaLogin extends javax.swing.JFrame {
         boolean accesoConcedido = false;
         Logica.Socio socioActual = null;
 
-        // IMPORTANTE: Asegúrate de que Gestor.getSocios() no esté vacío
+        
         for (Logica.Socio s : Logica.Gestor.getSocios()) {
-            // Usamos equalsIgnoreCase y trim para máxima compatibilidad
             if (s.getCorreo().trim().equalsIgnoreCase(emailIntroducido) &&
                 s.getContraseña().trim().equals(pass)) {
 
@@ -180,24 +178,21 @@ public class VentanaLogin extends javax.swing.JFrame {
         }
 
         if (accesoConcedido && socioActual != null) {
-    // 1. Quitamos los listeners para que al cerrar esta no se abra la anterior
     for (java.awt.event.WindowListener wl : this.getWindowListeners()) {
         this.removeWindowListener(wl);
     }
 
-    // 2. Crear y mostrar el menú del socio
     VentanaMenuSocio menuSocio = new VentanaMenuSocio(socioActual);
     menuSocio.setVisible(true);
     
-    // 3. Si la ventana principal existe, la destruimos para que no quede en la barra de tareas
     if (ventanaPrincipal != null) {
         ventanaPrincipal.dispose();
     }
     
-    // 4. Cerramos el Login
+    // Cerramos el Login
     this.dispose(); 
     } else {
-    // Solo si falla mostramos el error
+    // Si falla mostramos el error
     javax.swing.JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.");
 }
 

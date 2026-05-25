@@ -61,7 +61,7 @@ public class VentanaMisReservas extends javax.swing.JFrame {
         // Al abrir la ventana, cargamos los datos en la tabla inmediatamente
         actualizarTabla();
         
-        // Configurar qué pasa al darle a la 'X' de la ventana
+        
         this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -213,7 +213,6 @@ public class VentanaMisReservas extends javax.swing.JFrame {
     // 2. Imagen
     ImageIcon icono = act.getImagen();
     if (icono != null && icono.getImage() != null) {
-        // Usamos tamaño fijo en lugar de getWidth()/getHeight()
         int ancho = 270;
         int alto = 120;
 
@@ -281,13 +280,13 @@ public class VentanaMisReservas extends javax.swing.JFrame {
      */
     public void actualizarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tablaMisReservas.getModel();
-        modelo.setRowCount(0); // Vaciamos la tabla para no duplicar datos
+        modelo.setRowCount(0);
         
         // 1. Pedimos al Gestor la lista filtrada
         misReservasActuales = Gestor.obtenerReservasPorSocio(socioLogueado);
         
         if (misReservasActuales == null || misReservasActuales.isEmpty()) {
-            return; // Si no hay reservas, no hacemos nada más
+            return; 
         }
         
         // 2. Rellenamos la tabla
@@ -296,16 +295,14 @@ public class VentanaMisReservas extends javax.swing.JFrame {
             // Obtenemos la actividad de la reserva
             Actividad_Deportiva act = r.getActividad();
             
-            // A. Calculamos el precio igual que en otras ventanas
+            
             boolean esEspecial = r.getActividad() instanceof Logica.Actividad_Especial;
             String precioStr = esEspecial ? r.getPrecio_total() + "€" : "Incluido";
             
-            // B. Preparamos los textos compuestos (Sala con aforo y Horario separado)
             String salaInfo = act.getSala().getNombre() + " (" + act.getSala().getAforo_maximo() + ")";
             String horarioInfo = act.getHorario().getHora_inicio() + " - " + act.getHorario().getHora_final();
-            
-            // C. Creamos la fila con los 6 datos en orden
-            
+
+            // Creamos la fila con los datos en orden
             Object[] fila = {
             act.getTitulo(),                    
                 act.getTipo_Actividad().toString(),

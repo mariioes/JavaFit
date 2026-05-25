@@ -38,7 +38,7 @@ public class Gestor {
     /** Lista de reservas cargadas en memoria. */
     private static ArrayList<Reserva> reservas = new ArrayList<>();
 
-    // --- 3. INICIALIZACIÓN GLOBAL ---
+    
     /**
      * Inicializa el sistema al arrancar la aplicación.
      * Carga administradores, socios, actividades y reservas desde sus ficheros.
@@ -66,7 +66,7 @@ public class Gestor {
 }
    }
 
-    // --- 4. MÉTODOS DE GUARDADO (Persistencia) ---
+    
     /**
      * Guarda la lista de socios en el fichero socios.dat.
      */
@@ -103,7 +103,7 @@ public class Gestor {
         } catch (IOException e) { System.err.println("Error al guardar reservas: " + e.getMessage()); }
     }
 
-    // --- 5. MÉTODOS DE CARGA ---
+    
     
     /**
      * Carga la lista de socios desde el fichero socios.dat.
@@ -156,7 +156,6 @@ public class Gestor {
         } catch (IOException | ClassNotFoundException e) { System.err.println("Error al cargar reservas: " + e.getMessage()); }
     }
 
-    // --- 6. DATOS DE PRUEBA INICIALES ---
     /**
      * Carga un conjunto de actividades de prueba en memoria, si se elimina una actividad no se reescribe.
      * Solo se ejecuta la primera vez que arranca la aplicación, cuando no existe el fichero de actividades.
@@ -188,7 +187,7 @@ public class Gestor {
         actividades.add(especial1);
     }
 
-    // --- 7. LÓGICA DE NEGOCIO (RESERVAS Y FILTROS) ---
+    
     
     /**
      * Intenta realizar una reserva para un socio en una actividad.
@@ -327,7 +326,7 @@ public class Gestor {
     return filtradas;
 }
 
-    // --- 8. GETTERS, SETTERS Y GESTIÓN BÁSICA ---
+ 
     /**
      * Añade un nuevo socio al sistema y lo guarda en el fichero.
      * @param nuevo Socio a añadir.
@@ -408,7 +407,6 @@ public class Gestor {
     
     public static void generarReciboTxt(Logica.Reserva reserva) {
         // Creamos un nombre de archivo único para que no se sobrescriban. 
-        // Ejemplo: Recibo_juan_Yoga.txt
         String nombreFichero = "Recibo_" + reserva.getSocio().getNombre().replace(" ", "") + "_" 
                              + reserva.getActividad().getTitulo().replace(" ", "") + ".txt";
 
@@ -424,7 +422,6 @@ public class Gestor {
             out.println("  Nombre: " + reserva.getSocio().getNombre());
             out.println("  Correo: " + reserva.getSocio().getCorreo());
             out.println("  VIP: " + (reserva.getSocio().esVip() ? "Si" : "No"));
-            // out.println("  Tipo: " + (reserva.getSocio().isVip() ? "Socio VIP" : "Socio Básico"));
             out.println("-----------------------------------------");
             out.println("DATOS DE LA ACTIVIDAD:");
             out.println("  Actividad: " + reserva.getActividad().getTitulo());

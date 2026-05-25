@@ -1,5 +1,5 @@
 package Logica;
-import java.io.Serializable; //Importamos serializable para los ficheros de texto.
+import java.io.Serializable;
 
 /**
  * Clase abstracta que representa un usuario del sistema JavaFit.

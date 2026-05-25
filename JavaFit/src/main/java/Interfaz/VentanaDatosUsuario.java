@@ -26,26 +26,25 @@ public class VentanaDatosUsuario extends javax.swing.JFrame {
         this.VentanaMenuSocio = menu;
         this.socioActual = socio;
         
-        initComponents(); // Carga el diseño de la interfaz
+        initComponents();
         
-        // 1. Configuramos el tamaño y centrado
         this.setSize(710, 415);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.white);
         Logica.HerramientasVisuales.ponerIconoJavaFit(this);
         
-        // 2. Rellenamos los datos en pantalla
+        
         registroNombre.setText(socioActual.getNombre());
         registroTelefono.setText(socioActual.getTelefono());
         registroDireccion.setText(socioActual.getDireccion());
         registroCorreo.setText(socioActual.getCorreo());
         registroTarjeta.setText(socioActual.getTarjeta());
         registroSocioVip.setSelected(socioActual.esVip());
-        // Asumiendo que tu método se llama getContraseña() en la clase Usuario/Socio
+        
         registroContraseña.setText(socioActual.getContraseña()); 
         
-        // 3. Máscara del teléfono
+        
         try {
             javax.swing.text.MaskFormatter mf = new javax.swing.text.MaskFormatter("#########");
             mf.setPlaceholderCharacter('_');
@@ -54,7 +53,7 @@ public class VentanaDatosUsuario extends javax.swing.JFrame {
             System.err.println("Error en máscara: " + ex.getMessage());
         }
         
-        // 4. Configurar el evento de volver al menú al cerrar
+        // Boton volver
         this.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -219,15 +218,15 @@ public class VentanaDatosUsuario extends javax.swing.JFrame {
             socioActual.setDireccion(direccion);
             socioActual.setTarjeta(tarjeta);
             socioActual.setEsVip(esVip);
-            // Asegúrate de que tienes estos Setters creados en tu clase Socio/Usuario
+            
             socioActual.setCorreo(correo); 
             socioActual.setContraseña(contraseña); 
 
-            // ¡CRÍTICO! Guardamos la lista completa en el fichero
+            // Guardamos la lista completa en el fichero
             Logica.Gestor.guardarSocios();
 
             javax.swing.JOptionPane.showMessageDialog(this, "¡Datos actualizados correctamente!");
-            this.dispose(); // Volvemos al menú
+            this.dispose();
         }
     }
 

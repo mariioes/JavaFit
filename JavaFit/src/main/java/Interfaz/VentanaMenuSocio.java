@@ -61,7 +61,7 @@ public class VentanaMenuSocio extends javax.swing.JFrame {
     botonDatos.setBounds(150, 245, 400, 60);
     panelFondo.add(botonDatos);
     
-    // ── CERRAR SESIÓN ────────────────────────────────────────────
+    
     botonCerrarSesion.setText("Cerrar Sesión");
     botonCerrarSesion.setBounds(260, 335, 180, 38);
     botonCerrarSesion.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));

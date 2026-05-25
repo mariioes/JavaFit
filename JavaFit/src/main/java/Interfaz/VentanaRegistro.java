@@ -230,7 +230,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
             mostrarError("La contraseña debe tener al menos 6 caracteres.");
         }
 
-        else { // Si pasó todos los filtros if
+        else {
         
 
             Socio nuevoSocio = new Socio(nombre, telefono, direccion, tarjeta, esVip, correo, contraseña);

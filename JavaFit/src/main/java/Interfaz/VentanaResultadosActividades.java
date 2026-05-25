@@ -48,20 +48,19 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
 });
         
         this.ventanaMenu = menu;
-        this.socioLogueado = socio; // Guardamos el socio que nos pasan
+        this.socioLogueado = socio;
         this.setSize(900, 500);
-        this.setLocationRelativeTo(null); // Centra la ventana
-        this.setResizable(false);        // Bloquea el tamaño
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setTitle("JAVAFIT - Resultados de Búsqueda");
         Logica.HerramientasVisuales.ponerIconoJavaFit(this);
         
-        // AÑADIMOS EL EVENTO DE CLIC A LA TABLA
+        
         TablaResultados.addMouseListener(new java.awt.event.MouseAdapter() {
         @Override
         public void mouseClicked(java.awt.event.MouseEvent evt) {
             int fila = TablaResultados.getSelectedRow();
             if (fila != -1 && listaActividadesActual != null) {
-                // Obtenemos la actividad de la lista usando el índice de la fila
                 Actividad_Deportiva seleccionada = listaActividadesActual.get(fila);
                 actualizarPanelDetalles(seleccionada);
             }
@@ -90,7 +89,6 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
     // 2. Imagen
     ImageIcon icono = act.getImagen();
     if (icono != null && icono.getImage() != null) {
-        // Usamos tamaño fijo en lugar de getWidth()/getHeight()
         int ancho = 280;
         int alto = 130;
 
@@ -258,7 +256,7 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
                 .atZone(java.time.ZoneId.systemDefault())
                 .toLocalDate();
         
-        // Traducimos el número de día a texto (sin tildes, igual que en tu JComboBox original)
+        // Traducimos el número de día a texto
         int numeroDia = fechaReserva.getDayOfWeek().getValue();
         String[] diasEspanol = {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
         String diaElegidoStr = diasEspanol[numeroDia - 1]; 

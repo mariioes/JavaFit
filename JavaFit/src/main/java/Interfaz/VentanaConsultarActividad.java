@@ -51,7 +51,6 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
             if (ventanaAdmin != null) {
                 ventanaAdmin.setVisible(true);
             if (ventanaAdmin instanceof VentanaConsultarActividad ventanaConsultarActividad) {
-            // Si dice que sí, ya podemos transformarla sin peligro
                     ventanaConsultarActividad.cargarActividades();
             }
             }
@@ -87,12 +86,11 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
 
         this.listaActividadesActual = actividadesAMostrar;
 
-        // Si la lista está vacía, no hacemos nada más
         if (actividadesAMostrar == null || actividadesAMostrar.isEmpty()) {
             return;
         }
 
-        // Rellenamos la tabla recorriendo la lista que nos han pasado
+        // Rellenamos la tabla
         for (Logica.Actividad_Deportiva act : listaActividadesActual) {
             
             // Calculamos aforo restante
@@ -424,7 +422,6 @@ public class VentanaConsultarActividad extends javax.swing.JFrame {
             .filter(a -> tipo.equals("Cualquiera") || a.getTipo_Actividad().toString().equals(tipo))
             .filter(a -> dia.equals("Cualquiera") || a.getHorario().getDia().equals(dia))
             .filter(a -> monitor.equals("Cualquiera") || a.getMonitor_asignado().equals(monitor))
-            // Filtro adaptado usando Polimorfismo (Tema 2-5)
             .filter(a -> !soloEspecial || a instanceof Logica.Actividad_Especial) 
             .collect(Collectors.toCollection(ArrayList::new));
         
