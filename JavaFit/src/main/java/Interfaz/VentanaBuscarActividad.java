@@ -289,31 +289,21 @@ private void estilizarCombo(javax.swing.JComboBox<String> combo) {
      */
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
                                              
-    // 1. Obtener filtros
+    
     String tipo = buscaTipoActividad.getSelectedItem().toString();
     String dia = buscarDiaSemana.getSelectedItem().toString();
     String monitor = buscarMonitor.getSelectedItem().toString();
 
-    // 2. Obtener lista filtrada del Gestor
+    
     java.util.ArrayList<Logica.Actividad_Deportiva> resultados = Logica.Gestor.filtrarActividades(tipo, dia, monitor);
 
-    // 3. Crear la ventana de resultados
     VentanaResultadosActividades vResultados = new VentanaResultadosActividades(ventanaAnterior, socioActual);
-    
-    // Centramos la ventana en la pantalla
+
     vResultados.setLocationRelativeTo(null);
-    
-    // Hacer que no se pueda maximizar ni cambiar el tamaño manualmente
     vResultados.setResizable(false);
-    
-    // 4. ¡IMPORTANTE! Llamar al método que acabas de arreglar para pasarle los datos
     vResultados.cargarDatosEnTabla(resultados);
-    
-    // 5. Mostrar la ventana
     vResultados.setVisible(true);
-    
-    // Hacer que desaparezca la ventana de búsqueda
-    this.setVisible(false); // Cerramos la de búsqueda       
+    this.setVisible(false);     
     }//GEN-LAST:event_botonBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

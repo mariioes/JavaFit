@@ -175,7 +175,7 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
             return;
         }
         
-        // --- LA MAGIA DEL LOGIN ---
+        
         boolean accesoConcedido = false;
         Logica.Administrador adminActual = null;
 
@@ -184,22 +184,22 @@ public class VentanaLoginAdmin extends javax.swing.JFrame {
         System.out.println("Contraseña introducida: '" + contraseña + "'");
         System.out.println("Admins en memoria: " + Logica.Gestor.getAdmins().size());
         
-        // 1. EL BUCLE SOLO BUSCA
+        
         for (Logica.Administrador admin : Logica.Gestor.getAdmins()) {
             if (admin.getCorreo().equals(correo) && admin.getContraseña().equals(contraseña)) {
                 accesoConcedido = true;
                 adminActual = admin;
-                break; // Rompemos el bucle al encontrarlo
+                break; 
             }
-        } // <-- ESTA ES LA LLAVE MÁGICA QUE CIERRA EL FOR
+        } 
             
-        // 2. LA DECISIÓN ESTÁ FUERA DEL BUCLE
+        
         if (accesoConcedido && adminActual != null) {
             VentanaMenuAdmin menu = new VentanaMenuAdmin(adminActual); 
             menu.setVisible(true);
             this.dispose(); // Cerramos el login
         } else {
-            // Si no se concedió el acceso, mostramos el error
+            // Mostramos el error
             javax.swing.JOptionPane.showMessageDialog(this, 
                 "Correo o contraseña incorrectos.", 
                 "Error de Acceso", 
