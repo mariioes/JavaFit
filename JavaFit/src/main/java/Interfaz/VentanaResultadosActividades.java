@@ -269,17 +269,17 @@ public class VentanaResultadosActividades extends javax.swing.JFrame {
         
         Date fechaHoy = new Date(); 
         if (fechaSeleccionada.before(fechaHoy)) {
-            JOptionPane.showMessageDialog(this, "Error: No puedes reservar una fecha pasada.", "Fecha inválida", JOptionPane.ERROR_MESSAGE);
-        } else {
-            System.out.println("Fecha válida, procesando..."); }
-        
-        if (!diaElegidoStr.equalsIgnoreCase(diaActividad)) {
+            JOptionPane.showMessageDialog(this, "Error: No puedes reservar una fecha pasada.", "Fecha inválida", JOptionPane.ERROR_MESSAGE); }
+
+        else if (!diaElegidoStr.equalsIgnoreCase(diaActividad)) {
             JOptionPane.showMessageDialog(this, 
                 "Error: Esta actividad se imparte los " + diaActividad + ".\nHas seleccionado un " + diaElegidoStr + " en el calendario.", 
                 "Fecha incorrecta", 
                 JOptionPane.ERROR_MESSAGE);
             return; 
         }
+        else {
+            System.out.println("Fecha válida, procesando..."); }
 
         // Llamada al método de reserva que añadimos al Gestor
         String resultado = Gestor.realizarReserva(socioLogueado, seleccionada, fechaReserva);
